@@ -1,0 +1,9 @@
+syntax: glob
+
+*.pyc
+*.pyo
+django.db
+
+syntax: regexp
+
+^media/uploads/
