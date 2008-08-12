@@ -1,0 +1,58 @@
+{% extends "blog_base.xhtml" %}
+{% block blog_main %}
+        <div class="box">
+                <div class="header">
+                        Редактирование записи
+                </div>
+                <div class="text">
+                        {% if form.has_errors %}
+                                <div class="error">
+                                        Обнаружены ошибки!
+                                </div>
+                        {% endif %}
+                        <form action="" method="post">
+                        <table class="form_table">
+                                <tr>
+                                        <td><b>Заголовок</b></td>
+                                        <td>{{ form.title }}</td>
+                                </tr>
+                                <tr>
+                                        <td><b>Категория<b></td>
+                                        <td>{{ form.category }}</td>
+                                </tr>
+                                <tr>
+                                        <td>Личная запись</td>
+                                        <td>{{ form.private }}</td>
+                                </tr>
+                                <tr>
+                                        <td>Музыка:</td>
+                                        <td>{{ form.music }}</td>
+                                </tr>
+                                <tr>
+                                        <td><b>Текст записи:</b></td>
+                                        <td>{{ form.text }}</td>
+                                </tr>
+                                <tr>
+                                        <td>Дополнительный текст записи:</td>
+                                        <td>{{ form.extra_text }}</td>
+                                </tr>
+                                <tr>
+                                        <td>Метка:</td>
+                                        <td>{{ form.slug }}</td>
+                                </tr>
+                                <tr>
+                                        <td>Тэги:</td>
+                                        <td>{{ form.tags }}</td>
+                                </tr>
+                                <tr>
+                                        <td>Сохранение:</td>
+                                        <td><input type="submit" value="Сохранить" /></td>
+                                </tr>
+                        </table>
+                        </form>
+                </div>
+        </div>
+{% endblock %}
+{% block side_menu %}
+	{% include "blog_short_side_menu.xhtml" %}
+{% endblock %}

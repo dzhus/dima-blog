@@ -1,0 +1,27 @@
+{% extends "base.xhtml" %}
+{% load pytils_numeral %}
+
+{% block custom_css %}
+    <link rel="stylesheet" type="text/css" href="/media/css/index.css" />
+{% endblock %}
+
+{% block navigation %}
+<div id="nagivation">
+  <a href="/">Sphinx.net.ru</a> / <a href="/blog">блог</a> / список всех записей
+</div>
+{% endblock %}
+
+{% block base %}
+<div class="box">
+  <h1>Все записи блога:</h1>
+  {% for entry in entry_list %}
+  {% if not entry.private or user.is_superuser %}
+  {% ifchanged entry.add_date.month %}<h2>{{ entry.add_date|date:"F Y" }}</h2>{% endifchanged %}
+      <h3 class="entry_title">
+        <a href="{{ entry.get_absolute_url }}">{{ entry.title }}</a>
+        {% if entry.comments %}({{ entry.comments }} комментари{{ entry.comments|choose_plural:"й,я,ев" }}){% endif %}
+      </h3>
+  {% endif %}
+  {% endfor %}
+</div>
+{% endblock %}

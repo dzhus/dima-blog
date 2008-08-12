@@ -1,0 +1,21 @@
+{% extends "blog_base.xhtml" %}
+{% block blog_main %}
+        <div class="confirmation">
+                <div class="header">
+                        Удаление записи
+                </div>
+                <div class="text">
+                        <center>
+                        Удалить запись "{{ object.title }}"?
+                        <br />
+                        <br />
+                        <form action="" method="post">
+                                <div>
+                                        <input type="hidden" name="msg" id="msg" value="Ирочка - лучшая на свете =]" />
+                                        <input type="submit" value="Подтвердить"/>
+                                </div>
+                        </form>
+                        </center>
+                </div>
+        </div>
+{% endblock %}

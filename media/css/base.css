@@ -1,0 +1,119 @@
+body 
+{ 
+  color:                  #2e3436;
+  width: 60%;
+  margin-left: 20%;
+  background-color: #eeeeec;
+  /**       background: url("/media/images/glider-back.png");
+     background-repeat: repeat; */
+  }
+
+#header 
+{
+  /*  background-color:       #204a87;
+     color:                  #eeeeec;*/
+  font-size:              xx-large;
+  text-align:             center;
+  padding:                0.5em;
+  margin-bottom:          1em;
+  }
+
+#footer
+{
+  margin-top: 3em;
+  color: #888a85;
+  text-align: right;
+  clear: both;
+  }
+
+#footer a
+{ 
+  color: #888a85;
+ }
+
+#searchbox
+{ 
+  float: right;
+  padding: 0;
+}
+
+#navigation
+{ 
+  margin-bottom: 0.5em;
+  }
+
+#hcard
+{ 
+  display: none;
+ }
+
+.error
+{ 
+  color: #a40000;
+  font-weight: bold;
+  border-style: solid;
+  border-width: 0.3em;
+  border-color: #a40000;
+  margin-top: 1em;
+  margin-bottom: 1em;
+  }
+
+.message
+{ 
+  color: #204a87;
+  font-weight: bold;
+  border-style: solid;
+  border-width: 0.3em;
+  border-color: #204a87;
+  margin-top: 1em;
+  margin-bottom: 1em; 
+  }
+
+.box 
+{ 
+  margin-bottom: 1em;
+  padding: 2em;
+  background-color: white;
+  border-width: 1px;
+  border-style: solid;
+  border-color: #d3d7cf;
+  }
+
+/** links */
+a 
+{
+  background-color:       inherit;
+  color:                  #204a87;
+  font-weight:            bolder;
+  }
+
+a:visited 
+{
+  color:                  #5c3566;
+  }
+
+/** kill borders around link-images */
+a img 
+{
+  border:                 0px;
+  }
+
+/** Forms */
+input, textarea 
+{ 
+  border-style: solid;
+  border-width: 1px;
+  border-color: #888a85;
+  }
+
+button
+{ 
+  background-color: #eeeeec;
+  }
+
+/** block level */
+
+div
+{ 
+  padding: 0.2em; 
+  }

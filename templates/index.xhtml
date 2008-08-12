@@ -1,0 +1,101 @@
+{% extends "base.xhtml" %}
+
+{% block custom_css %}
+    <link rel="stylesheet" type="text/css" href="/media/css/index.css" />
+{% endblock %}
+
+{% block base %}
+
+{% if user.is_superuser %}
+<div class="box" id="blog_admin">
+  <p><a href="/admin/blog/entry/add/">Добавить запись</a>, посмотреть <a href="/admin/comments/freecomment/">комментарии</a>.</p>
+  <p><a href="/accounts/logout/">Выйти из системы</a>.</p>
+</div>
+{% endif %}
+
+<div class="box" id="blog_digest">
+  <h1><a href="/blog/">Блог</a></h1>
+  
+  <span style="float: right;">
+    <a href="/feeds/blog/30/" title="RSS-лента блога">
+      <img src="/media/icons/feed-icon-28x28.png" alt="RSS" />
+    </a>
+  </span>
+  
+  <h2>Последние записи</h2>
+
+  {% for entry in latest %}
+  <h3 class="entry_title">
+    <a href="{{ entry.get_absolute_url }}">{{ entry.title }}</a> // <small>{{ entry.add_date|date:"d.n.y" }}</small>
+  </h3>
+  {% endfor %}
+
+  <h2>Прочая</h2>
+  <p>
+    Обратите внимание на <a rel="tag" href="/blog/tag/статьи/">статьи</a>,
+    <a rel="tag" href="/blog/tag/заметки/">заметки</a>.
+  </p>
+
+  <p>
+    Ещё есть <a href="/blog/archive/">архив блога</a>.
+  </p>
+</div>
+
+<div class="box" id="outer_space">
+
+  <h1>Одного сайта мало</h1>
+
+  <h2>
+    <a href="http://flickr.com/photos/nothingpersonal/">Фотографии</a>
+    на <a href="http://www.flickr.com"><span style="color:#0065d6;">Flick</span><span style="color:#ff1894;">r</span></a>
+  </h2>
+
+  <span class="rss_icon">
+    <a href="http://api.flickr.com/services/feeds/photos_public.gne?id=46721940@N00&amp;format=rss_200"
+       title="RSS-лента моих фотографий">
+      <img src="/media/icons/feed-icon-14x14.png" alt="RSS"/>
+    </a>
+  </span>
+
+  <div id="flickr_photo">
+    <a href="http://flickrbadge.theducky.com/link/46721940@N00/1">
+      <img id="flickr_photo_image" 
+           src="http://flickrbadge.theducky.com/photo/46721940@N00/1.jpg"
+           alt="Последняя фотография на Flickr" />
+    </a>
+  </div>
+
+  <h2>
+    <a href="http://www.last.fm/user/SphinxTheGeek/">Прослушанное</a> на <a href="http://www.lastfm.ru">Last.fm</a>
+  </h2>
+
+  <span class="rss_icon">
+    <a href="http://ws.audioscrobbler.com/1.0/user/SphinxTheGeek/recenttracks.rss"
+       title="RSS-лента прослушанных композиций">
+      <img src="/media/icons/feed-icon-14x14.png" alt="RSS"/>
+    </a>
+  </span>
+
+  <div id="lastfm_tracks">
+    <a href="http://www.last.fm/user/SphinxTheGeek/charts/?charttype=recenttracks">
+      <img src="http://imagegen.last.fm/autosizeRecentTracks/recenttracks/5/SphinxTheGeek.gif" alt="5 прослушанных композиций" />
+    </a>
+  </div>
+
+  <h2>
+    <a href="http://del.icio.us/SphinxTheGeek/">Заложенное</a> на <a href="http://del.icio.us">del.icio.us</a>
+  </h2>
+  
+  <span class="rss_icon">
+    <a href="http://del.icio.us/rss/SphinxTheGeek"
+       title="RSS-лента моих закладок">
+      <img src="/media/icons/feed-icon-14x14.png" alt="RSS"/>
+    </a>
+  </span>
+  
+  <div id="linkroll">
+    <script type="text/javascript" src="http://del.icio.us/feeds/js/SphinxTheGeek?count=5"></script>
+  </div>
+  
+</div>
+{% endblock %}

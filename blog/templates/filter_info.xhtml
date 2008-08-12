@@ -1,0 +1,10 @@
+{% if tag %}
+<div id="filter_info" class="box">
+  {% if tag %}
+  Просмотр записей с меткой «{{ tag }}»:
+  {% endif %}
+</div>
+
+{% include "big_spacer.xhtml" %}
+
+{% endif %}

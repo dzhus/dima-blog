@@ -1,0 +1,27 @@
+{% extends "base.xhtml" %}
+
+{% block title %}
+Ошибка 404: страница не найдена
+{% endblock %}
+
+
+{% block navigation %}
+<div id="nagivation">
+  <a href="/" title="Перейти на главную страницу сайта">Sphinx.net.ru</a> /
+</div>
+{% endblock %}
+
+{% block base %}
+<div class="box">
+  <h1>404</h1>
+  Запрошенная страница не найдена.<br /><br />
+
+  <a href="http://www.flickr.com/photos/nothingpersonal/546516067/"
+     title="Photo Sharing">
+    <img src="http://farm2.static.flickr.com/1395/546516067_e64165a52b.jpg"
+         width="500"
+         height="375"
+         alt="404" />
+  </a>
+</div>
+{% endblock %}

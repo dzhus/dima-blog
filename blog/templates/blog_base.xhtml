@@ -1,0 +1,32 @@
+{% extends "../../templates/base.xhtml" %}
+
+{% block title %}
+Блог на Sphinx.net.ru
+{% endblock %}
+
+{% block custom_css %}
+<link rel="stylesheet" type="text/css" href="/media/css/blog.css" />
+{% endblock %}
+
+{% block navigation %}
+<div id="navigation">
+  <a href="/" title="Перейти на главную страницу сайта">Sphinx.net.ru</a> / блог /
+</div>
+{% endblock %}
+
+{% block base %}
+        {% block blog_main %}
+        {% endblock %}
+{% endblock %}
+
+{% block custom_footer %}
+    <div id="blog_links" style="float:left;">
+        <a href="/blog/tag/избранное/" title="Все избранные записи блога">Избранное</a>
+        •
+        <a href="/blog/tag/статьи/" title="Все статьи в блоге">Статьи</a>
+        •
+        <a href="/blog/tag/заметки/" title="Все заметки в блоге">Заметки</a>
+        <br />
+        <a href="/blog/archive/" title="Архивы записей блога по годам и месяцам">Архив блога</a>
+    </div>
+{% endblock %}

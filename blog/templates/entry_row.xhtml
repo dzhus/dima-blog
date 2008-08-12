@@ -1,0 +1,49 @@
+{% load markup %}
+{% load pytils_dt %}
+<div class="blog_entry" id="entry-{{ entry.id }}">
+  <h1 class="entry_title">
+    {% if entry.private %}&lowast;&nbsp;{% endif %}{{ entry.title }}
+  </h1>
+
+  <div class="entry_date" title="Запись сделана {{ entry.add_date|date:"d.m.Y в G:h:s" }}">
+    {{ entry.add_date|ru_strftime:"%d %B %Y" }}
+  </div>
+
+  {%if entry.tags.select_related %}
+  <div class="entry_tags" id="entry-{{ entry.id }}-tags">Теги:
+    {% for tag in entry.tags.select_related %}
+    <a href="{{ tag.get_absolute_url }}/" 
+       rel="tag" 
+       title="Посмотреть все записи с тегом «{{ tag }}»">{{ tag }}</a>{% if not forloop.last %}, {% endif %}{% endfor %}.
+  </div>
+  {% endif %}
+
+  <div class="entry_body" id="entry-{{ entry.id }}-body">
+    {{ entry.text|markdown|fix_ampersands }}
+
+    {% if entry.extra_text %}
+      {% if comment_form %}
+        {{ entry.extra_text|markdown|fix_ampersands }}
+      {% else %}
+        <a href="{{ entry.get_absolute_url }}">Читать далее</a>
+      {% endif %}
+    {% endif %}
+  </div>
+
+  <div class="entry_links" id="entry-{{ entry.id }}-links">
+    <span style="float: left;">
+      <a href="{{ entry.get_absolute_url }}" 
+         class="entry_permalink" 
+         rel="bookmark"
+         title="Постоянная ссылка на запись «{{ entry.title }}»">¶</a>
+      {% if user.is_superuser %}
+        • <a href="/admin/blog/entry/{{ entry.id }}/">правка</a>
+      {% endif %}
+    </span>
+    
+    {% if not comment_form %}
+      <a href="{{ entry.get_absolute_url }}#comments" title="Комментарии к записи «{{ entry.title }}»">Комментарии</a>{% if entry.comments %} (<b>{{entry.comments}}</b>){% endif %}
+    {% endif %}
+  </div>
+  
+</div>

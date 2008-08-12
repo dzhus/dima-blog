@@ -1,0 +1,22 @@
+{% extends "base.xhtml" %}
+
+{% block custom_css %}
+<link rel="stylesheet" type="text/css" href="/media/css/tag-cloud.css" />
+{% endblock %}
+
+{% block title %}
+Все тэги блога на Sphinx.net.ru
+{% endblock %}
+
+{% block base %}
+<div class="box">
+  {% for object in tag_list %}
+  <span class="weight-{{ object.weight }}">
+    <a rel="tag"
+       href="/blog/tag/{{ object.tag }}/" 
+       title="Все записи с тэгом «{{ object.tag }}»">
+      {{ object.tag }}</a> {{ object.count }}
+  </span>
+  {% endfor %}
+</div>
+{% endblock %}

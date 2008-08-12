@@ -1,0 +1,63 @@
+body
+{ 
+ }
+
+#blog_digest
+{ 
+  }
+
+#outer_space
+{ 
+  }
+
+.blog_entry
+{ 
+  text-align: justify;
+  font-size: smaller;
+  margin-bottom: 1em;
+  }
+
+.entry_title
+{ 
+  font-size: medium;
+  }
+
+.entry_date, .entry_tags, .entry_links
+{ 
+  display: none;
+  }
+
+.rss_icon
+{ 
+  float: right;
+ }
+
+#flickr_photo_image
+{ 
+  border-style: solid;
+  border-color: #d3d7cf;
+  border-width: 3px;
+ }
+
+#flickr_photo, #lastfm_tracks, #linkroll
+{
+  margin-top: 1em;
+  margin-bottom: 1em;
+  }
+
+#linkroll
+{ 
+  padding: 0;
+  }
+
+h1
+{ 
+  margin-top: 0em;
+  margin-bottom: 0.5em;
+  font-size: x-large;
+  }
+
+h2
+{ 
+  font-size: large;
+  }

@@ -1,0 +1,39 @@
+.weight-5,
+.weight-5 a
+{ 
+  font-size: xx-large;
+  color: #2e3436;
+  }
+
+.weight-4,
+.weight-4 a
+{ 
+  font-size: x-large;
+  color: #2e3436;
+ }
+
+.weight-3,
+.weight-3 a
+{ 
+  font-size: large;
+  color: #555753;
+  }
+
+.weight-2, 
+.weight-2 a
+{ 
+  font-size: medium;
+  color: #888a85;
+  }
+
+.weight-0, .weight-1,
+.weight-0 a, .weight-1 a
+{ 
+  font-size: small;
+  color: #d3d7cf;
+  }
+
+.box
+{ 
+  text-align: center;
+ }

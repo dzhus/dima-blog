@@ -1,0 +1,124 @@
+{% load pytils_numeral %}
+{% extends "blog_base.xhtml" %}
+
+{% block navigation %}
+<div id="nagivation">
+  <a href="/" title="Перейти на главную страницу сайта">Sphinx.net.ru</a> /
+
+  {% if not tag and not has_next %}
+    блог /
+  {% else %}
+    <a href="/blog" title="Перейти на начальную страницу блога">блог</a> /
+  {% endif %}
+
+  {% if tag %}записи с тегом
+    {% if not has_next %}
+      «{{ tag }}» /
+    {% else %}
+      <a href="/blog/tag/{{ tag }}" rel="tag" title="Посмотреть все записи с тегом «{{ tag }}»">«{{ tag }}»</a> /
+    {% endif %}
+  {% endif %}
+  
+  {% if has_next %}
+    страница {{page}} /
+  {% endif %}
+
+</div>
+{% endblock %}
+
+
+{% block title %}
+  {% if tag %}
+    Все записи с тегом «{{ tag }}» в блоге на Sphinx.net.ru
+  {% else %}
+    Блог на Sphinx.net.ru
+  {% endif %}
+{% endblock %}
+
+
+{% block links %}
+  {% if has_previous %}
+    {% if not tag%}
+      <link rel="prev" href="/blog/page-{{ previous }}/" />
+    {% else %}
+      <link rel="prev" href="/blog/tag/{{ tag }}/page-{{ previous }}/" />
+    {% endif %}
+  {% endif %}
+  
+  {% if has_next %}
+    {% if not tag%}
+      <link rel="next" href="/blog/page-{{ next }}/" />
+    {% else %}
+      <link rel="next" href="/blog/tag/{{ tag }}/page-{{ next }}/" />
+    {% endif %}
+  {% endif %}
+
+  {% if not tag%}
+    <link rel="last" href="/blog/" />
+    <link rel="first" href="/blog/page-1/" />
+  {% else %}
+    <link rel="last" href="/blog/tag/{{ tag }}/" />
+    <link rel="first" href="/blog/tag/{{ tag }}/page-1/" />
+  {% endif %}
+
+  {% if tag %}
+    <link rel="alternate" type="application/rss+xml" title="RSS-лента блога: {{ tag }}"
+          href="/feeds/blogtag/{{ tag }}/" />
+  {% endif %}
+  
+  <link rel="index" href="/blog/entry/" />
+{% endblock %}
+
+
+{% block blog_main %}
+
+{% if not entry_list %}
+    <div class="error">Не найдено записей, удовлетворяющий условиям фильтрации.</div>
+{% else %}
+
+    <div id="blog_entry_list">
+    {% for entry in entry_list %}
+        {% include "entry_row.xhtml" %}
+        {% if not forloop.last %}
+            {% include "entry_spacer.xhtml" %}
+        {% endif %}
+    {% endfor %}
+    </div>
+        
+    {% if is_paginated %}
+    <div id="blog_pagination">
+  
+        {% if has_previous %}
+        <span style="float:left;">
+            {% if not tag%}
+                ← <a href="/blog/page-{{ previous }}/" title="Перейти на предыдущую страницу">с. {{ previous }}</a>
+            {% else %}
+                ← <a href="/blog/tag/{{ tag }}/page-{{ previous }}/" title="Перейти на предыдущую страницу">с. {{ previous }}</a>
+            {% endif %}
+        </span>
+        {% endif %}
+        
+                        
+        {% if has_next %}
+        <span style="float:right;">
+            {% if not tag %}
+                <a href="/blog/page-{{ next }}/" title="Перейти на следующую страницу">с. {{ next }}</a> →
+            {% else %}
+                <a href="/blog/tag/{{ tag }}/page-{{ next }}/" title="Перейти на следующую страницу">с. {{ next}}</a> →
+            {% endif %}
+        </span>
+        {% endif %}
+    с. {{ page }}<br />
+
+    </div>
+    {% endif %}
+
+    {% if tag %}
+    <div style="clear: both;" id="blog_entry_count">
+      Всего {{ hits }} запис{{ hits|choose_plural:"ь,и,ей" }} с тегом «{{ tag }}»
+    </div>
+    {% endif %}
+
+
+{% endif %}
+{% endblock %}

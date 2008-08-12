@@ -1,0 +1,9 @@
+<div class="file">
+        <span class="name">{{ file.name }}</span>
+        (<span class="datetime">размещён {{ file.add_date|date:"d.m.y в G:h" }}</span>)
+        <div class="description">
+                {{ file.description }}
+        <br />
+        <span class="link"><a href="{{ file.get_file_url }}">Скачать файл</a></span>
+        </div>
+</div>

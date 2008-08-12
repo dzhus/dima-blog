@@ -1,0 +1,26 @@
+{% load pytils_numeral %}
+<div style="font-size: large;">Оставить комментарий:</div>
+<div id="comment_form">
+  <form action="" method="post">
+    <div>
+      <label>Представьтесь:</label>
+      <br />
+      {{ comment_form.person_name }}
+      <br /><br />
+      <label>Текст комментария:</label>
+      <br />
+      {{ comment_form.comment }}
+      <br /><br />
+      <label>Введите ответ:</label>
+      <br />
+      <b>{{ captcha.expression }}=?</b>
+      <input type="text" name="captcha_result" />
+      <input type="hidden" name="captcha_hash" value="{{ captcha.hash }}" />
+      <br />
+      <br />
+      <input type="submit" value="Добавить комментарий" />
+    </div>
+  </form>
+  <br />
+  <em>Можно отправлять не более одного комментария в минуту.</em>
+</div>

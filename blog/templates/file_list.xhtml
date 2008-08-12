@@ -1,0 +1,15 @@
+{% extends "blog_base.xhtml" %}
+{% block blog_main %}
+        {% if file_list %}
+                {% for file in file_list %}
+                        {% include "file_row.xhtml" %}
+                        {% if not forloop.last %}
+                                {% include "file_spacer.xhtml" %}
+                        {% endif %}
+                {% endfor %}
+        {% else %}
+                <div class="error">
+                        Файлы не найдены!
+                </div>
+        {% endif %}
+{% endblock %}

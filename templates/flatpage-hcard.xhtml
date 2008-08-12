@@ -1,0 +1,23 @@
+{% load markup %}
+
+{% extends "base.xhtml" %}
+
+{% block title %}
+Sphinx.net.ru — {{ flatpage.title }}
+{% endblock %}
+
+{% block navigation %}
+<div id="navigation">
+  <a href="/">Sphinx.net.ru</a> / {{ flatpage.title }}
+</div>
+{% endblock %}
+
+{% block base %}
+
+<div class="box">
+  {{ flatpage.content }}
+  {% include "hcard.xhtml" %}
+  <br />
+  На данной странице внедрена <a title="Что такое микроформаты?" href="/blog/entry/what-are-microformats/">hCard</a>.
+</div>
+{% endblock %}

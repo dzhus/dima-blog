@@ -1,0 +1,5 @@
+{% load markup %}
+{{ obj.text|markdown }}
+{% if obj.extra_text %}
+{{ obj.extra_text|markdown }}
+{% endif %}

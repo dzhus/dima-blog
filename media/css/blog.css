@@ -1,0 +1,168 @@
+/** Page level elements */
+
+#blog_entry_list
+{ 
+  background: none;
+  padding: 0;
+  }
+
+#blog_pagination, #entry_pagination
+{
+  text-align:             center;
+  /* use of `pt` instead of `em` is intentional! */
+  margin-top:             1em;
+  margin-bottom:          1em;
+  }
+
+/** overall selected entries counter */
+#blog_entry_count
+{ 
+  text-align: center;
+  margin-bottom: 5pt;
+}
+
+/** links to common tags, archive and tag cloud pages */
+#blog_links
+{ 
+  font-size: small;
+  text-align: left;
+  }
+
+/** entry elements */
+.blog_entry 
+{ 
+  text-align: justify;
+  margin-bottom: 1em;
+  padding: 2em;
+  border-color: #888a85;
+  border-style: solid;
+  border-width: 1px;
+  background-color: white;
+  }
+
+.entry_title 
+{ 
+  font-size: x-large;
+  }
+
+.entry_date 
+{ 
+  font-size: large;
+  margin-bottom: 0.3em;
+  }
+
+.entry_updated
+{ 
+  font-size: small;
+  color: #888a85;
+  }
+
+.entry_tags 
+{ 
+  font-size: smaller;
+  }
+
+.entry_body
+{ 
+ }
+
+.entry_permalink
+{ 
+ }
+
+.entry_links
+{ 
+  text-align: right;
+  margin-top: 0.5em;
+  }
+
+#comments
+{ 
+  margin-top: 0;
+  padding: 2em;
+  background-color: white;
+  border-width: 1px;
+  border-style: solid;
+  border-color: #d3d7cf;
+  }
+#comments h2
+{ 
+  font-size: large;
+  }
+
+/** Block level elements */
+
+h1, h2, h3, h4, h5, h6
+{
+  text-align: left;
+  }
+
+h1, h2, h3 
+{ 
+  margin-top: 0.5em;
+  margin-bottom: 0.5em;
+  }
+
+h4, h5, h6 
+{ 
+  margin-top: 0.5em;
+  margin-bottom: 0.3em;
+  }
+p 
+{
+  /*    text-indent:15px;  */
+  }
+
+h1
+{ 
+  font-size: xx-large;
+  font-weight: bold;
+  }
+
+h2
+{ 
+  font-size: xx-large;
+  }
+
+h3 
+{ 
+  font-size: x-large;
+  font-weight: bold;
+  }
+
+h4 
+{ 
+  font-size: x-large;
+  }
+
+h5 
+{ 
+  font-size: large;
+  font-weight: bold;
+  }
+
+h6 
+{ 
+  font-size: large;
+  }
+
+/** Inline elements */
+
+kbd 
+{ 
+  border-color: #888a85;
+  border-style: solid;
+  padding: 0.1em;
+  border-width: 0.1em;
+  }
+
+.name 
+{ 
+  font-weight: bolder;
+  }
+
+.entry_body pre
+{ 
+  overflow: auto;
+  width: 100%;
+ }

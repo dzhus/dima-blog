@@ -1,0 +1,26 @@
+{% extends "base.xhtml" %}
+
+{% block navigation %}
+<div id="nagivation">
+  <a href="/">Sphinx.net.ru</a> /
+  вход в систему /
+</div>
+{% endblock %}
+
+{% block base %}
+<div id="login_form">
+  <div class="text">
+    {% if form.has_errors %}
+    <div class="error">Введено неверное сочетание имени пользователя и пароля!</div>
+    {% endif %}
+    <form method="post" action=".">
+      <div>
+        {{ form.username }}<br />
+        {{ form.password }}<br />
+        <input type="submit" value="Вход" />
+        <input type="hidden" name="next" value="{{ next }}" />
+      </div>
+    </form>
+  </div>
+</div>
+{% endblock %}
