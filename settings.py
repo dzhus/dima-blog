@@ -1,10 +1,10 @@
-# Django settings for WS project.
+from site_settings import *
 
-DEBUG = False
+DEBUG = True
 TEMPLATE_DEBUG = DEBUG
 
 ADMINS = (
-    # ('Your Name', 'your_email@domain.com'),
+    ('Dmitry Dzhus', 'dima@sphinx.net.ru'),
 )
 
 MANAGERS = ADMINS
@@ -31,8 +31,6 @@ SITE_ID = 1
 APPEND_SLASH = True
 
 ADMIN_MEDIA_PREFIX = '/media/admin/'
-#MEDIA_ROOT = '/var/www/localhost/htdocs/media/'
-MEDIA_ROOT = '/home/sphinx/projects/python/ws/media/'
 
 # Make this unique, and don't share it with anybody.
 SECRET_KEY = 'k&2d**^=n!y9$5$kx$^6iw_kq0=uih47w=lqb@t(+bt-k=8z%q'
@@ -40,13 +38,13 @@ SECRET_KEY = 'k&2d**^=n!y9$5$kx$^6iw_kq0=uih47w=lqb@t(+bt-k=8z%q'
 # List of callables that know how to import templates from various sources.
 TEMPLATE_LOADERS = (
     'django.template.loaders.filesystem.load_template_source',
-    'django.template.loaders.app_directories.load_template_source',
-#     'django.template.loaders.eggs.load_template_source',
-)
+    'django.template.loaders.app_directories.load_template_source',)
 
+# Needed for admin shortcuts on index page and links in comments
+#
+# DO NOT remove the trailing comma!
 TEMPLATE_CONTEXT_PROCESSORS = (
-        'django.core.context_processors.auth',
-        )
+        'django.core.context_processors.auth',)
 
 MIDDLEWARE_CLASSES = (
     'django.middleware.common.CommonMiddleware',
@@ -55,19 +53,9 @@ MIDDLEWARE_CLASSES = (
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.middleware.doc.XViewMiddleware',
     'django.middleware.gzip.GZipMiddleware',
-    'django.contrib.flatpages.middleware.FlatpageFallbackMiddleware',
-)
+    'django.contrib.flatpages.middleware.FlatpageFallbackMiddleware',)
 
 ROOT_URLCONF = 'urls'
-
-TEMPLATE_DIRS = (
-    # Put strings here, like "/home/html/django_templates".
-    # Always use forward slashes, even on Windows.
-#    "/var/www/localhost/htdocs/templates",
-#    "/var/www/localhost/htdocs/blog/templates"
-    "/home/sphinx/projects/python/ws/templates",
-    "/home/sphinx/projects/python/ws/blog/templates"
-)
 
 INSTALLED_APPS = (
     'django.contrib.auth',
@@ -80,5 +68,6 @@ INSTALLED_APPS = (
     'django.contrib.sites',
     'blog',
     'tags',
-    'pytils'
-)
+    'pytils')
+
+TAGS_URL = u"/blog/tag/%s/"
