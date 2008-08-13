@@ -9,10 +9,10 @@
     {{ entry.add_date|ru_strftime:"%d %B %Y" }}
   </div>
 
-  {%if entry.tags.select_related %}
+  {%if entry.tags.all %}
   <div class="entry_tags" id="entry-{{ entry.id }}-tags">Теги:
-    {% for tag in entry.tags.select_related %}
-    <a href="{{ tag.get_absolute_url }}/" 
+    {% for tag in entry.tags.all %}
+    <a href="{{ tag.get_absolute_url }}" 
        rel="tag" 
        title="Посмотреть все записи с тегом «{{ tag }}»">{{ tag }}</a>{% if not forloop.last %}, {% endif %}{% endfor %}.
   </div>
