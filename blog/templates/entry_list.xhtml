@@ -1,26 +1,27 @@
-{% load pytils_numeral %}
 {% extends "blog_base.xhtml" %}
+{% load pytils_numeral %}
 
 {% block navigation %}
 <div id="nagivation">
   <a href="/" title="Перейти на главную страницу сайта">Sphinx.net.ru</a> /
 
-  {% if not tag and not has_next %}
+  {% if not tag and not page_obj.has_previous %}
     блог /
   {% else %}
     <a href="/blog" title="Перейти на начальную страницу блога">блог</a> /
   {% endif %}
 
   {% if tag %}записи с тегом
-    {% if not has_next %}
+    {% if not page_obj.has_previous %}
       «{{ tag }}» /
     {% else %}
-      <a href="/blog/tag/{{ tag }}" rel="tag" title="Посмотреть все записи с тегом «{{ tag }}»">«{{ tag }}»</a> /
+      <a href="/blog/{{ tag_chunk }}" rel="tag"
+         title="Посмотреть все записи с тегом «{{ tag }}»">«{{ tag }}»</a> /
     {% endif %}
   {% endif %}
   
-  {% if has_next %}
-    страница {{page}} /
+  {% if page_obj.has_previous %}
+    страница {{ page_obj.page }} /
   {% endif %}
 
 </div>
@@ -37,33 +38,20 @@
 
 
 {% block links %}
-  {% if has_previous %}
-    {% if not tag%}
-      <link rel="prev" href="/blog/page-{{ previous }}/" />
-    {% else %}
-      <link rel="prev" href="/blog/tag/{{ tag }}/page-{{ previous }}/" />
-    {% endif %}
+  {% if page_obj.has_previous %}
+      <link rel="prev" href="/blog/{{ tag_chunk }}page-{{ page_obj.previous_page_number }}/" />
   {% endif %}
   
-  {% if has_next %}
-    {% if not tag%}
-      <link rel="next" href="/blog/page-{{ next }}/" />
-    {% else %}
-      <link rel="next" href="/blog/tag/{{ tag }}/page-{{ next }}/" />
-    {% endif %}
+  {% if page_obj.has_next %}
+      <link rel="next" href="/blog/{{ tag_chunk }}page-{{ page_obj.next_page_number }}/" />
   {% endif %}
 
-  {% if not tag%}
-    <link rel="last" href="/blog/" />
-    <link rel="first" href="/blog/page-1/" />
-  {% else %}
-    <link rel="last" href="/blog/tag/{{ tag }}/" />
-    <link rel="first" href="/blog/tag/{{ tag }}/page-1/" />
-  {% endif %}
+  <link rel="last" href="/blog/{{ tag_chunk }}" />
+  <link rel="first" href="/blog/{{ tag_chunk }}page-1/" />
 
   {% if tag %}
     <link rel="alternate" type="application/rss+xml" title="RSS-лента блога: {{ tag }}"
-          href="/feeds/blogtag/{{ tag }}/" />
+          href="/feeds/blog{{ tag_chunk }}" />
   {% endif %}
   
   <link rel="index" href="/blog/entry/" />
@@ -72,12 +60,12 @@
 
 {% block blog_main %}
 
-{% if not entry_list %}
-    <div class="error">Не найдено записей, удовлетворяющий условиям фильтрации.</div>
-{% else %}
+  {% if not entry_list %}
+      <div class="error">Не найдено записей, удовлетворяющий условиям фильтрации.</div>
+  {% else %}
 
     <div id="blog_entry_list">
-    {% for entry in entry_list %}
+    {% for entry in entry_list reversed %}
         {% include "entry_row.xhtml" %}
         {% if not forloop.last %}
             {% include "entry_spacer.xhtml" %}
@@ -85,31 +73,24 @@
     {% endfor %}
     </div>
         
-    {% if is_paginated %}
+    {% if page_obj.has_other_pages %}
     <div id="blog_pagination">
   
-        {% if has_previous %}
+        {% if page_obj.has_previous %}
         <span style="float:left;">
-            {% if not tag%}
-                ← <a href="/blog/page-{{ previous }}/" title="Перейти на предыдущую страницу">с. {{ previous }}</a>
-            {% else %}
-                ← <a href="/blog/tag/{{ tag }}/page-{{ previous }}/" title="Перейти на предыдущую страницу">с. {{ previous }}</a>
-            {% endif %}
+            ← <a href="/blog/{{ tag_chunk }}page-{{ page_obj.previous_page_number }}/"
+                 title="Перейти на предыдущую страницу">с. {{ page_obj.previous_page_number }}</a>
+        </span>
+        {% endif %}
+
+        {% if page_obj.has_next %}
+        <span style="float:right;">
+            <a href="/blog/{{ tag_chunk }}page-{{ page_obj.next_page_number }}/"
+               title="Перейти на следующую страницу">с. {{ page_obj.next_page_number }}</a> →
         </span>
         {% endif %}
         
-                        
-        {% if has_next %}
-        <span style="float:right;">
-            {% if not tag %}
-                <a href="/blog/page-{{ next }}/" title="Перейти на следующую страницу">с. {{ next }}</a> →
-            {% else %}
-                <a href="/blog/tag/{{ tag }}/page-{{ next }}/" title="Перейти на следующую страницу">с. {{ next}}</a> →
-            {% endif %}
-        </span>
-        {% endif %}
-    с. {{ page }}<br />
-
+        с. {{ page_obj.number }}<br />
     </div>
     {% endif %}
 
