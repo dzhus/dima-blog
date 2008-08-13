@@ -11,7 +11,7 @@ from tags import fields
 # Create your models here.
 
 class Entry(models.Model):
-    title = models.CharField("Заголовок", maxlength=128)
+    title = models.CharField("Заголовок", max_length=128)
     private = models.BooleanField("Личная запись", blank=True)
     text = models.TextField("Текст")
     extra_text = models.TextField("Дополнительный текст", help_text="Данный текст виден только при просмотре отдельной записи.", null=True, blank=True)
