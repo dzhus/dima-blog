@@ -36,7 +36,7 @@ class Entry(models.Model):
         except:
             pass
 
-    def __str__(self):
+    def __unicode__(self):
         return self.title
 
 
@@ -64,5 +64,5 @@ class File(models.Model):
         verbose_name = "Файл"
         verbose_name_plural = "Файлы"
 
-    def __str__(self):
+    def __unicode__(self):
         return self.name
