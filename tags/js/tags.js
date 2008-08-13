@@ -6,6 +6,8 @@ var DOWN_CODE=40;
 var MIN_WIDTH=150;
 var MAX_HEIGHT=200;
 
+var suppress_blur = false;
+
 function createRequest(){
   try{
     return new XMLHttpRequest();
@@ -129,11 +131,10 @@ function initAutoComplete(input,init_scope){
   ul.style.position='absolute';
   ul.style.display='none';
   ul.style.width=(input.offsetWidth<MIN_WIDTH?MIN_WIDTH:input.offsetWidth)-2+'px';
-  try{
+  if (ul.style.maxHeight != undefined)
     ul.style.maxHeight=MAX_HEIGHT+'px';
-  } catch(e) {
+  else
     ul.style.height=MAX_HEIGHT+'px';
-  }//try
   ul.style.whiteSpace='nowrap';
   ul.style.overflow='auto';
   try{
@@ -141,7 +142,9 @@ function initAutoComplete(input,init_scope){
   } catch(e){
     //do nothing
   }//try
+  ul.style.margin = '0';
   input.onkeyup=function(e){
+    mousemove_enabled = true;
     var keyCode=getKeyCode(e);
     if(keyCode==ENTER_CODE ||
        keyCode==ESC_CODE ||
@@ -157,28 +160,59 @@ function initAutoComplete(input,init_scope){
       hideList(ul,input);
     }//if
   }//keyup
-  input.onkeydown=function(e){
+  
+  // Separate function is for IE that doesn't handle UP and DOWN in keypress
+  var processCursorKeys = function(keyCode) {
+    showList(ul,input);
+    var li = moveListSelection(ul,keyCode==DOWN_CODE?'down':'up');
+    mousemove_enabled = false;
+    if (li.offsetTop < ul.scrollTop)
+      ul.scrollTop = li.offsetTop;
+    else if (li.offsetTop + li.offsetHeight > ul.scrollTop + ul.offsetHeight)
+      ul.scrollTop = li.offsetTop + li.offsetHeight - ul.offsetHeight;
+    // mouse moves are enabled at keyup
+  }//processCursorKeys
+  
+  input.onkeypress = function(e){
     var keyCode=getKeyCode(e);
     if(keyCode==ESC_CODE){
       hideList(ul,input);
     } else if(keyCode==DOWN_CODE || keyCode==UP_CODE){
-      showList(ul,input);
-      moveListSelection(ul,keyCode==DOWN_CODE?'down':'up');
+      processCursorKeys(keyCode);
     } else if(keyCode==ENTER_CODE){
       var li=selectedItem(ul);
       if(li){
         input.value=liValue(li);
-        hideList(ul,input);
-        if(e && e.preventDefault)
-          e.preventDefault();
-        return false;
       } else {
         if(hasClass(input,'strict'))
           input.value='';
       }//if
+      var open = ul.offsetHeight > 0;
+      hideList(ul,input);
+      if (open) {
+        if(e && e.preventDefault) {
+          e.preventDefault();
+          e.preventEnter = true;
+        }
+        return false;
+      }//
     }//if
-  }//keydown
+  }//keypress
+  input.onkeydown = function(e) {
+    if (e) 
+      return true; // serve only IE here
+    var keyCode=getKeyCode(e);
+    if (keyCode==DOWN_CODE || keyCode==UP_CODE){
+      processCursorKeys(keyCode);
+    }//if
+  }//onkeydown
   input.onblur=function(e){
+    if (suppress_blur) {
+      suppress_blur = false;
+      input.focus();
+      return;
+    }//if
+    suppress_blur = false;
     if(hasClass(input,'strict')){
       var li=selectedItem(ul);
       if(li)
@@ -194,6 +228,10 @@ function initAutoComplete(input,init_scope){
     else
       showList(ul,input);
   }//click
+  ul.onmousedown = function(e) {
+    if (window.event && window.event.srcElement == ul)
+      suppress_blur = true;
+  }
 }//initAutoComplete
 
 function normalizeTitle(title){
@@ -267,6 +305,7 @@ function moveListSelection(ul,direction){
   if(index>=lis.length)
     index=0;
   addClass(lis[index],'selected');
+  return lis[index];
 }//moveListSelection
 
 function removeSelection(lis){
@@ -326,6 +365,8 @@ function reloadList(ul,input,value){
   },500);
 }//reloadList
 
+var mousemove_enabled = true;
+
 function initSuggestLis(ul,input){
   var lis=ul.getElementsByTagName('LI');
   for(var i=0;i<lis.length;i++){
@@ -333,12 +374,43 @@ function initSuggestLis(ul,input){
       input.value=liValue(this);
     }//onmousedown
     lis[i].onmouseover=function(){
+      if (!mousemove_enabled)
+        return;
+      removeSelection(lis);
       addClass(this,'selected');
     }//onmouseover
-    lis[i].onmouseout=function(){
-      removeClass(this,'selected');
-    }//onmouseout
   }//for
 }//initSuggestLis
+
+function deleteTag(button){
+  var li=button.parentNode;
+  var ul=li.parentNode;
+  //Prevent deletion of last input for it is used as a template for addition
+  if(getElementsByClass('suggest_tag',li,'input').length && getElementsByClass('suggest_tag',ul,'input').length==1)
+    addTag(ul.parentNode);
+  ul.removeChild(li);
+}//deleteTag
+  
+function addTag(tag_widget){
+  var ul=tag_widget.getElementsByTagName('UL')[0];
+  var lis=ul.getElementsByTagName('LI');
+  var li=ul.appendChild(lis[lis.length-1].cloneNode(true));
+  var input=li.getElementsByTagName('INPUT')[0];
+  input.value='';
+  initAutoComplete(input,tag_widget);
+  input.focus();
+}//addTag
+
+function initTagWidget(tag_widget) {
+  addEvent(tag_widget,'keypress',function(e){
+    if(getKeyCode(e)==ENTER_CODE) {
+      addTag(tag_widget);
+      if(e && e.preventDefault)
+        e.preventDefault();
+      return false;
+    }//if
+  })//keypress
+  initAutoCompletes(tag_widget);
+}//initTagWidget
 
 addClass(document.body,'js');
