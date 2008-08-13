@@ -41,21 +41,21 @@ class Entry(models.Model):
 
 
     class Admin:
-        list_display            = ('id','title','add_date', 'comments', 'slug')
-        list_display_links      = ('title',)
-        js                      = ('../js/tags.gs',)
-        search_fields           = ('text', 'extra_text', 'title')
+        list_display = ('id','title','add_date', 'comments', 'slug')
+        list_display_links = ('title',)
+        js = ('../js/tags.gs',)
+        search_fields = ('text', 'extra_text', 'title')
         
     class Meta:
-        verbose_name            = "Запись"
-        verbose_name_plural     = "Записи"
-        ordering                = ("-add_date",)
+        verbose_name = "Запись"
+        verbose_name_plural = "Записи"
+        ordering = ("-add_date",)
 
 class File(models.Model):
-    name            = models.CharField("Название", maxlength=50)
-    description     = models.TextField("Описание")
-    file            = models.FileField("Файл",upload_to="uploads/")
-    add_date        = models.DateTimeField("Дата&время добавления", editable=False, auto_now_add=True)
+    name = models.CharField("Название", maxlength=50)
+    description = models.TextField("Описание")
+    file = models.FileField("Файл",upload_to="uploads/")
+    add_date = models.DateTimeField("Дата&время добавления", editable=False, auto_now_add=True)
 
     class Admin:
 	pass
