@@ -52,7 +52,7 @@ class Entry(models.Model):
         ordering = ("-add_date",)
 
 class File(models.Model):
-    name = models.CharField("Название", maxlength=50)
+    name = models.CharField("Название", max_length=50)
     description = models.TextField("Описание")
     file = models.FileField("Файл",upload_to="uploads/")
     add_date = models.DateTimeField("Дата&время добавления", editable=False, auto_now_add=True)
