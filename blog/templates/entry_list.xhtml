@@ -20,8 +20,8 @@
     {% endif %}
   {% endif %}
   
-  {% if page_obj.has_previous %}
-    страница {{ page_obj.page }} /
+  {% if page_obj.has_next %}
+    страница {{ page_obj.number }} /
   {% endif %}
 
 </div>

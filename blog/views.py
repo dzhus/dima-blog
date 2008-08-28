@@ -15,18 +15,26 @@ from blog.models import Entry
 # from md5 import md5 as md5hash
 # from random import shuffle
 
-def entry_list(request, tag=None, **kwargs):
-    objects = Entry.objects
-
-    queryset = objects.order_by('add_date')
-
+def filter_inappropriate(request, queryset):
+    """
+    Take queryset and filter out objects inappropriate for current
+    user (e. g. private entries shouldn't be seen by guests).
+    """
     if not (request.user.is_authenticated() and \
             request.user.has_perm('blog.can_see_private')):
-        queryset = queryset.filter(private=0)
-        
+        return queryset.filter(private=0)
+    else:
+        return queryset    
+
+def entry_list(request, tag=None, page='last', **kwargs):
+    objects = Entry.objects
+
+    queryset = filter_inappropriate(request, objects.order_by('add_date'))
+
     return object_list_view(request, queryset,
                             extra_context={'tag': tag,
                                            'tag_chunk' : tag and "tag/%s/" % tag or ''},
+                            page=page,
                             **kwargs)
         
 def entry_detail(request, template_name="entry_detail.xhtml"):
