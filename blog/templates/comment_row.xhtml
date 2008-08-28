@@ -1,5 +1,5 @@
 {% load markup %}
 <div class="comment">
-  <span class="name">{{ comment.person_name|escape }}</span>, {{ comment.submit_date|date }} {% if user.is_superuser %}(<a href="./?delete_comment={{ comment.id }}">удалить</a>){% endif %}
+  <span class="name">{{ comment.user_name|escape }}</span>, {{ comment.submit_date|date }} {% if user.is_superuser %}(<a href="./?delete_comment={{ comment.id }}">удалить</a>){% endif %}
   {{ comment.comment|markdown|fix_ampersands }}
 </div>

@@ -1,3 +1,4 @@
+{% load comments %}
 {% load markup %}
 {% load pytils_dt %}
 <div class="blog_entry" id="entry-{{ entry.id }}">
@@ -41,8 +42,9 @@
       {% endif %}
     </span>
     
-    {% if not comment_form %}
-      <a href="{{ entry.get_absolute_url }}#comments" title="Комментарии к записи «{{ entry.title }}»">Комментарии</a>{% if entry.comments %} (<b>{{entry.comments}}</b>){% endif %}
+    {% if not full_view %}
+      {% get_comment_count for entry as comment_count %}
+      <a href="{{ entry.get_absolute_url }}#comments" title="Комментарии к записи «{{ entry.title }}»">Комментарии</a>{% if comment_count %} (<b>{{ comment_count }}</b>){% endif %}
     {% endif %}
   </div>
   
