@@ -17,23 +17,12 @@ class Entry(models.Model):
                                      editable=False, null=True, auto_now=True)
 #    tags = TagsField(Tag, blank=True, verbose_name="Теги")
     slug = models.SlugField("Метка", blank=True)
-    comments = models.IntegerField("Количество комментариев", blank=True, null=True, editable=False)
 
     def get_absolute_url(self):
         if self.slug:
             return "/blog/entry/%s/" % self.slug
         else:
             return "/blog/entry/%i/" % self.id
-
-    def delete(self):
-        """
-        Remove all related comments when wiping entry
-        """
-        super(Entry, self).delete()
-        try:
-            FreeComment.objects.filter(content_type=ContentType.objects.get_for_model(Entry).id, object_id=self.id).delete()
-        except:
-            pass
 
     def __unicode__(self):
         return self.title
