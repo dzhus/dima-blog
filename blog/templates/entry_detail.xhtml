@@ -28,7 +28,7 @@
     <h2>Комментарии:</h2>
     {% for comment in comment_list %}
       {% include "comment_row.xhtml" %}
-      {% if not forloop.last %}{% include "spacer.xhtml" %}{% endif %}
+      {% if not forloop.last %}{% include "comment_spacer.xhtml" %}{% endif %}
     {% endfor %}
 
   
