@@ -22,7 +22,7 @@
     {{ entry.text|markdown|fix_ampersands }}
 
     {% if entry.extra_text %}
-      {% if comment_form %}
+      {% if full_view %}
         {{ entry.extra_text|markdown|fix_ampersands }}
       {% else %}
         <a href="{{ entry.get_absolute_url }}">Читать далее</a>

@@ -41,7 +41,9 @@ def entry_list(request, tag=None, page='last', **kwargs):
 def entry_detail(request, queryset, **kwargs):
     queryset = filter_inappropriate(request, queryset)
     
-    return object_detail_view(request, queryset, **kwargs)
+    return object_detail_view(request, queryset,
+                              extra_context={'full_view': True},
+                              **kwargs)
 
 def tag_list(request, template_name="entry_detail.xhtml"):
     pass
