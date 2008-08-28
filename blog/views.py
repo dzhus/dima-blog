@@ -63,7 +63,7 @@ def entry_detail(request, queryset, **kwargs):
         prev_entry = None
     try:
         next_entry = obj.get_next_by_add_date(**filter_kwargs)
-    except ObjectDoesNotExit:
+    except ObjectDoesNotExist:
         next_entry = None
     
     return object_detail_view(request, queryset,
