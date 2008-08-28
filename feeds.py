@@ -1,6 +1,6 @@
-# -*- encoding: utf-8 -*-
+# -*- coding: utf-8 -*-
 from django.contrib.syndication.feeds import Feed
-from blog.models import Entry, Tag
+from blog.models import Entry#, Tag
 
 DEFAULT_COUNT = 50
 

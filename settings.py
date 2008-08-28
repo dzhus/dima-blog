@@ -65,9 +65,7 @@ INSTALLED_APPS = (
     'django.contrib.admin',
     'django.contrib.markup',
     'django.contrib.flatpages',
-    'django.contrib.sites',
     'blog',
-    'tags',
     'pytils')
 
 TAGS_URL = u"/blog/tag/%s/"

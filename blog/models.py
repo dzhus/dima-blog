@@ -1,22 +1,21 @@
-# coding: utf-8
-from django.db import models
-import django.contrib.comments.models as mdl
-from django.contrib.contenttypes.models import ContentType
+# -*- coding: utf-8 -*-
 import datetime
-from tags.models import Tag
-from tags import fields
 
+from django.db import models
 
-
-# Create your models here.
+#from tags.models import Tag
+#from tags.fields import TagsField
 
 class Entry(models.Model):
     title = models.CharField("Заголовок", max_length=128)
     private = models.BooleanField("Личная запись", blank=True)
     text = models.TextField("Текст")
-    extra_text = models.TextField("Дополнительный текст", help_text="Данный текст виден только при просмотре отдельной записи.", null=True, blank=True)
+    extra_text = models.TextField("Дополнительный текст", blank=True,
+                                  help_text="Данный текст виден только при просмотре отдельной записи.")
     add_date = models.DateTimeField("Дата и время добавления", editable=False, auto_now_add=True)
-    tags = fields.TagsField(Tag, blank=True, verbose_name="Теги")
+    edit_date = models.DateTimeField("Дата и время последнего редактирования",
+                                     editable=False, null=True, auto_now=True)
+#    tags = TagsField(Tag, blank=True, verbose_name="Теги")
     slug = models.SlugField("Метка", blank=True)
     comments = models.IntegerField("Количество комментариев", blank=True, null=True, editable=False)
 

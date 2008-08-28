@@ -13,8 +13,8 @@ from django.views.static import serve
 
 # Our stuff
 from blog.models import Entry, File
-from tags.models import Tag
-from feeds import BlogFeed, BlogTagFeed
+#from tags.models import Tag
+from feeds import BlogFeed#, BlogTagFeed
 from blog.views import entry_list, entry_detail, tag_list
 
 ## Index page
@@ -25,12 +25,11 @@ urlpatterns = patterns('django.views.generic.date_based',
                                                  'template_name': 'index.xhtml', 
                                                  'allow_empty': False}))
 
+## Entry list views
 list_common_kwargs = {'paginate_by': 5,
                       'orphans': 2,
                       'template_name': 'entry_list.xhtml',
                       'template_object_name': 'entry'}
-
-## Generic blog views
 urlpatterns += patterns('',
                         (r'^blog/page-(?P<page>\d+)/$', entry_list, list_common_kwargs),
                         (r'^blog/$', entry_list, list_common_kwargs),
@@ -38,10 +37,10 @@ urlpatterns += patterns('',
                         (r'^blog/tag/(?P<tag>.+)/page-(?P<page>\d+)/$', entry_list, list_common_kwargs),
                         (r'^blog/tag/(?P<tag>.+)/$', entry_list, list_common_kwargs))
 
+## Entry detail view
 detail_common_kwargs = {'queryset': Entry.objects,
                         'template_name': 'entry_detail.xhtml',
                         'template_object_name': 'entry'}
-## Entry detail view
 urlpatterns += patterns('django.views.generic.list_detail',
                         (r'^blog/entry/(?P<object_id>\d+)/$', 'object_detail', detail_common_kwargs),
                         (r'^blog/entry/(?P<slug>[\w-]+)/$', 'object_detail', detail_common_kwargs))
@@ -99,7 +98,7 @@ urlpatterns += patterns('django',
 ## Feeds
 urlpatterns += patterns('django.contrib.syndication.views',
                         (r'^feeds/(?P<url>.+)/$', 'feed',
-                         {'feed_dict': {'blog': BlogFeed, 'blogtag': BlogTagFeed} }))
+                         {'feed_dict': {'blog': BlogFeed}}))#, 'blogtag': BlogTagFeed} }))
 
 ## Admin pages view
 urlpatterns += patterns('',
