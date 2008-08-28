@@ -42,8 +42,8 @@ class Entry(models.Model):
 class File(models.Model):
     name = models.CharField("Название", max_length=50)
     description = models.TextField("Описание")
-    file = models.FileField("Файл",upload_to="uploads/")
-    add_date = models.DateTimeField("Дата&время добавления", editable=False, auto_now_add=True)
+    file = models.FileField("Файл", upload_to="uploads/")
+    add_date = models.DateTimeField("Дата и время добавления", editable=False, auto_now_add=True)
 
     class Admin:
 	pass
