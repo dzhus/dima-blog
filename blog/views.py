@@ -6,6 +6,7 @@ from django.template import RequestContext
 from django.template.loader import get_template
 
 from django.views.generic.list_detail import object_list as object_list_view
+from django.views.generic.list_detail import object_detail as object_detail_view
 
 from blog.models import Entry
 
@@ -37,8 +38,10 @@ def entry_list(request, tag=None, page='last', **kwargs):
                             page=page,
                             **kwargs)
         
-def entry_detail(request, template_name="entry_detail.xhtml"):
-    pass
+def entry_detail(request, queryset, **kwargs):
+    queryset = filter_inappropriate(request, queryset)
+    
+    return object_detail_view(request, queryset, **kwargs)
 
 def tag_list(request, template_name="entry_detail.xhtml"):
     pass

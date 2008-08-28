@@ -42,8 +42,8 @@ detail_common_kwargs = {'queryset': Entry.objects,
                         'template_name': 'entry_detail.xhtml',
                         'template_object_name': 'entry'}
 urlpatterns += patterns('django.views.generic.list_detail',
-                        (r'^blog/entry/(?P<object_id>\d+)/$', 'object_detail', detail_common_kwargs),
-                        (r'^blog/entry/(?P<slug>[\w-]+)/$', 'object_detail', detail_common_kwargs))
+                        (r'^blog/entry/(?P<object_id>\d+)/$', entry_detail, detail_common_kwargs),
+                        (r'^blog/entry/(?P<slug>[\w-]+)/$', entry_detail, detail_common_kwargs))
 
 
 ## REMOVE AT REAL SERVER DEPLOYMENT !!
