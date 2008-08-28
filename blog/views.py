@@ -45,9 +45,10 @@ def entry_detail(request, queryset, **kwargs):
 
     # Violate DRY badly as generic detail view doesn't allow to add
     # extra context which uses found object
-    if kwargs['object_id']:
+    assert('object_id' in kwargs.keys() or 'slug' in kwargs.keys())
+    if 'object_id' in kwargs.keys():
         queryset = queryset.filter(pk=kwargs['object_id'])
-    elif kwargs['slug']:
+    else:
         queryset = queryset.filter(slug=kwargs['slug'])
     try:
         obj = queryset.get()
