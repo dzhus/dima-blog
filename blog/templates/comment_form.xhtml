@@ -1,24 +1,11 @@
 {% load pytils_numeral %}
+{% load comments %}
+{% get_comment_form for entry as form %}
 <div style="font-size: large;">Оставить комментарий:</div>
 <div id="comment_form">
-  <form action="" method="post">
-    <div>
-      <label>Представьтесь:</label>
-      <br />
-      {{ comment_form.person_name }}
-      <br /><br />
-      <label>Текст комментария:</label>
-      <br />
-      {{ comment_form.comment }}
-      <br /><br />
-      <label>Введите ответ:</label>
-      <br />
-      <b>{{ captcha.expression }}=?</b>
-      <input type="text" name="captcha_result" />
-      <input type="hidden" name="captcha_hash" value="{{ captcha.hash }}" />
-      <br />
-      <br />
+  <form action="{% comment_form_target %}" method="post">
+      {{ form.as_p }}
+      <input type="hidden" name="next" value="{{ entry.get_absolute_url }}" />
       <input type="submit" value="Добавить комментарий" />
-    </div>
   </form>
 </div>
