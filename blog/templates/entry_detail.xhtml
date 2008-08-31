@@ -25,14 +25,14 @@
   <div id="comments">
     {% get_comment_list for blog.entry entry.id as comment_list %}    
 
-    <h2>Комментарии:</h2>
+    {% if comment_list %}<h2>Комментарии:</h2>{% endif %}
     {% for comment in comment_list %}
       {% include "comment_row.xhtml" %}
       {% if not forloop.last %}{% include "comment_spacer.xhtml" %}{% endif %}
     {% endfor %}
 
-  
   {% include "comment_form.xhtml" %}
+
   </div>
   
   <div id="entry_pagination">
