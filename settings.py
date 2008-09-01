@@ -70,3 +70,5 @@ INSTALLED_APPS = (
     'pytils')
 
 TAGS_URL = u"/blog/tag/%s/"
+
+LOGIN_REDIRECT_URL = "/"
