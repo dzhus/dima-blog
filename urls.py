@@ -90,8 +90,6 @@ urlpatterns += patterns('django.views.generic.list_detail',
 urlpatterns += patterns('django',
                         (r'^accounts/login/$',
                          'contrib.auth.views.login', {'template_name': 'login.xhtml'}),
-                        (r'^accounts/profile/$',
-                         'views.generic.simple.redirect_to', {'url':'/'}),
                         (r'^accounts/logout/$',
                          'contrib.auth.views.logout', {'next_page': '/'}))
 
