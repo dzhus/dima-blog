@@ -19,8 +19,8 @@ from blog.models import Entry
 
 def make_filter_kwargs(request):
     """
-    Take queryset and filter out objects inappropriate for current
-    user (e. g. private entries shouldn't be seen by guests).
+    Make a set of filter kwargs to hide objects inappropriate for
+    current user (e. g. private entries shouldn't be seen by guests).
     """
     if not (request.user.is_authenticated() and \
             request.user.has_perm('blog.can_see_private')):
@@ -55,7 +55,7 @@ def entry_detail(request, queryset, **kwargs):
     except ObjectDoesNotExist:
         raise Http404
 
-    # Exception not necessarily happen at the same time, so use two
+    # Exceptions not necessarily happen at the same time, so use two
     # try..except blocks
     try:
         prev_entry = obj.get_previous_by_add_date(**filter_kwargs)
