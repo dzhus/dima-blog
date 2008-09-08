@@ -3,9 +3,35 @@
 {% get_comment_form for entry as form %}
 <div style="font-size: large;">Оставить комментарий:</div>
 <div id="comment_form">
-  <form action="{% comment_form_target %}" method="post">
-      {{ form.as_p }}
-      <input type="hidden" name="next" value="{{ entry.get_absolute_url }}" />
-      <input type="submit" value="Добавить комментарий" />
-  </form>
+    <form action="{% comment_form_target %}" method="post">
+        <p>
+            {{ form.name.errors }}
+            <label for="id_name"><b>Имя:</b></label><br />
+            {{ form.name }}
+        </p>
+        <p>
+            {{ form.email.errors }}
+            <label for="id_email"><b>E-mail:</b></label><br />
+            {{ form.url }}
+        </p>
+        <p>
+            {{ form.url.errors }}
+            <label for="id_url">URL:</label><br />
+            {{ form.url }}
+        </p>
+        <p>
+            {{ form.comment.errors }}
+            <label for="id_comment">
+                <b>Комментарий</b>
+                <i>(можно <a href="/blog/entry/markdown-and-lightweight-markup/">Markdown</a>)</i>
+                <b>:</b></label><br />
+            {{ form.comment }}
+        </p>
+        {{ form.content_type }}
+        {{ form.object_pk }}
+        {{ form.timestamp }}
+        {{ form.security_hash }}
+        <input type="hidden" name="next" value="{{ entry.get_absolute_url }}" />
+        <input type="submit" value="Добавить комментарий" />
+    </form>
 </div>
