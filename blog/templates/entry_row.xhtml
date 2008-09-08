@@ -1,6 +1,7 @@
 {% load comments %}
 {% load markup %}
 {% load pytils_dt %}
+{% load tagging_tags %}
 <div class="blog_entry" id="entry-{{ entry.id }}">
   <h1 class="entry_title">
     {% if entry.private %}&lowast;&nbsp;{% endif %}{{ entry.title }}
@@ -10,14 +11,13 @@
     {{ entry.add_date|ru_strftime:"%d %B %Y" }}
   </div>
 
-  {%if entry.tags.all %}
   <div class="entry_tags" id="entry-{{ entry.id }}-tags">Теги:
-    {% for tag in entry.tags.all %}
-    <a href="{{ tag.get_absolute_url }}" 
+    {% tags_for_object entry as tags %}
+    {% for entry_tag in tags %}
+    <a href="/blog/tag/{{ entry_tag.name }}/" 
        rel="tag" 
-       title="Посмотреть все записи с тегом «{{ tag }}»">{{ tag }}</a>{% if not forloop.last %}, {% endif %}{% endfor %}.
+       title="Посмотреть все записи с тегом «{{ entry_tag.name }}»">{{ entry_tag.name }}</a>{% if not forloop.last %}, {% endif %}{% endfor %}.
   </div>
-  {% endif %}
 
   <div class="entry_body" id="entry-{{ entry.id }}-body">
     {{ entry.text|markdown|fix_ampersands }}
@@ -44,7 +44,8 @@
     
     {% if not full_view %}
       {% get_comment_count for entry as comment_count %}
-      <a href="{{ entry.get_absolute_url }}#comments" title="Комментарии к записи «{{ entry.title }}»">Комментарии</a>{% if comment_count %} (<b>{{ comment_count }}</b>){% endif %}
+      <a href="{{ entry.get_absolute_url }}#comments"
+         title="Комментарии к записи «{{ entry.title }}»">Комментарии</a>{% if comment_count %} <b>({{ comment_count }})</b>){% endif %}
     {% endif %}
   </div>
   
