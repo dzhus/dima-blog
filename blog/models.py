@@ -1,6 +1,8 @@
 # -*- coding: utf-8 -*-
 from django.db import models
 
+from tagging.fields import TagField
+
 #from tags.models import Tag
 #from tags.fields import TagsField
 
@@ -13,7 +15,7 @@ class Entry(models.Model):
     add_date = models.DateTimeField("Дата и время добавления", editable=False, auto_now_add=True)
     edit_date = models.DateTimeField("Дата и время последнего редактирования",
                                      editable=False, null=True, auto_now=True)
-#    tags = TagsField(Tag, blank=True, verbose_name="Теги")
+    tags = TagField("Теги", blank=True, null=True)
     slug = models.SlugField("Метка", blank=True)
 
     def get_absolute_url(self):

@@ -15,7 +15,7 @@ from django.views.static import serve
 from blog.models import Entry, File
 #from tags.models import Tag
 from feeds import BlogFeed#, BlogTagFeed
-from blog.views import entry_list, entry_detail, tag_list
+from blog.views import entry_list, entry_detail, tag_cloud
 
 ## Index page
 urlpatterns = patterns('django.views.generic.date_based',
@@ -35,7 +35,8 @@ urlpatterns += patterns('',
                         (r'^blog/$', entry_list, list_common_kwargs),
 
                         (r'^blog/tag/(?P<tag>.+)/page-(?P<page>\d+)/$', entry_list, list_common_kwargs),
-                        (r'^blog/tag/(?P<tag>.+)/$', entry_list, list_common_kwargs))
+                        (r'^blog/tag/(?P<tag>.+)/$', entry_list, list_common_kwargs),
+                        (r'^blog/tag/$', tag_cloud))
 
 ## Entry detail view
 detail_common_kwargs = {'queryset': Entry.objects,

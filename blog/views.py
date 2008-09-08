@@ -3,13 +3,16 @@ from django.core.paginator import Paginator, InvalidPage
 
 from django.http import HttpResponse, Http404
 from django.core.exceptions import ObjectDoesNotExist
+
 from django.template import RequestContext
 from django.template.loader import get_template
+from django.shortcuts import render_to_response
 
 from django.views.generic.list_detail import object_list as object_list_view
 from django.views.generic.list_detail import object_detail as object_detail_view
 
 from blog.models import Entry
+from tagging.models import Tag
 
 # import settings
 
@@ -73,5 +76,8 @@ def entry_detail(request, queryset, **kwargs):
                                              'next_entry': next_entry},
                               **kwargs)
 
-def tag_list(request, template_name="entry_detail.xhtml"):
-    pass
+def tag_cloud(request, template_name="tags.xhtml"):
+    filter_kwargs = make_filter_kwargs(request)
+    cloud = Tag.objects.cloud_for_model(Entry, filters=filter_kwargs)
+    context = {'tags': cloud}
+    return render_to_response(template_name, context)

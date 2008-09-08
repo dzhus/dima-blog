@@ -67,8 +67,7 @@ INSTALLED_APPS = (
     'django.contrib.markup',
     'django.contrib.flatpages',
     'blog',
-    'pytils')
-
-TAGS_URL = u"/blog/tag/%s/"
+    'pytils',
+    'tagging')
 
 LOGIN_REDIRECT_URL = "/"

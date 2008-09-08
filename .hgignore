@@ -2,8 +2,9 @@ syntax: glob
 
 *.pyc
 *.pyo
-django.db
+django*.db
 
 syntax: regexp
 
 ^media/uploads/
+^tagging

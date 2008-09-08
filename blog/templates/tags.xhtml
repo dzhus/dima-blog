@@ -5,17 +5,17 @@
 {% endblock %}
 
 {% block title %}
-Все тэги блога на Sphinx.net.ru
+Все теги блога на Sphinx.net.ru
 {% endblock %}
 
 {% block base %}
 <div class="box">
-  {% for object in tag_list %}
-  <span class="weight-{{ object.weight }}">
-    <a rel="tag"
-       href="/blog/tag/{{ object.tag }}/" 
-       title="Все записи с тэгом «{{ object.tag }}»">
-      {{ object.tag }}</a> {{ object.count }}
+    {% for tag in tags %}
+    <span class="weight-{{ tag.font_size }}">
+        <a rel="tag"
+           href="/blog/tag/{{ tag.name }}/" 
+           title="Все записи с тегом «{{ tag.name }}»">
+            {{ tag.name }}</a> {{ tag.count }}
   </span>
   {% endfor %}
 </div>
