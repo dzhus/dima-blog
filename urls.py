@@ -28,6 +28,8 @@ urlpatterns = patterns('django.views.generic.date_based',
 ## Entry list views
 list_common_kwargs = {'paginate_by': 5,
                       'orphans': 2,
+                      'page': 'last',
+                      'queryset': Entry.objects,
                       'template_name': 'entry_list.xhtml',
                       'template_object_name': 'entry'}
 urlpatterns += patterns('',

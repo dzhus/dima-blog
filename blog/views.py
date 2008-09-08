@@ -10,15 +10,10 @@ from django.shortcuts import render_to_response
 
 from tagging.views import tagged_object_list as tagged_object_list
 from django.views.generic.list_detail import object_detail as object_detail_view
+from django.views.generic.list_detail import object_list as object_list_view
 
 from blog.models import Entry
 from tagging.models import Tag
-
-# import settings
-
-# import captcha
-# from md5 import md5 as md5hash
-# from random import shuffle
 
 def make_filter_kwargs(request):
     """
@@ -31,22 +26,25 @@ def make_filter_kwargs(request):
     else:
         return {}
 
-def entry_list(request, tag=None, page='last', **kwargs):
+def entry_list(request, queryset, tag=None, **kwargs):
     """
     Show all entries with given tag, paginated and filtered.
 
     This function accepts the same arguments as tagged_object_list and
     object_list generic views.
     """
-    objects = Entry.objects
 
     # I want to filter out private entries, so I have to use a
     # queryset based upon request data
-    queryset = objects.order_by('add_date').filter(**make_filter_kwargs(request))
+    queryset = queryset.order_by('add_date').filter(**make_filter_kwargs(request))
 
-    return tagged_object_list(request, queryset, tag=tag,
-                              extra_context={'tag_chunk' : tag and "tag/%s/" % tag or ''},
-                              **kwargs)
+    if tag is None:
+        return object_list_view(request, queryset, **kwargs)
+    else:
+        return tagged_object_list(request, queryset,
+                                  tag=tag,
+                                  extra_context={'tag_chunk': "tag/%s/" % tag},
+                                  **kwargs)
         
 def entry_detail(request, queryset, **kwargs):
     filter_kwargs = make_filter_kwargs(request)
