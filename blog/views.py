@@ -26,7 +26,7 @@ def make_filter_kwargs(request):
     else:
         return {}
 
-def entry_list(request, queryset, tag=None, **kwargs):
+def entry_list(request, queryset, tag=None, page='last', **kwargs):
     """
     Show all entries with given tag, paginated and filtered.
 
@@ -39,10 +39,10 @@ def entry_list(request, queryset, tag=None, **kwargs):
     queryset = queryset.order_by('add_date').filter(**make_filter_kwargs(request))
 
     if tag is None:
-        return object_list_view(request, queryset, **kwargs)
+        return object_list_view(request, queryset, page=page, **kwargs)
     else:
         return tagged_object_list(request, queryset,
-                                  tag=tag,
+                                  tag=tag, page=page,
                                   extra_context={'tag_chunk': "tag/%s/" % tag},
                                   **kwargs)
         
@@ -82,6 +82,6 @@ def entry_detail(request, queryset, **kwargs):
 
 def tag_cloud(request, template_name="tags.xhtml"):
     filter_kwargs = make_filter_kwargs(request)
-    cloud = Tag.objects.cloud_for_model(Entry, filters=filter_kwargs)
+    cloud = Tag.objects.cloud_for_model(Entry, steps=6, filters=filter_kwargs)
     context = {'tags': cloud}
     return render_to_response(template_name, context)
