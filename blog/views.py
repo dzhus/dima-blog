@@ -1,4 +1,6 @@
 # -*- coding: utf-8 -*-
+import random
+
 from django.core.paginator import Paginator, InvalidPage
 
 from django.http import HttpResponse, Http404
@@ -83,5 +85,6 @@ def entry_detail(request, queryset, **kwargs):
 def tag_cloud(request, template_name="tags.xhtml"):
     filter_kwargs = make_filter_kwargs(request)
     cloud = Tag.objects.cloud_for_model(Entry, steps=6, filters=filter_kwargs)
+    random.shuffle(cloud)
     context = {'tags': cloud}
     return render_to_response(template_name, context)
