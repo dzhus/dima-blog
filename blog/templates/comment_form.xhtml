@@ -12,7 +12,7 @@
         <p>
             {{ form.email.errors }}
             <label for="id_email"><b>E-mail:</b></label><br />
-            {{ form.url }}
+            {{ form.email }}
         </p>
         <p>
             {{ form.url.errors }}
@@ -27,11 +27,13 @@
             </label><br />
             {{ form.comment }}
         </p>
-        {{ form.content_type }}
-        {{ form.object_pk }}
-        {{ form.timestamp }}
-        {{ form.security_hash }}
-        <input type="hidden" name="next" value="{{ entry.get_absolute_url }}" />
-        <input type="submit" value="Добавить комментарий" />
+        <p>
+            {{ form.content_type }}
+            {{ form.object_pk }}
+            {{ form.timestamp }}
+            {{ form.security_hash }}
+            <input type="hidden" name="next" value="{{ entry.get_absolute_url }}" />
+            <input type="submit" value="Добавить комментарий" />
+        </p>
     </form>
 </div>
