@@ -37,7 +37,7 @@ urlpatterns += patterns('',
 
                         (r'^blog/tag/(?P<tag>.+)/page-(?P<page>\d+)/$', entry_list, list_common_kwargs),
                         (r'^blog/tag/(?P<tag>.+)/$', entry_list, list_common_kwargs),
-                        (r'^blog/tag/$', tag_cloud))
+                        (r'^blog/tag/$', tag_cloud, {'shuffle': False}))
 
 ## Entry detail view
 detail_common_kwargs = {'queryset': Entry.objects,
