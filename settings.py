@@ -68,6 +68,9 @@ INSTALLED_APPS = (
     'django.contrib.flatpages',
     'blog',
     'pytils',
-    'tagging')
+    'tagging',
+    'nerdcomments')
 
-LOGIN_REDIRECT_URL = "/"
+COMMENTS_APP = 'nerdcomments'
+
+LOGIN_REDIRECT_URL = '/'

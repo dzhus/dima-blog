@@ -28,10 +28,18 @@
             {{ form.comment }}
         </p>
         <p>
+            <b>{{ form.captcha|safe }}</b>,
+            <label for="id_captcha_answer">
+                <i>x</i>∊ℕ, <i>x</i>=?
+            </label><br />
+            {{ form.captcha_answer }}
+        </p>
+        <p>
             {{ form.content_type }}
             {{ form.object_pk }}
             {{ form.timestamp }}
             {{ form.security_hash }}
+            {{ form.captcha_token }}
             <input type="hidden" name="next" value="{{ entry.get_absolute_url }}" />
             <input type="submit" value="Добавить комментарий" />
         </p>
