@@ -5,11 +5,11 @@ from blog.models import Entry#, Tag
 DEFAULT_COUNT = 50
 
 class GeneralFeed(Feed):
-    title = "Блог Джуса"
-    link = "/blog/"
-    author_email = 'mail@sphinx.net.ru'
+    title = ''
+    link = '/blog/'
+    author_email = 'dima@sphinx.net.ru'
     author_link = '/author/'
-    description_template = 'feed_entry_description.xhtml'
+    description_template = 'feed_entry_description.html'
 
     def item_pubdate(self, item):
         return item.add_date

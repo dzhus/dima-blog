@@ -80,7 +80,7 @@ def entry_detail(request, queryset, **kwargs):
                                              'next_entry': next_entry},
                               **kwargs)
 
-def tag_cloud(request, shuffle=True, template_name="tags.xhtml"):
+def tag_cloud(request, shuffle=True, template_name="tags.html"):
     filter_kwargs = make_filter_kwargs(request)
     cloud = Tag.objects.cloud_for_model(Entry, steps=6, filters=filter_kwargs)
     if shuffle:

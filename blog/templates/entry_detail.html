@@ -1,4 +1,5 @@
-{% extends "blog_base.xhtml" %}
+<!--*- mode: django-html -*-->
+{% extends "blog_base.html" %}
 
 {% load comments %}
 {% block title %}
@@ -19,17 +20,17 @@
 {% endblock %}
 
 {% block blog_main %}
-{% include "entry_row.xhtml" %}
+{% include "entry_row.html" %}
   <div id="comments">
     {% get_comment_list for blog.entry entry.id as comment_list %}    
 
     {% if comment_list %}<h2>Комментарии:</h2>{% endif %}
     {% for comment in comment_list %}
-      {% include "comment_row.xhtml" %}
-      {% if not forloop.last %}{% include "comment_spacer.xhtml" %}{% endif %}
+      {% include "comment_row.html" %}
+      {% if not forloop.last %}{% include "comment_spacer.html" %}{% endif %}
     {% endfor %}
 
-  {% include "comment_form.xhtml" %}
+  {% include "comment_form.html" %}
 
   </div>
   

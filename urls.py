@@ -22,14 +22,14 @@ urlpatterns = patterns('django.views.generic.date_based',
                        (r'^$', 'archive_index', {'queryset': Entry.objects.filter(private=0),
                                                  'date_field': 'add_date',
                                                  'num_latest': 5,
-                                                 'template_name': 'index.xhtml', 
+                                                 'template_name': 'index.html', 
                                                  'allow_empty': False}))
 
 ## Entry list views
 list_common_kwargs = {'paginate_by': 5,
                       'orphans': 2,
                       'queryset': Entry.objects,
-                      'template_name': 'entry_list.xhtml',
+                      'template_name': 'entry_list.html',
                       'template_object_name': 'entry'}
 urlpatterns += patterns('',
                         (r'^blog/page-(?P<page>\d+)/$', entry_list, list_common_kwargs),
@@ -41,7 +41,7 @@ urlpatterns += patterns('',
 
 ## Entry detail view
 detail_common_kwargs = {'queryset': Entry.objects,
-                        'template_name': 'entry_detail.xhtml',
+                        'template_name': 'entry_detail.html',
                         'template_object_name': 'entry'}
 urlpatterns += patterns('django.views.generic.list_detail',
                         (r'^blog/entry/(?P<object_id>\d+)/$', entry_detail, detail_common_kwargs),
@@ -60,14 +60,14 @@ urlpatterns += patterns('django.views.generic.date_based',
                          'archive_year', 
                          {'queryset': Entry.objects.order_by('add_date'),
                           'date_field': 'add_date',
-                          'template_name': 'blog_archive.xhtml',
+                          'template_name': 'blog_archive.html',
                           'template_object_name': 'entry',
                           'make_object_list': True}),
                         (r'^blog/archive/(?P<year>\d+)/(?P<month>\d+)/$',
                          'archive_month',
                          {'queryset': Entry.objects.order_by('add_date'),
                           'date_field': 'add_date',
-                          'template_name': 'blog_archive.xhtml',
+                          'template_name': 'blog_archive.html',
                           'template_object_name': 'entry',
                           'month_format': '%m'}))
 
@@ -75,23 +75,23 @@ urlpatterns += patterns('django.views.generic.date_based',
 urlpatterns += patterns('django.views.generic.list_detail',
                         (r'^blog/entry/$', 'object_list',
                          {'queryset': Entry.objects.order_by('add_date'),
-                          'template_name': 'blog_archive.xhtml',
+                          'template_name': 'blog_archive.html',
                           'template_object_name': 'entry'}),
                         (r'^blog/archive/$', 'object_list',
                          {'queryset': Entry.objects.order_by('add_date'),
-                          'template_name': 'blog_archive.xhtml',
+                          'template_name': 'blog_archive.html',
                           'template_object_name': 'entry',
                           'extra_context': {'archive_selection': True}}),
                         (r'^files/$', 'object_list',
                          {'queryset': File.objects.order_by('add_date'),
                           'allow_empty': True,
-                          'template_name': 'file_list.xhtml',
+                          'template_name': 'file_list.html',
                           'template_object_name': 'file'}) )
         
 ## Auth views
 urlpatterns += patterns('django',
                         (r'^accounts/login/$',
-                         'contrib.auth.views.login', {'template_name': 'login.xhtml'}),
+                         'contrib.auth.views.login', {'template_name': 'login.html'}),
                         (r'^accounts/logout/$',
                          'contrib.auth.views.logout', {'next_page': '/'}))
 

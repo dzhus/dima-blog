@@ -1,6 +1,7 @@
+<!--*- mode: django-html -*-->
 {% load markup %}
 
-{% extends "base.xhtml" %}
+{% extends "base.html" %}
 
 {% block title %}
 Sphinx.net.ru — {{ flatpage.title }}
@@ -16,7 +17,7 @@ Sphinx.net.ru — {{ flatpage.title }}
 
 <div class="box">
   {{ flatpage.content }}
-  {% include "hcard.xhtml" %}
+  {% include "hcard.html" %}
   <br />
   На данной странице внедрена <a title="Что такое микроформаты?" href="/blog/entry/what-are-microformats/">hCard</a>.
 </div>

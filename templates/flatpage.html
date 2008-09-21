@@ -1,15 +1,13 @@
+<!--*- mode: django-html -*-->
+{% extends "base.html" %}
 {% load markup %}
 
-{% extends "base.xhtml" %}
-
 {% block title %}
-Sphinx.net.ru — {{ flatpage.title }}
+{{ flatpage.title }}
 {% endblock %}
 
 {% block navigation %}
-<div id="navigation">
-  <a href="/">Sphinx.net.ru</a> / {{ flatpage.title }}
-</div>
+  {{ block.super }} {{ flatpage.title }}
 {% endblock %}
 
 {% block base %}
