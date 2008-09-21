@@ -1,16 +1,12 @@
-{% extends "base.xhtml" %}
+{% extends "blog_base.xhtml" %}
 {% load pytils_numeral %}
 
-{% block custom_css %}
-{% endblock %}
-
 {% block title %}
-Архив блога на Sphinx.net.ru
+Архив блога Димы Джуса
 {% endblock %}
 
 {% block navigation %}
-<div id="nagivation">
-  <a href="/">Sphinx.net.ru</a> / <a href="/blog/">блог</a> / 
+  {{ block.super }}
   {% if month %}
     <a href="/blog/archive/">архив</a> /
     <a href="/blog/archive/{{ month|date:"Y" }}/">{{ month|date:"Y"}} год</a> /
@@ -27,7 +23,6 @@
       {% endif %}
     {% endif %}
   {% endif %}
-</div>
 {% endblock %}
 
 {% block base %}

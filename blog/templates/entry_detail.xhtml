@@ -2,7 +2,7 @@
 
 {% load comments %}
 {% block title %}
-    «{{ entry.title }}» в блоге на Sphinx.net.ru
+    «{{ entry.title }}» в блоге Димы Джуса
 {% endblock %}
 
 {% block links %}
@@ -15,9 +15,7 @@
 {% endblock %}
 
 {% block navigation %}
-<div id="nagivation">
-  <a href="/">Sphinx.net.ru</a> / <a href="/blog">блог</a> / &hellip;
-</div>
+   {{ block.super }} &hellip;
 {% endblock %}
 
 {% block blog_main %}

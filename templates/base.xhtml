@@ -2,37 +2,40 @@
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="ru" lang="ru">
   <head profile="http://www.w3.org/2005/11/profile">
 
-    <title>{% block title %}Sphinx.net.ru{% endblock %}</title>
+    <title>{% block title %}Дмитрий Джус, домашняя страничка{% endblock %}</title>
     
-    <!-- text/html to provide IE compatibility -->
+    <!-- 
+         Set Content-Type to text/html to provide IE compatibility (I should not care
+         about this)
+      -->
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     
     <!-- GeoURL tags begin -->
     <meta name="ICBM" content="55.870188, 37.665961" />
     <meta name="DC.title" content="Dmitry «Sphinx» Dzhus" />
     <!-- GeoURL tags end -->
-
+    
+    <!-- Urchin tracker -->
     <meta name="verify-v1" content="1catUmsXWtAgm37Ca8nVWx2DK4fjw59QRpcxqtbrTks=" />
-
+    
     <link rel="icon" 
           type="image/png" 
           href="/media/icons/favicon.png" />
-
+    
     <link rel="stylesheet" type="text/css" href="/media/css/base.css" />
     {% block custom_css %}
     {% endblock %}
 
     {% block custom_js %}
     {% endblock %}
-
     <link rel="alternate" type="application/rss+xml" title="RSS-лента блога" 
           href="/feeds/blog/" />
     
     <script src="http://www.google-analytics.com/urchin.js" type="text/javascript">
     </script>
     <script type="text/javascript">
-      _uacct = "UA-2037319-1";
-      urchinTracker();
+        _uacct = "UA-2037319-1";
+        urchinTracker();
     </script>
 
     {% block links %}

@@ -2,37 +2,32 @@
 {% load pytils_numeral %}
 
 {% block navigation %}
-<div id="nagivation">
-  <a href="/" title="Перейти на главную страницу сайта">Sphinx.net.ru</a> /
-
   {% if not tag and not page_obj.has_next %}
-    блог /
+    <a href="/" title="Перейти на главную страницу сайта">Сайт Димы Джуса</a> / блог /
   {% else %}
-    <a href="/blog" title="Перейти на начальную страницу блога">блог</a> /
+    {{ block.super }}
   {% endif %}
 
   {% if tag %}записи с тегом
     {% if not page_obj.has_previous %}
       «{{ tag }}» /
     {% else %}
-      <a href="/blog/{{ tag_chunk }}" rel="tag"
-         title="Посмотреть все записи с тегом «{{ tag }}»">«{{ tag }}»</a> /
+      «<a href="/blog/{{ tag_chunk }}" rel="tag"
+         title="Посмотреть все записи с тегом «{{ tag }}»">{{ tag }}</a>» /
     {% endif %}
   {% endif %}
   
   {% if page_obj.has_next %}
     страница {{ page_obj.number }} /
   {% endif %}
-
-</div>
 {% endblock %}
 
 
 {% block title %}
   {% if tag %}
-    Все записи с тегом «{{ tag }}» в блоге на Sphinx.net.ru
+    Все записи с тегом «{{ tag }}» в блоге Димы Джуса
   {% else %}
-    Блог на Sphinx.net.ru
+    {{ block.super }}
   {% endif %}
 {% endblock %}
 

@@ -1,11 +1,16 @@
-{% extends "base.xhtml" %}
+{% extends "blog_base.xhtml" %}
 
 {% block custom_css %}
+{{ block.super }}
 <link rel="stylesheet" type="text/css" href="/media/css/tag-cloud.css" />
 {% endblock %}
 
+{% block navigation %}
+{{ block.super }} облако тегов /
+{% endblock %}
+
 {% block title %}
-Все теги блога на Sphinx.net.ru
+Все теги блога Димы Джуса
 {% endblock %}
 
 {% block base %}

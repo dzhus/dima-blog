@@ -1,11 +1,14 @@
 {% extends "base.xhtml" %}
 
 {% block custom_css %}
-    <link rel="stylesheet" type="text/css" href="/media/css/index.css" />
+<link rel="stylesheet" type="text/css" href="/media/css/index.css" />
+{% endblock %}
+
+{% block navigation %}
+Сайт Димы Джуса /
 {% endblock %}
 
 {% block base %}
-
 {% if user.is_superuser %}
 <div class="box" id="blog_admin">
   <p><a href="/admin/blog/entry/add/">Добавить запись</a>, посмотреть <a href="/admin/comments/freecomment/">комментарии</a>.</p>
@@ -32,12 +35,12 @@
 
   <h2>Прочая</h2>
   <p>
-    Обратите внимание на <a rel="tag" href="/blog/tag/статьи/">статьи</a>,
-    <a rel="tag" href="/blog/tag/заметки/">заметки</a>.
+      Интереснее всего <a rel="tag" href="/blog/tag/статьи/">статьи</a>.
   </p>
 
   <p>
-    Ещё есть <a href="/blog/archive/">архив блога</a>.
+      Доступен <a href="/blog/archive/">архив блога</a>
+      и <a href="/blog/tag">облако</a> тегов.
   </p>
 </div>
 

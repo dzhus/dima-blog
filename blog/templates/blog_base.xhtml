@@ -1,7 +1,7 @@
 {% extends "base.xhtml" %}
 
 {% block title %}
-Блог на Sphinx.net.ru
+Блог Димы Джуса
 {% endblock %}
 
 {% block custom_css %}
@@ -9,9 +9,7 @@
 {% endblock %}
 
 {% block navigation %}
-<div id="navigation">
-  <a href="/" title="Перейти на главную страницу сайта">Sphinx.net.ru</a> / блог /
-</div>
+{{ block.super }} <a href="/blog" title="Перейти на начальную страницу блога">блог</a> /
 {% endblock %}
 
 {% block base %}
@@ -23,11 +21,9 @@
     <div id="blog_links" style="float:left;">
         <a href="/blog/tag/статьи/" title="Все статьи в блоге">Статьи</a>
         <br />
-        <a href="/blog/archive/"
-           title="Архивы записей блога по годам и месяцам">Архив блога</a>
+        <a href="/blog/archive/" title="Архивы записей блога по годам и месяцам">Архив блога</a>
         •
-        <a href="/blog/tag/"
-           title="Все теги">Все теги</a>
+        <a href="/blog/tag/" title="Все теги">Все теги</a>
 
     </div>
 {% endblock %}
