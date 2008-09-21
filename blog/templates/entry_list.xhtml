@@ -9,7 +9,7 @@
   {% endif %}
 
   {% if tag %}записи с тегом
-    {% if not page_obj.has_previous %}
+    {% if not page_obj.has_next %}
       «{{ tag }}» /
     {% else %}
       «<a href="/blog/{{ tag_chunk }}" rel="tag"
