@@ -173,6 +173,11 @@ kbd
     font-weight: bolder;
 }
 
+.author_mark
+{
+    color: #ce5c00;
+}
+
 .entry_body pre
 { 
     overflow: auto;

@@ -5,7 +5,9 @@
 </div>
 {% else %}
 <div class="comment">
-    <span class="name">{{ comment.user_name|escape }}</span>, {{ comment.submit_date|date }} {% if user.is_superuser %}(<a href="/comments/delete/{{ comment.id }}/?next={{ entry.get_absolute_url|escape }}">удалить</a>){% endif %}
+    <span class="name">{{ comment.user_name|escape }}</span>{% ifequal comment.user.id 1 %}<span class="author_mark">&nbsp;←&nbsp;сам</span>{% endifequal %},
+    {{ comment.submit_date|date }}
+    {% if user.is_superuser %}(<a href="/comments/delete/{{ comment.id }}/?next={{ entry.get_absolute_url|escape }}">удалить</a>){% endif %}
     {{ comment.comment|markdown|fix_ampersands }}
 </div>
 {% endif %}
