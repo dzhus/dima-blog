@@ -1,0 +1,42 @@
+<!--*- mode: django-html -*-->
+{% extends "blog_archive.html" %}
+{% load comments %}
+{% load pytils_numeral %}
+
+{% block navigation %}
+  {{ block.super }}
+  список всех записей /
+{% endblock %}
+
+{% block base %}
+<div class="box">
+  <h1>Все записи блога</h1>
+  
+  {% for entry in entry_list %}
+    {% ifchanged entry.add_date.year %}
+      <h2>
+        <a href="{% url archive_year entry.add_date.year %}">
+          {{ entry.add_date|date:"Y" }}</a>
+      </h2>
+    {% endifchanged %}
+
+    {% ifchanged entry.add_date.month %}
+      <h3 style="left-margin: 0.3em;">
+        <a href="{% url archive_month entry.add_date.year, entry.add_date.month %}">
+          {{ entry.add_date|date:"F" }}</a>
+      </h3>
+    {% endifchanged %}
+
+    <div class="entry_title_archive">
+      <a href="{{ entry.get_absolute_url }}">{{ entry.title }}</a>
+    </div>
+
+    {% if forloop.last %}
+      <p>
+        За выбранный период было написано {{ forloop.counter }}
+        запис{{ forloop.counter|choose_plural:"ь,и,ей" }}.
+      </p>
+    {% endif %}
+  {% endfor %}
+</div>
+{% endblock %}

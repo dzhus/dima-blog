@@ -1,108 +1,61 @@
 <!--*- mode: django-html -*-->
 {% extends "blog_base.html" %}
-{% load pytils_numeral %}
 
 {% block title %}
-Архив блога Димы Джуса
+  Архив блога Димы Джуса
 {% endblock %}
 
 {% block navigation %}
   {{ block.super }}
-  {% if month %}
-    <a href="/blog/archive/">архив</a> /
-    <a href="/blog/archive/{{ month|date:"Y" }}/">{{ month|date:"Y"}} год</a> /
-    {{ month|date:"F" }} /
+  {% if not overview %}
+    <a href="{% url archive_overview %}">архив</a> /
   {% else %}
-    {% if year %}
-      <a href="/blog/archive/">архив</a> /
-      {{ year }} год /
-    {% else %}
-      {% if  archive_selection %}
-        архив /
-      {% else %}
-        <a href="/blog/archive/">архив</a> / список всех записей /
-      {% endif %}
-    {% endif %}
+    архив /
   {% endif %}
 {% endblock %}
 
 {% block base %}
 <div class="box">
 
-  {% if month %}
-    <h1>Все записи за {{ month|date:"F Y" }} года</h1>
-  {% else %}
-    {% if year %}
-      <h1>Все записи за {{ year }} год</h1>
-    {% else %}
-      {% if archive_selection %}
-        <h1>Архивы блога</h1>
-      {% else %}
-        <h1>Все записи блога</h1>
-      {% endif %}
-    {% endif %}
-  {% endif %}
-  
-  {% for entry in entry_list %}
-  {% if not entry.private or user.is_superuser %}
+<h1>Архивы блога</h1>
 
-    {% if archive_selection %}
-      {% ifchanged entry.add_date.year %}
-      {% if not forloop.first %}</div>{% endif %}
-      <div style="float: left; margin-right: 1em;">
-        <h2>
-          <a href="/blog/archive/{{ entry.add_date.year }}/"
-             title="Все записи за {{ entry.add_date.year }} год">
-            {{ entry.add_date|date:"Y" }}
-          </a>
-        </h2>
-      {% endifchanged %}
-
-      {% ifchanged entry.add_date.month %}
-        <h3>
-          <a href="/blog/archive/{{ entry.add_date|date:"Y/m" }}/"
-            title="Все записи за {{ entry.add_date|date:"F Y" }}">
-            {{ entry.add_date|date:"F" }}
-          </a>
-        </h3>
-      {% endifchanged %}
-
-    {% else %}
-
-      {% if not month or year %}
-        {% ifchanged entry.add_date.month %}
-        <h2>
-          {% if year %}
-            <a href="/blog/archive/{{ year }}/{{ entry.add_date|date:"m"}}/">
-              {{ entry.add_date|date:"F" }}
-            </a>
-          {% else %}
-            <a href="/blog/archive/{{ entry.add_date.year }}/{{ entry.add_date.month }}/">{{ entry.add_date|date:"F" }}<a/>
-            <a href="/blog/archive/{{ entry.add_date.year }}/">{{ entry.add_date.year }}</a>
-          {% endif %}
-        </h2>
-        {% endifchanged %}
-
-      {% endif %}
-      
-    {% if not month or year %}<h3 class="entry_title">{% else %}<h2 class="entry_title">{% endif %}
-      <a href="{{ entry.get_absolute_url }}">{{ entry.title }}</a>
-      {% if entry.comments %}({{ entry.comments }} комментари{{ entry.comments|choose_plural:"й,я,ев" }}){% endif %}
-    {% if not month or year %}</h3>{% else %}</h2>{% endif %}
+{% for entry in entry_list %}
+  {% ifchanged entry.add_date.year %}
+  {% if not forloop.first %}</div>{% endif %}
+  <div style="float: left; margin-right: 1em;">
+    <h2>
+      <a href="{% url archive_year entry.add_date.year %}"
+         title="Все записи за {{ entry.add_date.year }} год">
+        {{ entry.add_date|date:"Y" }}
+      </a>
+    </h2>
+  {% endifchanged %}
     
-    {% endif %}
-  {% endif %}
-
+  {% ifchanged entry.add_date.month %}
+    <h3>
+      <a href="{% url archive_month entry.add_date.year entry.add_date.month %}"
+         title="Все записи за {{ entry.add_date|date:"F Y"|lower }}">
+        {{ entry.add_date|date:"F" }}
+      </a>
+    </h3>
+  {% endifchanged %}
+  
   {% if forloop.last %}
-    {% if archive_selection %}
-      </div>
-      <p style="clear: both;">Можно посмотреть заголовки всех записей <a href="/blog/entry/" rel="appendix">одним списком</a> (всего {{ forloop.counter }}).</p>
-    {% else %}
-      <p>За выбранный период было написано {{ forloop.counter }} запис{{ forloop.counter|choose_plural:"ь,и,ей" }}.</p>
-    {% endif %}
+    </div>
+    <p style="clear: both;">
+      Можно посмотреть заголовки всех записей 
+      <a href="{% url archive_biglist %}"rel="appendix">одним списком</a>
+      (всего {{ forloop.counter }}).
+    </p>
   {% endif %}
-
-  {% endfor %}
+{% endfor %}
 
 </div>
+{% endblock %}
+
+{% block custom_css %}
+<link rel="stylesheet" type="text/css" href="/media/css/blog_archive.css" />
+{% endblock %}
+
+{% block custom_footer %}
 {% endblock %}

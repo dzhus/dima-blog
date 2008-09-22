@@ -26,7 +26,8 @@ def make_filter_kwargs(request):
     else:
         return {}
 
-def entry_list(request, queryset, tag=None, page='last', **kwargs):
+def entry_list(request, queryset=Entry.objects.order_by('add_date'),
+               tag=None, template_object_name='entry', page='last', **kwargs):
     """
     Show all entries with given tag, paginated and filtered.
 
@@ -36,12 +37,15 @@ def entry_list(request, queryset, tag=None, page='last', **kwargs):
 
     # I want to filter out private entries, so I have to use a
     # queryset based upon request data
-    queryset = queryset.order_by('add_date').filter(**make_filter_kwargs(request))
+    queryset = queryset.filter(**make_filter_kwargs(request))
 
     if tag is None:
-        return object_list_view(request, queryset, page=page, **kwargs)
+        return object_list_view(request, queryset,
+                                template_object_name=template_object_name,
+                                page=page, **kwargs)
     else:
         return tagged_object_list(request, queryset,
+                                  template_object_name=template_object_name,
                                   tag=tag, page=page,
                                   extra_context={'tag_chunk': "tag/%s/" % tag},
                                   **kwargs)
@@ -88,3 +92,38 @@ def tag_cloud(request, shuffle=True, template_name="tags.html"):
         random.shuffle(cloud)
     context = {'tags': cloud}
     return render_to_response(template_name, context)
+
+def archive_view(request, view, queryset=Entry.objects.order_by('add_date'),
+                 template_name=None, template_object_name=None,
+                 date_field='add_date', **kwargs):
+    """
+    Decorate generic year and month views.
+
+    View to call after decorating is passed with `view` argument.
+
+    Filter private entries if necessary.
+
+    If `template_name` argument is not passed, a default value of
+    `<model_name>_<view_func_name>.html` is used.
+
+    If `template_object_name` is none, use `<model_name>`.
+
+    Add `year` to template context (even if using `archive_month`).
+    """
+    queryset = queryset.filter(**make_filter_kwargs(request))
+
+    model_name = queryset.model._meta.object_name.lower()
+
+    if template_name is None:
+        t_n = '%s_%s.html' % (model_name, view.func_name)
+    if template_object_name is None:
+        t_o_n = model_name
+
+    if not kwargs.has_key('extra_context'):
+        kwargs['extra_context'] = {}
+
+    kwargs['extra_context'].update({'year': kwargs['year']})
+    
+    return view(request, queryset=queryset, date_field=date_field,
+                template_name=t_n, template_object_name=t_o_n,
+                **kwargs)
