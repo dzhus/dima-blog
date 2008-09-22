@@ -183,3 +183,9 @@ kbd
     overflow: auto;
     width: 100%;
 }
+
+.captcha_comment
+{
+    font-size: small;
+    color: #d3d7cf;
+}
