@@ -111,51 +111,13 @@ h1, h2, h3, h4, h5, h6
 h1, h2, h3 
 { 
     margin-top: 0.5em;
-    margin-bottom: 0.5em;
+    margin-bottom: 0.3em;
 }
 
 h4, h5, h6 
 { 
-    margin-top: 0.5em;
-    margin-bottom: 0.3em;
-}
-
-p 
-{
-/*    text-indent:15px;  */
-}
-
-h1
-{ 
-    font-size: xx-large;
-    font-weight: bold;
-}
-
-h2
-{ 
-    font-size: xx-large;
-}
-
-h3 
-{ 
-    font-size: x-large;
-    font-weight: bold;
-}
-
-h4 
-{ 
-    font-size: x-large;
-}
-
-h5 
-{ 
-    font-size: large;
-    font-weight: bold;
-}
-
-h6 
-{ 
-    font-size: large;
+    margin-top: 0.2em;
+    margin-bottom: 0.1em;
 }
 
 /** Inline elements */
