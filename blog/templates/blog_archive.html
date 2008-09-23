@@ -1,6 +1,10 @@
 <!--*- mode: django-html -*-->
 {% extends "blog_base.html" %}
 
+{% block custom_css %}
+<link rel="stylesheet" type="text/css" href="/media/css/blog_archive.css" />
+{% endblock %}
+
 {% block title %}
   Архив блога Димы Джуса
 {% endblock %}
@@ -16,45 +20,42 @@
 
 {% block base %}
 <div class="box">
+  <h1>Архивы блога</h1>
 
-<h1>Архивы блога</h1>
+  {% regroup entry_list by add_date.year as year_list %}
+  {% for year in year_list %}
+    <div style="float: left; margin-right: 2em;">
+      <h2>
+        <a href="{% url archive_year year.grouper %}"
+           title="Все записи за {{ year.grouper }} год">
+          {{ year.grouper }}
+        </a>
+      </h2>
 
-{% for entry in entry_list %}
-  {% ifchanged entry.add_date.year %}
-  {% if not forloop.first %}</div>{% endif %}
-  <div style="float: left; margin-right: 1em;">
-    <h2>
-      <a href="{% url archive_year entry.add_date.year %}"
-         title="Все записи за {{ entry.add_date.year }} год">
-        {{ entry.add_date|date:"Y" }}
-      </a>
-    </h2>
-  {% endifchanged %}
-    
-  {% ifchanged entry.add_date.month %}
-    <h3>
-      <a href="{% url archive_month entry.add_date.year entry.add_date.month %}"
-         title="Все записи за {{ entry.add_date|date:"F Y"|lower }}">
-        {{ entry.add_date|date:"F" }}
-      </a>
-    </h3>
-  {% endifchanged %}
-  
-  {% if forloop.last %}
+      {% regroup year.list by add_date.month as month_list %}
+      {% for n in twelve %}
+      {% filter default:"<h3> </h3>" %}{% spaceless %}
+        {% for month in month_list %}
+          {% ifequal n month.grouper %}
+            <h3>
+              <a href="{% url archive_month year.grouper,month.grouper%}"
+                 title="Все записи за {{ month.grouper }}">
+                {{ month.list.0.add_date|date:"F" }}
+              </a>
+            </h3>
+          {% endifequal %}
+        {% endfor %}
+      {% endspaceless %}{% endfilter %}
+      {% endfor %}
     </div>
-    <p style="clear: both;">
-      Можно посмотреть заголовки всех записей 
-      <a href="{% url archive_biglist %}"rel="appendix">одним списком</a>
-      (всего {{ forloop.counter }}).
-    </p>
-  {% endif %}
-{% endfor %}
+  {% endfor %}
 
+  <p style="clear: both;">
+    Можно посмотреть заголовки всех записей 
+    <a href="{% url archive_biglist %}"
+    rel="appendix">одним списком</a> (всего {{ entry_list.count }}).
+  </p>
 </div>
-{% endblock %}
-
-{% block custom_css %}
-<link rel="stylesheet" type="text/css" href="/media/css/blog_archive.css" />
 {% endblock %}
 
 {% block custom_footer %}

@@ -75,7 +75,8 @@ urlpatterns += patterns('',
                             entry_list,
                             {'template_name': 'blog_archive.html',
                              'template_object_name': 'entry',
-                             'extra_context': {'overview': True}},
+                             'extra_context': {'overview': True,
+                                               'twelve': range(1, 13)}},
                             'archive_overview'))
 ## Files list
 urlpatterns += patterns('django.views.generic.list_detail',
