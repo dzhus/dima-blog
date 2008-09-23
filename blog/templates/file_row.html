@@ -1,9 +1,13 @@
+<!--*- mode: django-html -*-->
+{% load markup %}
 <div class="file">
-        <span class="name">{{ file.name }}</span>
-        (<span class="datetime">размещён {{ file.add_date|date:"d.m.y в G:h" }}</span>)
-        <div class="description">
-                {{ file.description }}
-        <br />
-        <span class="link"><a href="{{ file.get_file_url }}">Скачать файл</a></span>
-        </div>
+  <span class="file_name">
+    <a href="{{ file.file.url }}">
+      {{ file.name }}
+    </a>
+  </span>
+  (<span class="datetime">размещён {{ file.add_date|date:"d.m.y в G:h" }}</span>)
+  <div class="file_description">
+    {{ file.description|markdown|fix_ampersands }}
+  </div>
 </div>
