@@ -3,7 +3,7 @@
 from django.conf.urls.defaults import *
 
 # Load generic and admin views
-from django.views.generic.date_based import archive_index, archive_year, archive_month
+from django.views.generic.date_based import archive_year, archive_month
 import django.views.generic.list_detail
 from django.contrib import admin
 admin.autodiscover()
@@ -15,7 +15,6 @@ from django.views.static import serve
 from blog.models import Entry, File
 #from tags.models import Tag
 from feeds import BlogFeed#, BlogTagFeed
-from blog.views import entry_list, entry_detail, tag_cloud, archive_view
 
 ## Index page
 urlpatterns = patterns('django.views.generic.date_based',
@@ -31,21 +30,27 @@ list_kwargs = {'paginate_by': 5,
                'queryset': Entry.objects.order_by('add_date'),
                'template_name': 'entry_list.html',
                'template_object_name': 'entry'}
-urlpatterns += patterns('',
-                        (r'^blog/page-(?P<page>\d+)/$', entry_list, list_kwargs),
-                        (r'^blog/$', entry_list, list_kwargs),
+urlpatterns += patterns('blog.views',
+                        (r'^blog/page-(?P<page>\d+)/$', 'entry_list', list_kwargs),
+                        (r'^blog/$', 'entry_list', list_kwargs),
 
-                        (r'^blog/tag/(?P<tag>.+)/page-(?P<page>\d+)/$', entry_list, list_kwargs),
-                        (r'^blog/tag/(?P<tag>.+)/$', entry_list, list_kwargs),
-                        (r'^blog/tag/$', tag_cloud, {'shuffle': False}))
+                        (r'^blog/tag/(?P<tag>.+)/page-(?P<page>\d+)/$', 'entry_list', list_kwargs),
+                        (r'^blog/tag/(?P<tag>.+)/$', 'entry_list', list_kwargs),
+                        (r'^blog/tag/$', 'tag_cloud', {'shuffle': False}))
 
 ## Entry detail view
 detail_kwargs = {'queryset': Entry.objects,
                  'template_name': 'entry_detail.html',
                  'template_object_name': 'entry'}
-urlpatterns += patterns('django.views.generic.list_detail',
-                        (r'^blog/entry/(?P<object_id>\d+)/$', entry_detail, detail_kwargs),
-                        (r'^blog/entry/(?P<slug>[\w-]+)/$', entry_detail, detail_kwargs))
+urlpatterns += patterns('blog.views',
+                        url(r'^blog/entry/(?P<object_id>\d+)/$',
+                            'entry_detail',
+                            detail_kwargs,
+                            'entry_by_id'),
+                        url(r'^blog/entry/(?P<slug>[\w-]+)/$',
+                            'entry_detail',
+                            detail_kwargs,
+                            'entry_by_slug'))
 
 
 ## REMOVE AT REAL SERVER DEPLOYMENT !!
@@ -55,24 +60,24 @@ urlpatterns += patterns('',
                          {'document_root': '/home/sphinx/projects/python/ws/media'}))
 
 ## Archive views
-urlpatterns += patterns('',
+urlpatterns += patterns('blog.views',
                         url(r'^blog/archive/(?P<year>\d+)/$',
-                            archive_view,
+                            'archive_view',
                             {'view': archive_year,
                              'make_object_list': True},
                             'archive_year'),
                         url(r'^blog/archive/(?P<year>\d+)/(?P<month>\d+)/$',
-                            archive_view,
+                            'archive_view',
                             {'view': archive_month,
                              'month_format': '%m'},
                             'archive_month'),
                         url(r'^blog/entry/$',
-                            entry_list,
+                            'entry_list',
                             {'template_name': 'blog_archive_biglist.html',
                              'template_object_name': 'entry'},
                             'archive_biglist'),
                         url(r'^blog/archive/$',
-                            entry_list,
+                            'entry_list',
                             {'template_name': 'blog_archive.html',
                              'template_object_name': 'entry',
                              'extra_context': {'overview': True,

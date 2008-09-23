@@ -18,11 +18,12 @@ class Entry(models.Model):
     tags = TagField("Теги", blank=True, null=True)
     slug = models.SlugField("Метка", blank=True)
 
+    @models.permalink
     def get_absolute_url(self):
         if self.slug:
-            return "/blog/entry/%s/" % self.slug
+            return ('entry_by_slug', [str(self.slug)])
         else:
-            return "/blog/entry/%i/" % self.id
+            return ('entry_by_id', [str(self.id)])
 
     def __unicode__(self):
         return self.title
