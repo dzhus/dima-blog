@@ -9,7 +9,6 @@
 #blog_pagination, #entry_pagination
 {
     text-align:             center;
-    /* use of `pt` instead of `em` is intentional! */
     margin-top:             1em;
     margin-bottom:          1em;
 }
