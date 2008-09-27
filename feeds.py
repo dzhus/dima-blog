@@ -34,6 +34,9 @@ class BlogFeed(GeneralFeed):
         return (Entry.objects, count)
 
 class BlogTagFeed(BlogFeed):
+    def link(self, obj):
+        return u'/blog/tag/%s/' % obj[0].name
+
     def items(self, obj):
         objects = TaggedItem.objects.get_by_model(Entry, obj[0])
         return objects.filter(private=0)[:obj[1]]
@@ -45,6 +48,8 @@ class BlogTagFeed(BlogFeed):
         """
         Return tuple of Tag object and requested item count.
         """
+        if len(bits) < 1:
+            raise ObjectDoesNotExist
         count = make_count(bits, 1)
         tag_name = bits[0].replace('_', ' ')
         return (Tag.objects.get(name=tag_name), count)
