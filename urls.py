@@ -13,8 +13,7 @@ from django.views.static import serve
 
 # Our stuff
 from blog.models import Entry, File
-#from tags.models import Tag
-from feeds import BlogFeed#, BlogTagFeed
+from feeds import BlogFeed, BlogTagFeed
 
 ## Index page
 urlpatterns = patterns('django.views.generic.date_based',
@@ -101,7 +100,7 @@ urlpatterns += patterns('django',
 ## Feeds
 urlpatterns += patterns('django.contrib.syndication.views',
                         (r'^feeds/(?P<url>.+)/$', 'feed',
-                         {'feed_dict': {'blog': BlogFeed}}))#, 'blogtag': BlogTagFeed} }))
+                         {'feed_dict': {'blog': BlogFeed, 'blogtag': BlogTagFeed}}))
 
 ## Admin pages view
 urlpatterns += patterns('',
