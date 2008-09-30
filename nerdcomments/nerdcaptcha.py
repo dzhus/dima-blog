@@ -19,12 +19,12 @@ def check_answer(answer, token):
     """
     return encode_answer(answer) == token
 
-def make_random_expr_items(functions, arguments, funset=(add, sub, mul), max_arg=10):
+def make_random_expr_items(functions, arguments, funset=(add, sub, mul), min_arg=1, max_arg=10):
     items = []
     for i in range(functions):
         items.append(choice(funset))
     for i in range(arguments):
-        items.append(rrn(max_arg))
+        items.append(rrn(min_arg, max_arg))
     return items
 
 class NerdCaptcha():
