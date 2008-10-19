@@ -12,13 +12,15 @@
     {{ entry.add_date|ru_strftime:"%d %B %Y" }}
   </div>
 
+  {% tags_for_object entry as tags %}
+  {% if tags %}
   <div class="entry_tags" id="entry-{{ entry.id }}-tags">Теги:
-    {% tags_for_object entry as tags %}
     {% for entry_tag in tags %}
     <a href="/blog/tag/{{ entry_tag.name }}/" 
        rel="tag" 
        title="Посмотреть все записи с тегом «{{ entry_tag.name }}»">{{ entry_tag.name }}</a>{% if not forloop.last %}, {% endif %}{% endfor %}.
   </div>
+  {% endif %}
 
   <div class="entry_body" id="entry-{{ entry.id }}-body">
     {{ entry.text|markdown|fix_ampersands }}
