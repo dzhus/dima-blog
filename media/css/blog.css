@@ -30,7 +30,7 @@
 /** entry elements */
 .blog_entry 
 { 
-    text-align: justify;
+    text-align: left;
     margin-bottom: 1em;
     padding: 2em;
     border-color: #888a85;
@@ -62,7 +62,8 @@
 }
 
 .entry_body
-{ 
+{
+    line-height: 125%;
 }
 
 .entry_permalink
