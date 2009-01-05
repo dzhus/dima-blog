@@ -28,6 +28,8 @@ class Entry(models.Model):
     def __unicode__(self):
         return self.title
 
+    def __len__(self):
+        return len(self.text + self.extra_text)
 
     class Admin:
         list_display = ('id','title','add_date', 'comments', 'slug')
