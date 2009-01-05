@@ -1,0 +1,18 @@
+<!--*- mode: django-html -*-->
+{% extends "blog_base.html" %}
+
+{% block title %}
+Статистика блога Димы Джуса
+{% endblock %}
+
+{% block navigation %}
+  {{ block.super }} статистика
+{% endblock %}
+
+{% block base %}
+<div class="box">
+  <img src="{{ chart_url }}"
+       width="{{ chart_width }}" 
+       height="{{ chart_height }}" />
+</div>
+{% endblock %}

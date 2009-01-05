@@ -17,16 +17,18 @@ from feeds import BlogFeed, BlogTagFeed
 
 ## Index page
 urlpatterns = patterns('django.views.generic.date_based',
-                       (r'^$', 'archive_index', {'queryset': Entry.objects.filter(private=0),
+                       url(r'^$', 'archive_index', {'queryset': Entry.objects.filter(private=0),
                                                  'date_field': 'add_date',
                                                  'num_latest': 5,
                                                  'template_name': 'index.html', 
                                                  'allow_empty': False}))
 
+blog_entries = Entry.objects.order_by('add_date')
+
 ## Entry list views
 list_kwargs = {'paginate_by': 5,
                'orphans': 2,
-               'queryset': Entry.objects.order_by('add_date'),
+               'queryset': blog_entries,
                'template_name': 'entry_list.html',
                'template_object_name': 'entry'}
 urlpatterns += patterns('blog.views',
@@ -36,6 +38,9 @@ urlpatterns += patterns('blog.views',
                         (r'^blog/tag/(?P<tag>.+)/page-(?P<page>\d+)/$', 'entry_list', list_kwargs),
                         (r'^blog/tag/(?P<tag>.+)/$', 'entry_list', list_kwargs),
                         (r'^blog/tag/$', 'tag_cloud', {'shuffle': False}))
+
+urlpatterns += patterns('stats.views',
+                        (r'^blog/stats/$', 'blog_stats', {'queryset': blog_entries}))
 
 ## Entry detail view
 detail_kwargs = {'queryset': Entry.objects,
