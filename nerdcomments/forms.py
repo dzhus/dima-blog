@@ -6,7 +6,7 @@ from django.contrib.comments.forms import CommentForm
 from nerdcaptcha import NerdCaptcha, make_random_expr_items, check_answer
 
 class NerdCommentForm(CommentForm):
-    captcha_answer = forms.IntegerField(label="CAPTCHA")
+    captcha_answer = forms.IntegerField(label='CAPTCHA')
     captcha_token = forms.CharField(widget=forms.HiddenInput)
 
     def __init__(self, *args, **kwargs):
@@ -17,8 +17,10 @@ class NerdCommentForm(CommentForm):
             self.initial['captcha_token'] = self.captcha.token
             
     def clean(self):
+        if not 'captcha_answer' in self.cleaned_data:
+            raise forms.ValidationError('No CAPTCHA answer')
         answer = self.cleaned_data['captcha_answer']
         token = self.cleaned_data['captcha_token']
         if not check_answer(str(answer), token):
-            raise forms.ValidationError("Bad CAPTCHA answer")
+            raise forms.ValidationError('Bad CAPTCHA answer')
         return self.cleaned_data
