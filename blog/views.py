@@ -31,8 +31,8 @@ def entry_list(request, queryset=Entry.objects.order_by('add_date'),
     """
     Show all entries with given tag, paginated and filtered.
 
-    This function accepts the same arguments as tagged_object_list and
-    object_list generic views.
+    This function accepts the same arguments as `tagged_object_list` and
+    `object_list` generic views.
     """
 
     # I want to filter out private entries, so I have to use a
