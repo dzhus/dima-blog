@@ -20,7 +20,7 @@ def date_to_epoch(date):
     """
     return time.mktime(date.timetuple())
 
-def make_model_prob_chart(object_list, width, height):
+def make_prob_chart(object_list, width, height):
     """
     Return a chart of «probability function» for given objects of any
     model which has length and add_date field.
@@ -44,17 +44,19 @@ def raw_prob_function(list):
         x += entry
         yield x
 
-def blog_stats(request, queryset, template_name="blog_stats.html",
-               width=600, height=300, label_format="%Y-%m"):
+def queryset_stats(request, queryset, template_name,
+                   width=600, height=300,
+                   label_format="%Y-%m", title=None, color=None):
     def make_label(date):
         return date.strftime(label_format)
     
     entry_list = queryset.filter(**make_filter_kwargs(request))
 
     # Create probability chart
-    chart = make_model_prob_chart(entry_list, width, height)
-    
-    chart.set_colours(['666666'])
+    chart = make_prob_chart(entry_list, width, height)
+
+    if not color is None:
+        chart.set_colours([color])
 
     # Set chart labels
 
@@ -64,7 +66,8 @@ def blog_stats(request, queryset, template_name="blog_stats.html",
     chart.set_axis_labels(Axis.LEFT, ['', chart.data[1][-1:][0]])
     chart.set_axis_labels(Axis.BOTTOM, map(make_label,
                                            [first_date, last_date]))
-    chart.set_title('Рост количества информации в бложике с течением времени')
+    if title:
+        chart.set_title(title)
     
     context = {'chart_url': chart.get_url(),
                'chart_width': width,

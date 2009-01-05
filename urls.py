@@ -40,7 +40,9 @@ urlpatterns += patterns('blog.views',
                         (r'^blog/tag/$', 'tag_cloud', {'shuffle': False}))
 
 urlpatterns += patterns('stats.views',
-                        (r'^blog/stats/$', 'blog_stats', {'queryset': blog_entries}))
+                        (r'^blog/stats/$', 'queryset_stats', {'queryset': blog_entries,
+                                                              'color': '4e9a06',
+                                                              'template_name': 'blog_stats.html'}))
 
 ## Entry detail view
 detail_kwargs = {'queryset': Entry.objects,
