@@ -18,7 +18,7 @@ from tagging.models import Tag
 def make_filter_kwargs(request):
     """
     Make a set of filter kwargs to hide objects inappropriate for
-    current user (e. g. private entries shouldn't be seen by guests).
+    current user (e. g. private entries mustn't be seen by guests).
     """
     if not (request.user.is_authenticated() and \
             request.user.has_perm('blog.can_see_private')):
