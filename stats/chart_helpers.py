@@ -6,6 +6,40 @@
 # This module provides several functions which use pygooglechart API
 # to produce charts containing certain statistics about sets of
 # objects.
+#
+# How to use
+# ==========
+#
+# You'll want to use the following 4 charting functions provided by
+# this module:
+#
+# 1. `make_pool_date_chart()`
+# 
+# 2. `make_pool_uniform_chart()`
+# 
+# 3. `make_q_piechart()`
+# 
+# 4. `make_l_piechart()`
+#
+# Requirements for objects
+# ========================
+# 
+# *All* charting functions assume the following about their arguments:
+# 
+# - `object_list` has `count()` method which returns total amount of
+#   objects in set;
+#
+# - `object_list` objects are measurable in sense of `len()`;
+#
+# - multiply of `width` and `height` does not exceed 300 000 with each
+#   dimension being less than or equal to 1000.
+#
+# For every charting function *but* `make_pool_uniform_chart()`, each
+# object in `object_list()` must have a datetime field, named
+# according to `date_field` argument of the functions. Object creation
+# dates are retrieved from that field.
+#
+# Several functions imply more requirements for `object_list`.
 
 import time
 import datetime
@@ -23,10 +57,13 @@ def date_to_epoch(date):
     return time.mktime(date.timetuple())
 
 def make_pool_chart(object_list, width, height, x_values):
+    """
+    Return object pool size graph with `x_values` used for X axis
+    values.
+    """
     chart = XYLineChart(width, height)
     chart.add_data(x_values)
     
-    # Overall object pool size after every addition
     r = raw_prob_function(object_list)
     chart.add_data([y for y in r])
     return chart
@@ -34,12 +71,8 @@ def make_pool_chart(object_list, width, height, x_values):
 def make_pool_date_chart(object_list, width, height, date_field='add_date',
                          labels=True, label_format='%Y-%m', color=None):
     """
-    Return a chart of probability function for given objects with
-    length and datetime field named as specified in `date_field`
-    string argument.
-
-    `width` and `height` are integers with their multiple being less
-    than 300000.
+    Return object pool size graph with objects distributed along X
+    axis using their creation dates.
     """
     chart =  make_pool_chart(object_list, width, height,
                              map(lambda o: date_to_epoch(o.__dict__[date_field]),
@@ -63,7 +96,7 @@ def make_pool_uniform_chart(object_list, width, height,
                             labels=True, color=None):
     """
     The same as `make_pool_date_chart`, but without any regard to
-    objects creation date, so that pool sizes are uniformly
+    objects creation dates, so that pool sizes are uniformly
     distributed along *X* axis.
     """
     chart =  make_pool_chart(object_list, width, height,
@@ -81,7 +114,7 @@ def make_pool_uniform_chart(object_list, width, height,
 # TODO Use implementation from standard django template tags
 def group_by_year(object_list, date_field='add_date', ):
     """
-    Return dictionary of objects grouped by years
+    Return dictionary of objects grouped by years of creation.
     """
     groups = dict()
     for obj in object_list:
@@ -134,6 +167,10 @@ def dict_transform_values(orig_dict, transform):
 
 def make_q_piechart(object_list, width, height,
                     labels=True, colors=None):
+    """
+    Group objects by years of creation and return PieChart2D with
+    amount of objects created each year.
+    """
     pie_dict = dict_transform_values(group_by_year(object_list), len)
     chart = make_piechart(pie_dict, width, height)
     
@@ -141,6 +178,10 @@ def make_q_piechart(object_list, width, height,
 
 def make_l_piechart(object_list, width, height,
                     labels=True, colors=None):
+    """
+    Group objects by years of creation and return PieChart2D with
+    total measure of objects created each year.
+    """
     pie_dict = dict_transform_values(group_by_year(object_list),
                                      lambda objects: sum(map(lambda object: len(object), objects)))
     chart = make_piechart(pie_dict, width, height)
