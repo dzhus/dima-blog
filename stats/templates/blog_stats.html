@@ -14,36 +14,52 @@
   <h1>Распределение информации в блоге</h1>
   Далее представлены графики роста блога с течением времени и с
   увеличением количества записей.
-  <h2>По времени</h2>
+  <h2>За всё время</h2>
+
+  <h3>По датам</h3>
   По оси <span class="math">x</span> равномерно распределены даты.
   <br />
+  <div class="figure">
   <img src="{{ date_chart.get_url }}"
        alt="Распределение информации в блоге по времени"
        width="{{ date_chart.width }}" 
        height="{{ date_chart.height }}" />
+  </div>
   <br/>
 
-  <h2>По записям</h2>
+  <h3>По записям</h3>
   По оси <span class="math">x</span> равномерно распределены номера записей.
+  <div class="figure">
   <img src="{{ uni_chart.get_url }}"
        alt="Распределение информации в блоге по записям"
        width="{{ uni_chart.width }}" 
        height="{{ uni_chart.height }}" />
-  <br/>
-  Для построения графиков используется
-  API <a href="http://code.google.com/intl/ru/apis/chart/">Google
-  Chart</a>
-  и <a href="http://pygooglechart.slowchop.com/">pygooglechart</a>.
+  </div>
 
-  <br />
+  <h2>По годам</h2>
+
+  <h3>По количеству записей</h3>
+  <div class="figure">
   <img src="{{ uni_pie.get_url }}"
        alt="Распределение записей в блоге по годам"
        width="{{ uni_pie.width }}" 
        height="{{ uni_pie.height }}" />
-  <img src="{{ date_pie.get_url }}"
-       alt="Распределение информации в блоге по годам"
-       width="{{ date_pie.width }}" 
-       height="{{ date_pie.height }}" />
+  </div>
+  
+  <h3>По объёму записей</h3>
+  <div class="figure">
+    <img src="{{ date_pie.get_url }}"
+         alt="Распределение информации в блоге по годам"
+         width="{{ date_pie.width }}" 
+         height="{{ date_pie.height }}" />
+  </div>
+
+  <br/>
+
+  <small>Для построения графиков используется
+  API <a href="http://code.google.com/intl/ru/apis/chart/">Google
+  Chart</a>
+  и <a href="http://pygooglechart.slowchop.com/">pygooglechart</a>.</small>
 
 </div>
 {% endblock %}

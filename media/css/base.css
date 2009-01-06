@@ -84,6 +84,11 @@ body
     font-style: italic;
 }
 
+.figure
+{
+    margin:0.5em;
+}
+
 /** links */
 a 
 {
