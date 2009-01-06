@@ -2,6 +2,7 @@
 {% extends "blog_base.html" %}
 
 {% block custom_css %}
+{{ block.super }}
 <link rel="stylesheet" type="text/css" href="/media/css/blog_archive.css" />
 {% endblock %}
 
@@ -56,7 +57,4 @@
     rel="appendix">одним списком</a> (всего {{ entry_list.count }}).
   </p>
 </div>
-{% endblock %}
-
-{% block custom_footer %}
 {% endblock %}
