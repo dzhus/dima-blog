@@ -52,10 +52,11 @@ def make_pool_date_chart(object_list, width, height, date_field='add_date',
         
         first_date = first_object.add_date
         last_date = last_object.add_date
+        half_date = first_date + (last_date - first_date)/2
         
         chart.set_axis_labels(Axis.LEFT, ['', chart.data[1][-1:][0]])
         chart.set_axis_labels(Axis.BOTTOM, map(make_date_label,
-                                               [first_date, last_date]))
+                                               [first_date, half_date, last_date]))
         chart.set_axis_labels(Axis.BOTTOM, ['1', len(object_list)])
     
     if not color is None:
