@@ -7,7 +7,6 @@ from pygooglechart import Axis
 
 from django.shortcuts import render_to_response
 
-from ws.blog.models import Entry
 from ws.blog.views import make_filter_kwargs
 
 from prob_utils import raw_prob_function
