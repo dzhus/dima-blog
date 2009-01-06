@@ -12,9 +12,9 @@ def queryset_stats(request, queryset, template_name,
     """
     Provide charts with statistics for objects in `queryset`.
 
-    `color` is a string in ``RRGGBB`` or ``RRGGBBAA`` form which sets
-    color for object pool graphs. `colors` (list of strings like in
-    `color`) sets colors used for pie charts.
+    `color` is a string which sets color for object pool graphs.
+    `colors` argument sets colors used for pie charts. See
+    `chart_helpers.py` docs for more information about colors.
 
     Integer `width` and `height` are chart image dimensions.
     

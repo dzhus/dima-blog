@@ -34,12 +34,20 @@
 # - multiply of `width` and `height` does not exceed 300 000 with each
 #   dimension being less than or equal to 1000.
 #
+# Creation date fields
+# --------------------
 # For every charting function *but* `make_pool_uniform_chart()`, each
 # object in `object_list()` must have a datetime field, named
 # according to `date_field` argument of the functions. Object creation
 # dates are retrieved from that field.
 #
-# Several functions imply more requirements for `object_list`.
+# Colors
+# ------
+# Both `*_chart()` functions accept `color` argument, which is a
+# string in ``RRGGBB`` or ``RRGGBBAA`` format used to specify graph
+# color. Both `*_piechart()` functions acceps `colors` argument, which
+# are lists of strings like in `color` used to set colors of pie
+# charts.
 
 import time
 import datetime
@@ -112,7 +120,7 @@ def make_pool_uniform_chart(object_list, width, height,
     return chart
 
 # TODO Use implementation from standard django template tags
-def group_by_year(object_list, date_field='add_date', ):
+def group_by_year(object_list, date_field):
     """
     Return dictionary of objects grouped by years of creation.
     """
@@ -125,7 +133,8 @@ def group_by_year(object_list, date_field='add_date', ):
     return groups
 
 def make_piechart(groups, width, height,
-                  labels=True, colors=None):
+                  labels=True,
+                  colors=None):
     """
     Make piechart from dictionary.
 
@@ -165,24 +174,24 @@ def dict_transform_values(orig_dict, transform):
         new_dict[k] = transform(i)
     return new_dict
 
-def make_q_piechart(object_list, width, height,
+def make_q_piechart(object_list, width, height, date_field='add_date',
                     labels=True, colors=None):
     """
     Group objects by years of creation and return PieChart2D with
     amount of objects created each year.
     """
-    pie_dict = dict_transform_values(group_by_year(object_list), len)
+    pie_dict = dict_transform_values(group_by_year(object_list, date_field), len)
     chart = make_piechart(pie_dict, width, height)
     
     return chart
 
-def make_l_piechart(object_list, width, height,
+def make_l_piechart(object_list, width, height, date_field='add_date',
                     labels=True, colors=None):
     """
     Group objects by years of creation and return PieChart2D with
     total measure of objects created each year.
     """
-    pie_dict = dict_transform_values(group_by_year(object_list),
+    pie_dict = dict_transform_values(group_by_year(object_list, date_field),
                                      lambda objects: sum(map(lambda object: len(object), objects)))
     chart = make_piechart(pie_dict, width, height)
 
