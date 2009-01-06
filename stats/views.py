@@ -18,15 +18,16 @@ def date_to_epoch(date):
     """
     return time.mktime(date.timetuple())
 
-def make_prob_chart(object_list, width, height):
+def make_prob_chart(object_list, width, height, date_field='add_date'):
     """
-    Return a chart of «probability function» for given objects of any
-    model which has length and add_date field.
+    Return a chart of probability function for given objects with
+    length and datetime field named as specified in `date_field`
+    string argument.
     """
     chart = XYLineChart(width, height)
 
-    # Dates when objects were created, in seconds since Epoch
-    dates = [date_to_epoch(o.add_date) for o in object_list]
+    # Dates when objects were created
+    dates = [date_to_epoch(o.__dict__[date_field]) for o in object_list]
     chart.add_data(dates)
     
     # Overall object pool size after every addition
