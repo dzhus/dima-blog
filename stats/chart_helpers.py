@@ -179,25 +179,29 @@ def dict_transform_values(orig_dict, transform):
         new_dict[k] = transform(i)
     return new_dict
 
-def make_q_piechart(object_list, width, height, date_field='add_date',
-                    labels=True, label_format='%d (%d)', colors=None):
+def make_q_piechart(object_list, width, height, date_field='add_date', **kwargs):
     """
     Group objects by years of creation and return PieChart2D with
     amount of objects created each year.
+
+    Accepts `labels`, `label_format` and `colors` arguments like in
+    `make_piechart()`.
     """
     pie_dict = dict_transform_values(group_by_year(object_list, date_field), len)
-    chart = make_piechart(pie_dict, width, height)
+    chart = make_piechart(pie_dict, width, height, **kwargs)
     
     return chart
 
-def make_l_piechart(object_list, width, height, date_field='add_date',
-                    labels=True, label_format='%d (%d)', colors=None):
+def make_l_piechart(object_list, width, height, date_field='add_date', **kwargs):
     """
     Group objects by years of creation and return PieChart2D with
     total measure of objects created each year.
+
+    Accepts `labels`, `label_format` and `colors` arguments like in
+    `make_piechart()`.
     """
     pie_dict = dict_transform_values(group_by_year(object_list, date_field),
                                      lambda objects: sum(map(lambda object: len(object), objects)))
-    chart = make_piechart(pie_dict, width, height)
+    chart = make_piechart(pie_dict, width, height, **kwargs)
 
     return chart
