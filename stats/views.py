@@ -6,13 +6,11 @@ from pygooglechart import XYLineChart
 from pygooglechart import Axis
 
 from django.shortcuts import render_to_response
-from django.conf import settings
 
 from ws.blog.models import Entry
 from ws.blog.views import make_filter_kwargs
 
-WIDTH=500
-HEIGHT=50
+from prob_utils import raw_prob_function
 
 def date_to_epoch(date):
     """
@@ -32,17 +30,10 @@ def make_prob_chart(object_list, width, height):
     chart.add_data(dates)
     
     # Overall object pool size after every addition
-    r = raw_prob_function([len(o) for o in object_list])
+    r = raw_prob_function(object_list)
     chart.add_data([x for x in r])
     
     return chart
-
-def raw_prob_function(list):
-    x = 0
-    yield x
-    for entry in list:
-        x += entry
-        yield x
 
 def queryset_stats(request, queryset, template_name,
                    width=600, height=300,
