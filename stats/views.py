@@ -21,13 +21,11 @@ def date_to_epoch(date):
 
 def make_pool_chart(object_list, width, height, x_values):
     chart = XYLineChart(width, height)
-
     chart.add_data(x_values)
     
     # Overall object pool size after every addition
     r = raw_prob_function(object_list)
     chart.add_data([y for y in r])
-    
     return chart
 
 def make_pool_date_chart(object_list, width, height, date_field='add_date',
@@ -154,9 +152,9 @@ def queryset_stats(request, queryset, template_name,
 
     context = {'date_chart': date_chart,
                'uni_chart': uni_chart,
-               'uni_pie': make_q_piechart(entry_list, width=400, height=250),
+               'uni_pie': make_q_piechart(entry_list, width*2/3, height),
                # How cute, a date pie :-)
-               'date_pie': make_l_piechart(entry_list, width=400, height=250)}
+               'date_pie': make_l_piechart(entry_list, width*2/3, height)}
     
     return render_to_response(template_name, context)
 
