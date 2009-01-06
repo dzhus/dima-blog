@@ -8,12 +8,12 @@ from chart_helpers import make_pool_date_chart, make_pool_uniform_chart
 from chart_helpers import make_q_piechart, make_l_piechart
         
 def queryset_stats(request, queryset, template_name,
-                   width=600, height=300, color=None, colors=None):
+                   width=600, height=300, graph_color=None, pie_colors=None):
     """
     Provide charts with statistics for objects in `queryset`.
 
-    `color` is a string which sets color for object pool graphs.
-    `colors` argument sets colors used for pie charts. See
+    `graph_color` is a string which sets color for object pool graphs.
+    `pie_colors` argument sets colors used for pie charts. See
     `chart_helpers.py` docs for more information about colors.
 
     Integer `width` and `height` are chart image dimensions.
@@ -33,13 +33,13 @@ def queryset_stats(request, queryset, template_name,
     and `height` fields.
     """
     # Create probability chart
-    date_chart = make_pool_date_chart(queryset, width, height, color=color)
-    uni_chart = make_pool_uniform_chart(queryset, width, height, color=color)
+    date_chart = make_pool_date_chart(queryset, width, height, color=graph_color)
+    uni_chart = make_pool_uniform_chart(queryset, width, height, color=graph_color)
 
     context = {'date_chart': date_chart,
                'uni_chart': uni_chart,
-               'quantity_pie': make_q_piechart(queryset, width, height, colors=colors),
-               'measure_pie': make_l_piechart(queryset, width, height, colors=colors)}
+               'quantity_pie': make_q_piechart(queryset, width, height, colors=pie_colors),
+               'measure_pie': make_l_piechart(queryset, width, height, colors=pie_colors)}
     
     return render_to_response(template_name, context)
 
