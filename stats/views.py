@@ -18,23 +18,38 @@ def date_to_epoch(date):
     """
     return time.mktime(date.timetuple())
 
-def make_prob_chart(object_list, width, height, date_field='add_date'):
+def make_pool_chart(object_list, width, height, x_values):
+    chart = XYLineChart(width, height)
+
+    chart.add_data(x_values)
+    
+    # Overall object pool size after every addition
+    r = raw_prob_function(object_list)
+    chart.add_data([y for y in r])
+    
+    return chart
+
+def make_pool_date_chart(object_list, width, height, date_field='add_date'):
     """
     Return a chart of probability function for given objects with
     length and datetime field named as specified in `date_field`
     string argument.
-    """
-    chart = XYLineChart(width, height)
 
-    # Dates when objects were created
-    dates = [date_to_epoch(o.__dict__[date_field]) for o in object_list]
-    chart.add_data(dates)
-    
-    # Overall object pool size after every addition
-    r = raw_prob_function(object_list)
-    chart.add_data([x for x in r])
-    
-    return chart
+    `width` and `height` are integers with their multiple being less
+    than 300000.
+    """
+    return make_pool_chart(object_list, width, height,
+                           map(lambda o: date_to_epoch(o.__dict__[date_field]),
+                               object_list))
+
+def make_pool_uniform_chart(object_list, width, height):
+    """
+    The same as `make_pool_date_chart`, but without any regard to
+    objects creation date, so that pool sizes are uniformly
+    distributed along *X* axis.
+    """
+    return make_pool_chart(object_list, width, height,
+                           range(len(object_list)))
 
 def queryset_stats(request, queryset, template_name,
                    width=600, height=300,
@@ -45,7 +60,7 @@ def queryset_stats(request, queryset, template_name,
     entry_list = queryset.filter(**make_filter_kwargs(request))
 
     # Create probability chart
-    chart = make_prob_chart(entry_list, width, height)
+    chart = make_pool_date_chart(entry_list, width, height)
 
     if not color is None:
         chart.set_colours([color])
