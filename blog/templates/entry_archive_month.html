@@ -19,7 +19,7 @@
     </div>
   {% if forloop.last %}
     <p>
-      За этот месяц было написано {{ forloop.counter }}
+      За этот месяц было добавлено {{ forloop.counter }}
       запис{{ forloop.counter|choose_plural:"ь,и,ей" }}.
     </p>
   {% endif %}
