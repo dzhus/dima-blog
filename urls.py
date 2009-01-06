@@ -18,10 +18,10 @@ from feeds import BlogFeed, BlogTagFeed
 ## Index page
 urlpatterns = patterns('django.views.generic.date_based',
                        url(r'^$', 'archive_index', {'queryset': Entry.objects.filter(private=0),
-                                                 'date_field': 'add_date',
-                                                 'num_latest': 5,
-                                                 'template_name': 'index.html', 
-                                                 'allow_empty': False}))
+                                                    'date_field': 'add_date',
+                                                    'num_latest': 5,
+                                                    'template_name': 'index.html', 
+                                                    'allow_empty': False}))
 
 blog_entries = Entry.objects.order_by('add_date')
 
