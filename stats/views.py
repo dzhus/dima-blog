@@ -100,10 +100,14 @@ def make_piechart(groups, width, height,
     """
     chart = PieChart2D(width, height)
 
-    chart.add_data(groups.values())
+    # Enforce sorting by keys
+    sorted_keys = groups.keys()
+    sorted_keys.sort()
+
+    chart.add_data([groups[k] for k in sorted_keys])
 
     if labels:
-        chart.set_pie_labels(map(str, groups.iterkeys()))
+        chart.set_pie_labels(map(str, sorted_keys))
 
     if not colors is None:
         chart.set_colours(colors)
