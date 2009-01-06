@@ -79,6 +79,11 @@ body
     border-color: #d3d7cf;
 }
 
+.math
+{
+    font-style: italic;
+}
+
 /** links */
 a 
 {
