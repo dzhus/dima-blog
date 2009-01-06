@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
 
 import time
+import datetime
 
 from pygooglechart import XYLineChart
 from pygooglechart import Axis
@@ -43,11 +44,8 @@ def make_pool_date_chart(object_list, width, height, date_field='add_date',
                                  object_list))
 
     if labels:
-        first_object = object_list[0]
-        last_object = object_list.reverse()[0]
-        
-        first_date = first_object.add_date
-        last_date = last_object.add_date
+        [first_date, last_date] = map(lambda x:datetime.datetime.fromtimestamp(int(x)),
+                                      chart.data_x_range())
         half_date = first_date + (last_date - first_date)/2
         
         chart.set_axis_labels(Axis.LEFT, ['', chart.data[1][-1:][0]])
