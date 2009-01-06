@@ -52,22 +52,15 @@ def raw_prob_function(object_list):
     time. Consider objects being blog posts, measured by their textual
     length, with P being all text ever posted to the blog. Plotting P
     sizes produced by `raw_prob_function` with respective posting (or
-    contribution in our terms) dates being x axis values, you may see
-    how the blog grew with years. Using natural numbers for x values
-    will produce *blog size after n posts* plot.
+    contribution in our terms) dates being *X* axis values, you may
+    see how the blog grew with years. Using natural numbers for x
+    values will produce **blog size after n posts** plot.
     """
     total_size = 0
     yield total_size
     for obj in object_list:
         total_size += len(obj)
         yield total_size
-
-class WeightedObject:
-    def __init__(self, weight=1):
-        self.weight = weight
-        
-    def __len__(self):
-        return self.weight
 
 if __name__ == "__main__":
     import doctest
