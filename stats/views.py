@@ -38,9 +38,6 @@ def make_pool_date_chart(object_list, width, height, date_field='add_date',
     `width` and `height` are integers with their multiple being less
     than 300000.
     """
-    def make_date_label(date):
-        return date.strftime(label_format)
-    
     chart =  make_pool_chart(object_list, width, height,
                              map(lambda o: date_to_epoch(o.__dict__[date_field]),
                                  object_list))
@@ -54,9 +51,8 @@ def make_pool_date_chart(object_list, width, height, date_field='add_date',
         half_date = first_date + (last_date - first_date)/2
         
         chart.set_axis_labels(Axis.LEFT, ['', chart.data[1][-1:][0]])
-        chart.set_axis_labels(Axis.BOTTOM, map(make_date_label,
+        chart.set_axis_labels(Axis.BOTTOM, map(lambda d: d.strftime(label_format),
                                                [first_date, half_date, last_date]))
-        chart.set_axis_labels(Axis.BOTTOM, ['1', len(object_list)])
     
     if not color is None:
         chart.set_colours([color])
