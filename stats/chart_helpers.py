@@ -133,12 +133,17 @@ def group_by_year(object_list, date_field):
     return groups
 
 def make_piechart(groups, width, height,
-                  labels=True,
+                  labels=True, label_format='%d (%d)',
                   colors=None):
     """
     Make piechart from dictionary.
 
-    Dictionary items set pie chart data, while dictionary keys are
+    Dictionary items set pie chart data.
+
+    If `labels` is True, chart labels are placed using `label_format`,
+    which must be valid format string with two items substituted for
+    dictionary key and value, respectively.
+
     used for labels.
 
     `colors` is a list of colors for each pie piece.
@@ -152,7 +157,7 @@ def make_piechart(groups, width, height,
     chart.add_data([groups[k] for k in sorted_keys])
 
     if labels:
-        chart.set_pie_labels(map(lambda y:str(y)+' '+str(groups[y]), sorted_keys))
+        chart.set_pie_labels(map(lambda y: label_format % (y, groups[y]), sorted_keys))
 
     if not colors is None:
         chart.set_colours(colors)
@@ -175,7 +180,7 @@ def dict_transform_values(orig_dict, transform):
     return new_dict
 
 def make_q_piechart(object_list, width, height, date_field='add_date',
-                    labels=True, colors=None):
+                    labels=True, label_format='%d (%d)', colors=None):
     """
     Group objects by years of creation and return PieChart2D with
     amount of objects created each year.
@@ -186,7 +191,7 @@ def make_q_piechart(object_list, width, height, date_field='add_date',
     return chart
 
 def make_l_piechart(object_list, width, height, date_field='add_date',
-                    labels=True, colors=None):
+                    labels=True, label_format='%d (%d)', colors=None):
     """
     Group objects by years of creation and return PieChart2D with
     total measure of objects created each year.
