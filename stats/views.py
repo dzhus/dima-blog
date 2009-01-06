@@ -53,31 +53,32 @@ def make_pool_uniform_chart(object_list, width, height):
 
 def queryset_stats(request, queryset, template_name,
                    width=600, height=300,
-                   label_format="%Y-%m", title=None, color=None):
+                   label_format="%Y-%m", color=None):
     def make_label(date):
         return date.strftime(label_format)
     
     entry_list = queryset.filter(**make_filter_kwargs(request))
 
     # Create probability chart
-    chart = make_pool_date_chart(entry_list, width, height)
+    date_chart = make_pool_date_chart(entry_list, width, height)
+    uni_chart = make_pool_uniform_chart(entry_list, width, height)
 
     if not color is None:
-        chart.set_colours([color])
+        date_chart.set_colours([color])
+        uni_chart.set_colours([color])
 
     # Set chart labels
 
     first_date = entry_list[0].add_date
     last_date = entry_list.reverse()[0].add_date
     
-    chart.set_axis_labels(Axis.LEFT, ['', chart.data[1][-1:][0]])
-    chart.set_axis_labels(Axis.BOTTOM, map(make_label,
+    date_chart.set_axis_labels(Axis.LEFT, ['', date_chart.data[1][-1:][0]])
+    date_chart.set_axis_labels(Axis.BOTTOM, map(make_label,
                                            [first_date, last_date]))
-    if title:
-        chart.set_title(title)
+    uni_chart.set_axis_labels(Axis.LEFT, ['', date_chart.data[1][-1:][0]])
+    uni_chart.set_axis_labels(Axis.BOTTOM, ['1', len(queryset)])
     
-    context = {'chart_url': chart.get_url(),
-               'chart_width': width,
-               'chart_height': height}
+    context = {'date_chart': date_chart,
+               'uni_chart': uni_chart}
     
     return render_to_response(template_name, context)

@@ -11,8 +11,23 @@
 
 {% block base %}
 <div class="box">
-  <img src="{{ chart_url }}"
-       width="{{ chart_width }}" 
-       height="{{ chart_height }}" />
+  <h1>Распределение информации в блоге</h1>
+  <h2>По времени</h2>
+  <img src="{{ date_chart.get_url }}"
+       alt="Распределение информации в блоге по времени"
+       width="{{ date_chart.width }}" 
+       height="{{ date_chart.height }}" />
+  <br/>
+
+  <h2>По записям</h2>
+  <img src="{{ uni_chart.get_url }}"
+       alt="Распределение информации в блоге по записям"
+       width="{{ uni_chart.width }}" 
+       height="{{ uni_chart.height }}" />
+  <br/>
+  Для построения графиков используется
+  API <a href="http://code.google.com/intl/ru/apis/chart/">Google
+  Chart</a>
+  и <a href="http://pygooglechart.slowchop.com/">pygooglechart</a>.
 </div>
 {% endblock %}
