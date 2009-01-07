@@ -47,10 +47,8 @@
 # string in ``RRGGBB`` or ``RRGGBBAA`` format used to specify graph
 # color.
 #
-# Both `*_piechart()` functions acceps `colors` argument, which are
-# lists of strings like in `color` used to set colors of pie charts.
-# If `colors` contains less items than needed, only the first one is
-# used.
+# See `make_piechart()` documentation to see how pie chart colors are
+# handled.
 #
 # Labels
 # ------
@@ -157,7 +155,8 @@ def make_piechart(groups, width, height,
 
     used for labels.
 
-    `colors` is a list of colors for each pie piece.
+    `colors` is a list of colors for each pie slice. Colors are
+    interpolated if there are fewer of them than slices.
     """
     chart = PieChart2D(width, height)
 
