@@ -6,6 +6,9 @@ from django.contrib.comments.forms import CommentForm
 from nerdcaptcha import NerdCaptcha, make_random_expr_items, check_answer
 
 class NerdCommentForm(CommentForm):
+    """
+    CommentForm with additional CAPTCHA fields
+    """
     captcha_answer = forms.IntegerField(label='CAPTCHA')
     captcha_token = forms.CharField(widget=forms.HiddenInput)
 

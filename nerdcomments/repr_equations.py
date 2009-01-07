@@ -89,7 +89,7 @@ class ReprFunction(Repr):
         module.
 
         >>> r = ReprFunction('(add1 %s)', lambda x: x + 1)
-        >>> # Hey, your parentheses are wrong. Wait… OH SHI~
+        >>> # Hey, your parentheses are wrong
         >>> r(5)
         6
         >>> print r % -100
