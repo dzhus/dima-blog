@@ -1,35 +1,36 @@
-# -*- coding: utf-8 -*-
-# Description
-# ===========
-#
-# This module introduces several classes aimed to provide means of
-# constructing, evaluating and printing of arbitary (mathematical)
-# expressions:
-#
-# - `ReprFunction`
-#
-# - `ReprArgument`
-#
-# - `ReprExpression`
-#
-# - `ReprEquation`
-#
-# Why Do I Use Infix Notation
-# ===========================
-#
-# KISS! This is merely a helper module to construct CAPTCHAs :-)
-#
-# List of things to be done
-# ========================
-#
-# - Warn about wrong number of conversion specifiers in
-#   `ReprFunction()` and `ReprExpression()`
-#
-# Examples
-# ========
-#
-# See how to work with this module in `examples.txt`. See also
-# real-world example in `nerdcaptcha.py`.
+"""
+Description
+===========
+
+This module introduces several classes aimed to provide means of
+constructing, evaluating and printing of arbitary (mathematical)
+expressions:
+
+- `ReprFunction`
+
+- `ReprArgument`
+
+- `ReprExpression`
+
+- `ReprEquation`
+
+Why Do I Use Infix Notation
+===========================
+
+KISS! This is merely a helper module to construct CAPTCHAs :-)
+
+List of things to be done
+========================
+
+- Warn about wrong number of conversion specifiers in
+  `ReprFunction()` and `ReprExpression()`
+
+Examples
+========
+
+See how to work with this module in `examples.txt`. See also
+real-world example in `nerdcaptcha.py`.
+"""
 
 import inspect
 
