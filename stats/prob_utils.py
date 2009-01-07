@@ -8,7 +8,7 @@
 # measurable objects.
 
 
-def raw_prob_function(object_list):
+def pool_size_function(object_list):
     """
     Return generator for total **length of objects** in [0:n]-slice of
     `object_list` for every n from 0 to `len(object_list)`.

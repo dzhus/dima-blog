@@ -57,7 +57,7 @@ from pygooglechart import XYLineChart
 from pygooglechart import PieChart2D
 from pygooglechart import Axis
 
-from prob_utils import raw_prob_function
+from prob_utils import pool_size_function
 
 def date_to_epoch(date):
     """
@@ -69,11 +69,13 @@ def make_pool_chart(object_list, width, height, x_values):
     """
     Return object pool size graph with `x_values` used for X axis
     values.
+
+    See also `pool_size_function()` documentation in `prob_utils.py`.
     """
     chart = XYLineChart(width, height)
     chart.add_data(x_values)
     
-    r = raw_prob_function(object_list)
+    r = pool_size_function(object_list)
     chart.add_data([y for y in r])
     return chart
 
