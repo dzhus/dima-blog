@@ -4,9 +4,20 @@ from blog.models import Entry
 from tagging.models import Tag, TaggedItem
 
 def make_count(bits, index=0, default_count=50):
+    """
+    Return items count from URL bits. `index` is the expected number
+    position.
+    
+    >>> make_count(['55'])
+    55
+    >>> make_count(['Emacs', '20'])
+    50
+    >>> make_count(['бред', '15'], 1)
+    15
+    """
     # We assume that item count is the last bit
     if len(bits) == index + 1:
-        count = bits[index]
+        count = int(bits[index])
         if (count < 1):
             raise ObjectDoesNotExist
     else:
@@ -24,6 +35,9 @@ class GeneralFeed(Feed):
         return item.add_date
     
 class BlogFeed(GeneralFeed):
+    """
+    Feed of all blog items.
+    """
     title = u'Блог Димы Джуса'
     
     def items(self, obj):
@@ -34,6 +48,11 @@ class BlogFeed(GeneralFeed):
         return (Entry.objects, count)
 
 class BlogTagFeed(BlogFeed):
+    """
+    Feed of blog items with specific tags.
+
+    Underscore signs in tags are replaced with space.
+    """
     def link(self, obj):
         return u'/blog/tag/%s/' % obj[0].name
 
