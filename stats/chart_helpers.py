@@ -34,6 +34,7 @@
 #
 # Creation date fields
 # --------------------
+# 
 # For every charting function *but* `make_pool_uniform_chart()`, each
 # object in `object_list()` must have a datetime field, named
 # according to `date_field` argument of the functions. Object creation
@@ -41,14 +42,21 @@
 #
 # Colors
 # ------
+#
 # Both `*_chart()` functions accept `color` argument, which is a
 # string in ``RRGGBB`` or ``RRGGBBAA`` format used to specify graph
 # color.
 #
-#Both `*_piechart()` functions acceps `colors` argument, which are
+# Both `*_piechart()` functions acceps `colors` argument, which are
 # lists of strings like in `color` used to set colors of pie charts.
 # If `colors` contains less items than needed, only the first one is
 # used.
+#
+# Labels
+# ------
+#
+# All charting functions accept `labels` boolean argument, which
+# specifies whether labels should be set or not.
 
 import time
 import datetime
