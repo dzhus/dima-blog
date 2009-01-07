@@ -28,9 +28,8 @@
 # Examples
 # ========
 #
-# You may want to read doctest examples in `repr_functions.py` to
-# understand how this module works. See real-world example in
-# `nerdcaptcha.py`.
+# See how to work with this module in `examples.txt`. See also
+# real-world example in `nerdcaptcha.py`.
 
 import inspect
 

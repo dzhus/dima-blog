@@ -1,0 +1,61 @@
+Description
+===========
+
+This file contains doctest examples for classes and functions defined
+in `repr_equations.py` and `repr_functions.py`.
+
+Examples
+========
+
+Basic
+-----
+
+>>> from repr_functions import *
+>>> from repr_equations import *
+>>> one = ReprArgument('1', 1)
+>>> four = ReprArgument('4', 4)
+>>> eight = ReprArgument('8', 8)
+>>> print ReprExpression([add, one, four])
+1+4
+>>> l = [div, add, four, four, eight]
+>>> print ReprExpression(l)
+(4+4)÷8
+>>> print ReprEquation(l)
+(4+4)÷8=1
+
+Basic 2
+-------
+
+>>> DA = ReprArgument('Answer to Life, the Universe, and Everything', 42)
+>>> verbose_wrapper = '%s is %s'
+>>> print ReprEquation([DA], verbose_wrapper)
+Answer to Life, the Universe, and Everything is 42
+>>> op = ReprFunction('opposite of %s', lambda x: -x)
+>>> print ReprEquation([op, DA], verbose_wrapper)
+opposite of Answer to Life, the Universe, and Everything is -42
+
+Hidden arguments
+----------------
+
+>>> hidden = ReprArgument('x', 512)
+>>> print ReprEquation([op, hidden], verbose_wrapper)
+opposite of x is -512
+
+CAPTCHA
+-------
+
+Hiding arguments
+~~~~~~~~~~~~~~~~
+
+>>> print ReprEquation([add, div, hidden, four, eight])
+x÷4+8=136
+
+Hiding operations
+~~~~~~~~~~~~~~~~~
+>>> import math
+>>> hidden_op = ReprFunction('%s ? %s', operator.add, 2)
+>>> print ReprEquation([hidden_op, four, eight], '%s = %s')
+4 ? 8 = 12
+
+Be careful when hiding arguments or operations! You may get an
+equation with several or infinite number of solutions.
