@@ -8,7 +8,7 @@ from chart_helpers import make_pool_date_chart, make_pool_uniform_chart
 from chart_helpers import make_q_piechart, make_l_piechart
         
 def queryset_stats(request, queryset, template_name,
-                   width=600, height=300, graph_color=None, pie_colors=None):
+                   width=500, height=325, graph_color=None, pie_colors=None):
     """
     Provide charts with statistics for objects in `queryset`.
 
