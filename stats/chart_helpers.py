@@ -1,5 +1,3 @@
-# -*- coding: utf-8 -*-
-#
 # Description
 # ===========
 #
@@ -45,9 +43,12 @@
 # ------
 # Both `*_chart()` functions accept `color` argument, which is a
 # string in ``RRGGBB`` or ``RRGGBBAA`` format used to specify graph
-# color. Both `*_piechart()` functions acceps `colors` argument, which
-# are lists of strings like in `color` used to set colors of pie
-# charts.
+# color.
+#
+#Both `*_piechart()` functions acceps `colors` argument, which are
+# lists of strings like in `color` used to set colors of pie charts.
+# If `colors` contains less items than needed, only the first one is
+# used.
 
 import time
 import datetime
@@ -160,7 +161,10 @@ def make_piechart(groups, width, height,
         chart.set_pie_labels(map(lambda y: label_format % (y, groups[y]), sorted_keys))
 
     if not colors is None:
-        chart.set_colours(colors)
+        if len(colors) < len(sorted_keys):
+            chart.set_colours(colors)
+        else:
+            chart.set_colours_within_series(colors)
 
     return chart
 
