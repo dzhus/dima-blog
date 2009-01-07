@@ -68,7 +68,7 @@ class ReprFunction(Repr):
     """
     Loosely mimics functions and strings.
 
-    Instances of this class are primarly used when constructin
+    Instances of this class are primarly used when constructing
     `ReprExpression` or `ReprEquation` objects.
     """
     
@@ -151,7 +151,7 @@ class ReprArgument(ReprFunction):
 
     *Call* it with no arguments to get its value.
 
-    Instances of this class are primarly used when constructin
+    Instances of this class are primarly used when constructing
     `ReprExpression` or `ReprEquation` objects.
     """
     
