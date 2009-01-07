@@ -274,22 +274,22 @@ class ReprEquation():
     both expression and its *value* when printing.
     """
     
-    def __init__(self, items, priority_wrapper='(%s)', equal_wrapper='%s=%s'):
+    def __init__(self, items, equal_wrapper='%s=%s', priority_wrapper='(%s)'):
         """
         Constructs `ReprEquation` instance using `items` the same way
         `ReprExpression` class constructor does.
 
-        `priority_wrapper` has the same meaning as in
-        `ReprExpression`.
-
         `equal_wrapper` is a string with two ``%s`` specifiers
         substituted for expression and its value when printing.
+
+        `priority_wrapper` has the same meaning as in
+        `ReprExpression`.
 
         >>> a = ReprFunction('absolute value of %s', abs, 1)
         >>> f = ReprArgument('minus four', -4)
         >>> print ReprEquation([a, f])
         absolute value of minus four=4
-        >>> print ReprEquation([a, f], equal_wrapper='%s is actually equal to %s')
+        >>> print ReprEquation([a, f], '%s is actually equal to %s')
         absolute value of minus four is actually equal to 4
         """
         self.__expression = ReprExpression(items, wrapper=priority_wrapper)
