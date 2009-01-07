@@ -8,12 +8,11 @@ import django.views.generic.list_detail
 from django.contrib import admin
 admin.autodiscover()
 
-# Serve media at development deploy
-from django.views.static import serve
-
 # Our stuff
 from blog.models import Entry, File
 from feeds import BlogFeed, BlogTagFeed
+
+from site_urls import dev_media_url
 
 ## Index page
 urlpatterns = patterns('django.views.generic.date_based',
@@ -22,6 +21,9 @@ urlpatterns = patterns('django.views.generic.date_based',
                                                     'num_latest': 5,
                                                     'template_name': 'index.html', 
                                                     'allow_empty': False}))
+
+## Media (development only)
+urlpatterns += dev_media_url
 
 blog_entries = Entry.objects.order_by('add_date')
 
@@ -61,12 +63,6 @@ urlpatterns += patterns('blog.views',
                             detail_kwargs,
                             'entry_by_slug'))
 
-
-## REMOVE AT REAL SERVER DEPLOYMENT !!
-## @RRSD
-urlpatterns += patterns('',
-                        (r'^media/(?P<path>.*)$', 'django.views.static.serve',
-                         {'document_root': '/home/sphinx/projects/python/ws/media'}))
 
 ## Archive views
 urlpatterns += patterns('blog.views',
