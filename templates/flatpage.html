@@ -3,7 +3,7 @@
 {% load markup %}
 
 {% block title %}
-{{ flatpage.title }}
+{{ block.super }}: {{ flatpage.title }}
 {% endblock %}
 
 {% block navigation %}
