@@ -15,9 +15,9 @@
 <div class="box">
   <h1>Распределение информации в блоге</h1>
 
-  {% with pool_range_xlabels.1 as count %} 
+  {% with pool_range_xlabels|last as count %} 
 
-  {% with pool_size_ylabels.1 as size %}
+  {% with pool_size_ylabels|last as size %}
 
   Всего блог содержит <strong>{{ count }}</strong>
   запис{{count|choose_plural:"ь,и,ей" }}, в которых
