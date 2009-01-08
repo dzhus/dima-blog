@@ -3,8 +3,10 @@ syntax: glob
 *.pyc
 *.pyo
 django*.db
+settings.py
 
 syntax: regexp
 
 ^media/uploads/
 ^tagging
+^googlecharts

@@ -1,4 +1,5 @@
 from site_settings import *
+from secret import SECRET_KEY
 
 DEBUG = True
 TEMPLATE_DEBUG = DEBUG
@@ -31,9 +32,6 @@ SITE_ID = 1
 APPEND_SLASH = True
 
 ADMIN_MEDIA_PREFIX = '/media/admin/'
-
-# Make this unique, and don't share it with anybody.
-SECRET_KEY = 'k&2d**^=n!y9$5$kx$^6iw_kq0=uih47w=lqb@t(+bt-k=8z%q'
 
 # List of callables that know how to import templates from various sources.
 TEMPLATE_LOADERS = (
