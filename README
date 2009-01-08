@@ -7,6 +7,13 @@
   For this blog to operate properly, define `SECRET_KEY` variable in
   `secret.py` in the same directory as `settings.py`.
 
+  Default database name is `django.db`.
+
+* A note to myself
+  _Dmitry, DB, key file and uploads are ignored by Mercurial!_ 
+
+  See [[file:.hgignore]].
+
 * Requirements
   This blog is being successfully used with the following software:
   
