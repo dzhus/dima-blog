@@ -89,6 +89,20 @@
   {% endchart %}
   </div>
   
+  <h3>По плотности записей</h3>
+
+  Число в скобках означает среднюю плотность записей за год,
+  определяемую как отношение объёма к количеству.
+  
+  <div class="figure">
+  {% chart %}
+    {% chart-data yearly_density %}
+    {% chart-size "400x200" %}
+    {% chart-type "pie" %}
+    {% chart-labels yd_labels %}
+    {% chart-colors "ad7fa8" "5c3566" %}
+  {% endchart %}
+  </div>
   <br/>
   
   <small>Для построения графиков используется
