@@ -1,6 +1,7 @@
 <!--*- mode: django-html -*-->
 {% extends "blog_base.html" %}
 {% load charts %}
+{% load pytils_numeral %}
 
 {% block title %}
 Статистика блога Димы Джуса
@@ -13,16 +14,22 @@
 {% block base %}
 <div class="box">
   <h1>Распределение информации в блоге</h1>
+
+  {% with pool_range_xlabels.1 as count %} 
+
+  {% with pool_size_ylabels.1 as size %}
+
+  Всего блог содержит <strong>{{ count }}</strong>
+  запис{{count|choose_plural:"ь,и,ей" }}, в которых
+  <strong>{{ size }}</strong> символ{{ size|choose_plural:",а,ов" }}.
+
+  {% endwith %} {% endwith %}
+
   <h2>За всё время</h2>
 
-  Здесь представлены графики роста блога с течением времени и с ростом
-  количества записей.
-
-
-
   <h3>По датам</h3>
-  По оси <span class="math">x</span> равномерно распределены даты.
-  <br />
+
+  Роста блога с течением времени.
   <div class="figure">
   {% chart %}
     {% chart-type "line-xy" %}
@@ -35,10 +42,11 @@
     {% chart-colors "3465a4" %}
   {% endchart %}
   </div>
-  <br/>
 
   <h3>По записям</h3>
-  По оси <span class="math">x</span> равномерно распределены номера записей.
+
+  Рост блога с увеличением количества записей.
+
   <div class="figure">
   {% chart %}
     {% chart-type "line-xy" %}
@@ -55,7 +63,7 @@
 
   <h3>По количеству записей</h3>
 
-  В скобках указано, сколько всего записей было написано за год.
+  В скобках указано, сколько всего записей было добавлено за год.
   
   <div class="figure">
   {% chart %}
