@@ -1,7 +1,6 @@
 from site_settings import *
 from secret import SECRET_KEY
 
-DEBUG = True
 TEMPLATE_DEBUG = DEBUG
 
 ADMINS = (
