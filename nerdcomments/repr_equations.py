@@ -30,6 +30,14 @@ Examples
 
 See how to work with this module in `examples.txt`. See also
 real-world example in `nerdcaptcha.py`.
+
+Author and licensing
+====================
+
+Copyright (C) 2008, 2009 Dmitry Dzhus
+
+This package is subject to GNU GPL version 3 license, as can be read
+on http://www.gnu.org/licenses/gpl-3.0.html.
 """
 
 import inspect

@@ -24,3 +24,13 @@
   - googlecharts for Django, hg r4 <http://toys.jacobian.org/hg/googlecharts>
     
   - pytils-0.2.3, <http://pypi.python.org/pypi/pytils/>
+
+* Copying permissions
+  All Python sources and Django templates under `blog/`,
+  `nerdcomments/`, `stats/` and `templates/` directories are subject
+  to GNU GENERAL PUBLIC LICENSE Version 3, as can be read on
+  http://www.gnu.org/licenses/gpl-3.0.html.
+
+  All files under `media/` are released under Creative Commons
+  Attribution 3.0 Unported license, as can be read on
+  http://creativecommons.org/licenses/by/3.0/.
