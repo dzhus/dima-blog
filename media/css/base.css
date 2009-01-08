@@ -79,6 +79,11 @@ body
     border-color: #d3d7cf;
 }
 
+.smallnotice
+{
+   font-size: smaller;
+}
+
 .math
 {
     font-style: italic;
@@ -126,4 +131,15 @@ button
 div
 { 
     padding: 0.2em; 
+}
+
+/** Diffs */
+add
+{
+    color: #4e9a06;
+}
+
+del
+{
+    color: #888a85;
 }
