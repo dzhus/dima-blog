@@ -3,9 +3,6 @@ from django.db import models
 
 from tagging.fields import TagField
 
-#from tags.models import Tag
-#from tags.fields import TagsField
-
 class Entry(models.Model):
     title = models.CharField("Заголовок", max_length=128)
     private = models.BooleanField("Личная запись", blank=True)
