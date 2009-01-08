@@ -8,12 +8,12 @@ body
 
 #header 
 {
-  /*  background-color:       #204a87;
-      color:                  #eeeeec;*/
-    font-size:              xx-large;
-    text-align:             center;
-    padding:                0.5em;
-    margin-bottom:          1em;
+  /*  background-color: #204a87;
+      color:     #eeeeec;*/
+    font-size: xx-large;
+    text-align: center;
+    padding: 0.5em;
+    margin-bottom: 1em;
 }
 
 #footer
@@ -92,20 +92,20 @@ body
 /** links */
 a 
 {
-    background-color:       inherit;
-    color:                  #204a87;
-    font-weight:            bolder;
+    background-color: inherit;
+    color: #204a87;
+    font-weight: bolder;
 }
 
 a:visited 
 {
-    color:                  #5c3566;
+    color: #5c3566;
 }
 
 /** kill borders around link-images */
 a img 
 {
-    border:                 0px;
+    border: 0px;
 }
 
 /** Forms */
