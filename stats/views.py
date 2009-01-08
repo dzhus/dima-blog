@@ -60,6 +60,8 @@ def queryset_stats(request, queryset, template_name, date_field='add_date'):
     [yc_labels, ym_labels, yd_labels] = map(lambda d: make_year_labels(years, d),
                                             [yearly_count, yearly_measure, yearly_density])
 
+    density_labels = make_pool_labels([max(yearly_density)])
+
     context = dict([(x, locals()[x]) for x in ['pool_data',
                                                'pool_x_range',
                                                'pool_x_dates',
@@ -71,7 +73,9 @@ def queryset_stats(request, queryset, template_name, date_field='add_date'):
                                                'yearly_density',
                                                'yc_labels',
                                                'ym_labels',
-                                               'yd_labels']])
+                                               'yd_labels',
+                                               'density_labels',
+                                               'years']])
     
     return render_to_response(template_name, context)
 

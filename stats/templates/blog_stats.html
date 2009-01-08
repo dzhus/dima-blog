@@ -104,10 +104,14 @@
   {% chart %}
     {% chart-data yearly_density %}
     {% chart-size "400x200" %}
-    {% chart-type "pie" %}
-    {% chart-labels yd_labels %}
+    {% chart-type "column-grouped" %}
+    {% chart-labels years %}
+    {% axis "left" %}
+      {% axis-labels density_labels %}
+    {% endaxis %}
     {% chart-colors "ad7fa8" "5c3566" %}
     {% chart-alt yd_labels %}
+    {% chart-bar-width 60 %}
   {% endchart %}
   </div>
   <br/>
