@@ -18,14 +18,19 @@ def fit_to_unit(data):
     return map(lambda x: x/float(tail), data)
 
 def make_uniform_labels(data):
-    return [1, len(data)]
+    total = len(data)
+    return [1, total/4, total/2, total*3/4, total]
 
-def make_date_labels(objects, date_field, date_format='%Y-%m'):
-    dates = map(lambda d: d.__dict__[date_field], objects)
+def make_date_labels(objects, date_field, spans=4, date_format='%Y-%m'):
+    "Make X axis labels given a pair of first and last objects."
+    [beg, end] = map(lambda d: d.__dict__[date_field], objects)
+    span = (end - beg) / spans
+    dates = map(lambda d: beg + d * span, range(5))
     return map(lambda date: date.strftime(date_format), dates)
 
 def make_pool_labels(pool_data):
-    return ['', pool_data[-1:][0]]
+    total_pool = pool_data[-1:][0]
+    return ['', total_pool/2, total_pool]
 
 def make_year_labels(years, yearly_data, format='%d (%s)'):
     """
