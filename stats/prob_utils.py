@@ -1,12 +1,12 @@
 # -*- coding: utf-8 -*-
-#
-# Description
-# ===========
-#
-# This module contains several generic procedures which return
-# discrete cumulative distribution functions (CDF) for sets of
-# measurable objects.
+"""
+Description
+===========
 
+This module contains several generic procedures which return
+discrete cumulative distribution functions (CDF) for sets of
+measurable objects.
+"""
 
 def pool_size_function(object_list):
     """
@@ -40,7 +40,7 @@ def pool_size_function(object_list):
     Practical example follows.
 
     >>> a, b, c = 'intro', 'long content', 'fin'
-    >>> r = raw_prob_function([a, b, c])
+    >>> r = pool_size_function([a, b, c])
     >>> [x for x in r]
     [0, 5, 17, 20]
 
@@ -58,7 +58,7 @@ def pool_size_function(object_list):
     contribution, it's possible to examine how the pool grew over the
     time. Consider objects being blog posts, measured by their textual
     length, with P being all text ever posted to the blog. Plotting P
-    sizes produced by `raw_prob_function` with respective posting (or
+    sizes produced by `pool_size_function` with respective posting (or
     contribution in our terms) dates used for *X* axis values, you may
     see how the blog grew with years. Using natural numbers for *X*
     values will produce **blog size after n posts** plot.
@@ -68,7 +68,3 @@ def pool_size_function(object_list):
     for obj in object_list:
         total_size += len(obj)
         yield total_size
-
-if __name__ == "__main__":
-    import doctest
-    doctest.testmod()
