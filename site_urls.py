@@ -1,19 +1,14 @@
 # This file defines `dev_media_url` pattern, which is used in Django
 # `urls.py` with development server
 
-from socket import gethostname
-import os.path
+from site_settings import SITE_PREFIX
+from site_helpers import at_dev
 
-from django.conf.urls.defaults import *
-
-hostname = gethostname()
-cd = os.path.abspath(os.path.curdir)
-
-if hostname == 'blizzard':
-    # Not needed with real webserver, development only
+if at_dev():
+    from django.conf.urls.defaults import *
     from django.views.static import serve
     dev_media_url =  patterns('',
                               (r'^media/(?P<path>.*)$', 'django.views.static.serve',
-                               {'document_root': cd + '/media'}))
+                               {'document_root': SITE_PREFIX + '/media'}))
 else:
     dev_media_url = []
