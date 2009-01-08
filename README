@@ -9,6 +9,8 @@
 
   Default database name is `django.db`.
 
+  `site_settings.py` contains site-specific settings.
+
 * A note to myself
   _Dmitry, DB, key file and uploads are ignored by Mercurial!_ 
 

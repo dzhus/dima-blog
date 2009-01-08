@@ -1,9 +1,12 @@
-import os.path
+from site_helpers import at_dev
 
-cd = os.path.abspath(os.path.curdir)
+if at_dev():
+    SITE_PREFIX = '/home/sphinx/projects/dima-blog'
+else:
+    SITE_PREFIX = '/var/www/localhost/dima-blog'
 
-TEMPLATE_DIRS = (cd + '/templates')
+DEBUG = at_dev()
 
-MEDIA_ROOT = cd + '/media/'
-
-DEBUG = True
+TEMPLATE_DIRS = (SITE_PREFIX + '/templates')
+MEDIA_ROOT = SITE_PREFIX + '/media/'
+DATABASE_NAME = SITE_PREFIX + '/django.db'

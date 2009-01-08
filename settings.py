@@ -10,8 +10,6 @@ ADMINS = (
 MANAGERS = ADMINS
 
 DATABASE_ENGINE = 'sqlite3'           # 'postgresql', 'mysql', 'sqlite3' or 'ado_mssql'.
-DATABASE_NAME = 'django.db'             # Or path to database file if using sqlite3.
-
 
 # Local time zone for this installation. All choices can be found here:
 # http://www.postgresql.org/docs/current/static/datetime-keywords.html#DATETIME-TIMEZONE-SET-TABLE
@@ -74,4 +72,4 @@ COMMENTS_APP = 'nerdcomments'
 
 LOGIN_REDIRECT_URL = '/'
 
-FORCE_SCRIPT_PREFIX = ''
+FORCE_SCRIPT_NAME = ''
