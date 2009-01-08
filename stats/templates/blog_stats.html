@@ -1,5 +1,6 @@
 <!--*- mode: django-html -*-->
 {% extends "blog_base.html" %}
+{% load charts %}
 
 {% block title %}
 Статистика блога Димы Джуса
@@ -12,30 +13,34 @@
 {% block base %}
 <div class="box">
   <h1>Распределение информации в блоге</h1>
-  Далее представлены графики роста блога с течением времени и с
-  увеличением количества записей.
   <h2>За всё время</h2>
+
+  Здесь представлены графики роста блога с течением времени и с ростом
+  количества записей.
+
+
 
   <h3>По датам</h3>
   По оси <span class="math">x</span> равномерно распределены даты.
   <br />
   <div class="figure">
-  <img src="{{ date_chart.get_url }}"
-       alt="Распределение информации в блоге по времени"
-       width="{{ date_chart.width }}" 
-       height="{{ date_chart.height }}" />
+  {% chart %}
+  {% chart-type "line-xy" %}
+  {% chart-data pool_x_dates pool_data %}
+  {% chart-size "500x325" %}
+  {% endchart %}
   </div>
   <br/>
 
   <h3>По записям</h3>
   По оси <span class="math">x</span> равномерно распределены номера записей.
   <div class="figure">
-  <img src="{{ uni_chart.get_url }}"
-       alt="Распределение информации в блоге по записям"
-       width="{{ uni_chart.width }}" 
-       height="{{ uni_chart.height }}" />
+  {% chart %}
+  {% chart-type "line-xy" %}
+  {% chart-data pool_x_range pool_data %}
+  {% chart-size "500x325" %}
+  {% endchart %}
   </div>
-
   <h2>По годам</h2>
 
   <h3>По количеству записей</h3>
@@ -43,10 +48,12 @@
   В скобках указано, сколько всего записей было написано за год.
   
   <div class="figure">
-  <img src="{{ quantity_pie.get_url }}"
-       alt="Распределение записей в блоге по годам"
-       width="{{ quantity_pie.width }}" 
-       height="{{ quantity_pie.height }}" />
+    {% chart %}
+    {% chart-data yearly_count %}
+    {% chart-size "400x200" %}
+    {% chart-type "pie" %}
+    {% chart-labels yc_labels %}
+    {% endchart %}
   </div>
   
   <h3>По объёму записей</h3>
@@ -54,10 +61,12 @@
   В скобках обозначен суммарных объём (в знаках) всех записей за год.
   
   <div class="figure">
-    <img src="{{ measure_pie.get_url }}"
-         alt="Распределение информации в блоге по годам"
-         width="{{ measure_pie.width }}" 
-         height="{{ measure_pie.height }}" />
+    {% chart %}
+    {% chart-data yearly_measure %}
+    {% chart-size "400x200" %}
+    {% chart-type "pie" %}
+    {% chart-labels ym_labels %}
+    {% endchart %}
   </div>
 
   <br/>
@@ -65,7 +74,8 @@
   <small>Для построения графиков используется
   API <a href="http://code.google.com/intl/ru/apis/chart/">Google
   Chart</a>
-  и <a href="http://pygooglechart.slowchop.com/">pygooglechart</a>.</small>
+  и <a href="http://toys.jacobian.org/hg/googlecharts/">googlecharts</a>
+  для Django.</small>
 
 </div>
 {% endblock %}

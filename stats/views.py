@@ -2,44 +2,67 @@
 
 from django.shortcuts import render_to_response
 
-from ws.blog.views import make_filter_kwargs
+from prob_utils import pool_size_function
+from chart_helpers import date_to_epoch, group_by_year
 
-from chart_helpers import make_pool_date_chart, make_pool_uniform_chart
-from chart_helpers import make_q_piechart, make_l_piechart
-        
-def queryset_stats(request, queryset, template_name,
-                   width=500, height=325, graph_color=None, pie_colors=None):
+def queryset_stats(request, queryset, template_name, date_field='add_date'):
     """
-    Provide charts with statistics for objects in `queryset`.
-
-    `graph_color` is a string which sets color for object pool graphs.
-    `pie_colors` argument sets colors used for pie charts. See
-    `chart_helpers.py` docs for more information about colors.
-
-    Integer `width` and `height` are chart image dimensions.
-    
     Context:
-        uni_chart
-            Object pool size graph with object numbers used for X axis values
-        date_chart
-            Object pool size graph with creation dates used for X
-        quantity_pie
-            Pie chart with amount of objects created each year
-        measure_pie
-            Pie chart with total measures of objects created each year
+        pool_data
+            Object pool size data
+        pool_x_range
+            Uniformly distributed numbers, rescaled
+        pool_x_dates
+            Creation dates of pool objects, rescaled
+        yearly_count
+            List with numbers of objects created each year
+        yearly_measure
+            List with overall measures of objects created each year
 
     To get image URLs for charts, `get_url` method should be used in
     the template (like `uni_chart.get_url`), as well as their `width`
     and `height` fields.
     """
-    # Create probability chart
-    date_chart = make_pool_date_chart(queryset, width, height, color=graph_color)
-    uni_chart = make_pool_uniform_chart(queryset, width, height, color=graph_color)
+    def rescale_x(data):
+        "Shift and rescale `data` to fit unit interval."
+        head = data[0]
+        data = map(lambda x: x - head, data)
+        tail = data[-1:][0]
+        return map(lambda x: x/float(tail), data)
 
-    context = {'date_chart': date_chart,
-               'uni_chart': uni_chart,
-               'quantity_pie': make_q_piechart(queryset, width, height, colors=pie_colors),
-               'measure_pie': make_l_piechart(queryset, width, height, colors=pie_colors)}
+    count = queryset.count()
+
+    # Rescale pool size data
+    pool_data = [x for x in pool_size_function(queryset)]
+    pool_data = map(lambda x: float(x)/pool_data[-1:][0], pool_data)
+
+
+    pool_x_range = rescale_x(range(count))
+    pool_x_dates = rescale_x(map(lambda o: date_to_epoch(o.__dict__[date_field]),
+                                 queryset))
+
+    year_groups = group_by_year(queryset, date_field)
+    years = year_groups.keys()
+
+    # We manually sort year groups by keys
+    years.sort()
+
+    yearly_objects = [year_groups[y] for y in years]
+    yearly_count = map(len, yearly_objects)
+    yearly_measure = map(lambda year: sum(map(lambda object: len(object), year)), yearly_objects)
+
+    yc_labels = ['%d (%s)' % (y, c) for (c, y) in zip(yearly_count, years)]
+    ym_labels = ['%d (%s)' % (y, c) for (c, y) in zip(yearly_measure, years)]
+
+    group_by_year(queryset, date_field).values()
+
+    context = { 'pool_data': pool_data,
+                'pool_x_range': pool_x_range,
+                'pool_x_dates': pool_x_dates,
+                'yearly_count': yearly_count,
+                'yearly_measure': yearly_measure,
+                'yc_labels': yc_labels,
+                'ym_labels': ym_labels}
     
     return render_to_response(template_name, context)
 
