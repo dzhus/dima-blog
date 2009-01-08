@@ -27,6 +27,12 @@ def queryset_stats(request, queryset, template_name, date_field='add_date'):
             List with overall measures of objects created each year
         ym_labels
             Labels for yearly objects count chart
+        yd_labels
+            Labels for yearly objects density *pie* chart
+        years
+            List of years which when objects were created
+        density_labels
+            List of object densities for every year
     """
 
     count = queryset.count()
