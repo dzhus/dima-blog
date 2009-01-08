@@ -1,0 +1,19 @@
+-*- mode: org -*-
+
+* Description
+  This is a simple blog engine by Dmitry Dzhus.
+
+* Installation notes
+  For this blog to operate properly, define `SECRET_KEY` variable in
+  `secret.py` in the same directory as `settings.py`.
+
+* Requirements
+  This blog is being successfully used with the following software:
+  
+  - Django 1.0 with patches from tickets #7005, #8630, #8968
+    
+  - django-tagging, SVN r149 <http://code.google.com/p/django-tagging/>
+
+  - googlecharts for Django, hg r4 <http://toys.jacobian.org/hg/googlecharts>
+    
+  - pytils-0.2.3, <http://pypi.python.org/pypi/pytils/>
