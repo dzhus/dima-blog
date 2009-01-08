@@ -44,9 +44,6 @@ urlpatterns += patterns('blog.views',
 urlpatterns += patterns('stats.views',
                         (r'^blog/stats/$', 'queryset_stats',
                          {'queryset': blog_entries,
-                          # Probably I should use settings for this:
-                          'graph_color': '4e9a06',
-                          'pie_colors': ['a2cfff', '3465a4'],
                           'template_name': 'blog_stats.html'}))
                           
 ## Entry detail view
