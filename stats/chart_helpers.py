@@ -17,6 +17,15 @@ def fit_to_unit(data):
     tail = data[-1:][0]
     return map(lambda x: x/float(tail), data)
 
+def make_uniform_labels(data):
+    return [1, len(data)]
+
+def make_date_labels(objects, date_field, date_format='%Y-%m'):
+    dates = map(lambda d: d.__dict__[date_field], objects)
+    return map(lambda date: date.strftime(date_format), dates)
+
+def make_pool_labels(pool_data):
+    return ['', pool_data[-1:][0]]
 
 def make_year_labels(years, yearly_data, format='%d (%s)'):
     """

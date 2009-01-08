@@ -25,9 +25,13 @@
   <br />
   <div class="figure">
   {% chart %}
-  {% chart-type "line-xy" %}
-  {% chart-data pool_x_dates pool_data %}
-  {% chart-size "500x325" %}
+    {% chart-type "line-xy" %}
+    {% chart-data pool_x_dates pool_data %}
+    {% chart-size "500x325" %}
+    {% chart-labels pool_range_xlabels %}
+    {% axis "left" %}
+      {% axis-labels pool_size_ylabels %}
+    {% endaxis %}
   {% endchart %}
   </div>
   <br/>
@@ -36,9 +40,13 @@
   По оси <span class="math">x</span> равномерно распределены номера записей.
   <div class="figure">
   {% chart %}
-  {% chart-type "line-xy" %}
-  {% chart-data pool_x_range pool_data %}
-  {% chart-size "500x325" %}
+    {% chart-type "line-xy" %}
+    {% chart-data pool_x_range pool_data %}
+    {% chart-size "500x325" %}
+    {% chart-labels pool_date_xlabels %}
+    {% axis "left" %}
+      {% axis-labels pool_size_ylabels %}
+    {% endaxis %}
   {% endchart %}
   </div>
   <h2>По годам</h2>
