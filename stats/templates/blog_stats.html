@@ -28,10 +28,11 @@
     {% chart-type "line-xy" %}
     {% chart-data pool_x_dates pool_data %}
     {% chart-size "500x325" %}
-    {% chart-labels pool_range_xlabels %}
+    {% chart-labels pool_date_xlabels %}
     {% axis "left" %}
       {% axis-labels pool_size_ylabels %}
     {% endaxis %}
+    {% chart-colors "3465a4" %}
   {% endchart %}
   </div>
   <br/>
@@ -43,10 +44,11 @@
     {% chart-type "line-xy" %}
     {% chart-data pool_x_range pool_data %}
     {% chart-size "500x325" %}
-    {% chart-labels pool_date_xlabels %}
+    {% chart-labels pool_range_xlabels %}
     {% axis "left" %}
       {% axis-labels pool_size_ylabels %}
     {% endaxis %}
+    {% chart-colors "4e9a06" %}
   {% endchart %}
   </div>
   <h2>По годам</h2>
@@ -56,12 +58,13 @@
   В скобках указано, сколько всего записей было написано за год.
   
   <div class="figure">
-    {% chart %}
+  {% chart %}
     {% chart-data yearly_count %}
     {% chart-size "400x200" %}
     {% chart-type "pie" %}
     {% chart-labels yc_labels %}
-    {% endchart %}
+    {% chart-colors "a2cfff" "3465a4" %}
+  {% endchart %}
   </div>
   
   <h3>По объёму записей</h3>
@@ -69,16 +72,17 @@
   В скобках обозначен суммарных объём (в знаках) всех записей за год.
   
   <div class="figure">
-    {% chart %}
+  {% chart %}
     {% chart-data yearly_measure %}
     {% chart-size "400x200" %}
     {% chart-type "pie" %}
     {% chart-labels ym_labels %}
-    {% endchart %}
+    {% chart-colors "8ae234" "4e9a06" %}
+  {% endchart %}
   </div>
-
+  
   <br/>
-
+  
   <small>Для построения графиков используется
   API <a href="http://code.google.com/intl/ru/apis/chart/">Google
   Chart</a>
