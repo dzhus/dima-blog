@@ -1,4 +1,9 @@
 # encoding: utf-8
+"""Simple CAPTCHA.
+
+This package is obsolete in favor of nerdcaptcha. Preserved for
+historical purposes.
+"""
 
 from random import randrange, seed
 from md5 import md5
