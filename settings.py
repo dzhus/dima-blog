@@ -70,6 +70,7 @@ INSTALLED_APPS = (
     'pytils',
     'tagging',
     'nerdcomments',
+    'googlecharts',
     'stats')
 
 COMMENTS_APP = 'nerdcomments'
