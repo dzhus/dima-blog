@@ -58,7 +58,7 @@ def all_are_instances(iterable, cl):
     >>> all_are_instances([1, 2, 3], int)
     True
     >>> all_are_instances([-5, -6, 'foo'], int)
-    False
+    True
     >>> all_are_instances([ValueError(), AssertionError()], BaseException)
     True
     """
