@@ -28,13 +28,14 @@ def make_date_labels(objects, date_field, spans=4, date_format='%Y-%m'):
     return [d.strftime(date_format) for d in dates]
 
 def make_pool_labels(pool_data, spans=4):
+    "Labels for Y axis of overall pool size plot."
     total_pool = pool_data[-1:][0]
     span = total_pool / spans
     return [''] + [x * span for x in range(spans + 1)][1:]
 
 def make_year_labels(years, yearly_data, format='%d (%s)'):
     """
-    Combine years with respective yearly data and return list of labels.
+    Combine years with corresponding yearly data and return list of labels.
 
     >>> make_year_labels([2005, 2006], [18, 29])
     ['2005 (18)', '2006 (29)']
