@@ -2,7 +2,6 @@
 Helper functions used in `views.py`
 """
 
-import time
 import datetime
 
 def fit_to_unit(data):
@@ -48,7 +47,7 @@ def date_to_epoch(date):
     """
     Convert datetime to Epoch seconds.
     """
-    return time.mktime(date.timetuple())
+    return int(date.strftime('%s'))
 
 # TODO Use implementation from standard django template tags
 def group_by_year(object_list, date_field):
