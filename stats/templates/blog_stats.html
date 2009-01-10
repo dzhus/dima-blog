@@ -21,7 +21,8 @@
 
   Всего блог содержит <strong>{{ count }}</strong>
   запис{{count|choose_plural:"ь,и,ей" }}, в которых
-  <strong>{{ size }}</strong> символ{{ size|choose_plural:",а,ов" }}.
+  <strong>{{ size }}</strong> печатных и не очень 
+  знак{{ size|choose_plural:",а,ов" }}.
 
   {% endwith %} {% endwith %}
 
@@ -30,6 +31,7 @@
   <h3>По датам</h3>
 
   Рост блога с течением времени.
+  
   <div class="figure">
   {% chart %}
     {% chart-type "line-xy" %}
