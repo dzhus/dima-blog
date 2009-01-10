@@ -1,5 +1,8 @@
 # -*- coding: utf-8 -*-
+
 from django.contrib.syndication.feeds import Feed
+from django.utils.feedgenerator import Atom1Feed
+
 from blog.models import Entry
 from tagging.models import Tag, TaggedItem
 
@@ -26,6 +29,7 @@ def make_count(bits, index=0, default_count=50):
 
 class GeneralFeed(Feed):
     link = '/blog/'
+    feed_type = Atom1Feed
     author_name = 'Дмитрий Джус'
     author_email = 'dima@sphinx.net.ru'
     author_link = '/author/'

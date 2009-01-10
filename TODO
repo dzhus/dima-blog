@@ -1,5 +1,6 @@
 -*- mode: org -*-
 
 * Feeds
-** Relative links
+** DONE Relative links
+   CLOSED: [2009-01-10 Сбт 22:14]
    Descriptions of feed items should not contain relative links.
