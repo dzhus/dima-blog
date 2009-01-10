@@ -4,3 +4,9 @@
 ** DONE Relative links
    CLOSED: [2009-01-10 Сбт 22:14]
    Descriptions of feed items should not contain relative links.
+
+* Tests
+** TODO Use nose
+   Not, not to sniff bugs.
+
+   I should add a Makefile `check` rule which will run `nosetests(1)`.
