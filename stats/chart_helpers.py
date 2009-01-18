@@ -17,11 +17,15 @@ def fit_to_unit(data):
     return [x/float(tail) for x in data]
 
 def make_uniform_labels(data):
+    "Make X axis labels with object pool sizes."
     total = len(data)
     return [1, total/4, total/2, total*3/4, total]
 
 def make_date_labels(objects, date_field, spans=4, date_format='%Y-%m'):
-    "Make X axis labels given a pair of first and last objects."
+    """
+    Make X axis labels with dates given a pair of first and last
+    objects.
+    """
     [beg, end] = [o.__dict__[date_field] for o in objects]
     span = (end - beg) / spans
     dates = [beg + d * span for d in range(spans + 1)]
