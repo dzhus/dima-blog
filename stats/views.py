@@ -4,6 +4,17 @@ from django.shortcuts import render_to_response
 
 from prob_utils import pool_size_function
 from chart_helpers import *
+from blog.views import make_filter_kwargs
+
+def blog_stats(request, queryset, **kwargs):
+    """
+    Decorate `queryset_stats` view, filtering private entries from
+    `queryset` if necessary.
+
+    Accepts the same keyword arguments as `queryset_stats`.
+    """
+    return queryset_stats(request, queryset.filter(**make_filter_kwargs(request)),
+                          **kwargs)
 
 # TODO Reorganize this view
 def queryset_stats(request, queryset, template_name, date_field='add_date'):
@@ -34,10 +45,9 @@ def queryset_stats(request, queryset, template_name, date_field='add_date'):
         density_labels
             List of object densities for every year
     """
-
     count = queryset.count()
 
-    # Object pool size charts
+    ## Object pool size charts
     pool_data = [x for x in pool_size_function(queryset)]
     pool_size_ylabels = make_pool_labels(pool_data)
     # Rescale pool size data (can't rely on Google Charts)
@@ -51,7 +61,7 @@ def queryset_stats(request, queryset, template_name, date_field='add_date'):
                                    queryset))
     pool_date_xlabels = make_date_labels([queryset[0], queryset.reverse()[0]], date_field)
 
-    # Pie charts with yearly data
+    ## Pie charts with yearly data
     year_groups = group_by_year(queryset, date_field)
     years = year_groups.keys()
 
@@ -67,6 +77,8 @@ def queryset_stats(request, queryset, template_name, date_field='add_date'):
                                             [yearly_count, yearly_measure, yearly_density])
 
     density_labels = make_pool_labels([max(yearly_density)])
+
+    ## Context dictionary and rendering
 
     context = dict([(x, locals()[x]) for x in ['pool_data',
                                                'pool_x_range',

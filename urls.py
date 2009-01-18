@@ -42,7 +42,7 @@ urlpatterns += patterns('blog.views',
                         (r'^blog/tag/$', 'tag_cloud', {'shuffle': False}))
 
 urlpatterns += patterns('stats.views',
-                        (r'^blog/stats/$', 'queryset_stats',
+                        (r'^blog/stats/$', 'blog_stats',
                          {'queryset': blog_entries,
                           'template_name': 'blog_stats.html'}))
                           
