@@ -136,10 +136,12 @@ div
 /** Diffs */
 ins
 {
+    text-decoration: none;
     color: #4e9a06;
 }
 
 del
 {
+    text-decoration: line-through;
     color: #888a85;
 }
