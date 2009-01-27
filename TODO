@@ -26,4 +26,13 @@
    Currently all pages under `/blog/archive/` have the same title.
    That's bad.
 ** TODO Next/previous period links
+* TODO Author page link
+  There must be no link to the author page in the footer when we're
+  already there.
+
+  It's unclear how to test what page we're on. Special flag context
+  variable can't be used here because flatpage view does not provide
+  any way to utilize extra context.
+  
+  See also http://groups.google.com/group/django-users/browse_thread/thread/1903e7c98148e1f4/7b1ca298fe37e80a
    
