@@ -10,3 +10,20 @@
    Not, not to sniff bugs.
 
    I should add a Makefile `check` rule which will run `nosetests(1)`.
+* TODO OpenID
+* TODO RDF
+  http://semanticdjango.org/
+  - [ ] Add DC data to posts
+
+* Comment form
+** TODO Provide better form errors handling
+   Related (somehow) tickets:
+   http://code.djangoproject.com/ticket/8968
+   http://code.djangoproject.com/ticket/9268
+
+* Archive
+** TODO More meaningful page titles
+   Currently all pages under `/blog/archive/` have the same title.
+   That's bad.
+** TODO Next/previous period links
+   
