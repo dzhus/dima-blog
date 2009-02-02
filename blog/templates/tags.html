@@ -17,8 +17,7 @@
 <div class="box">
   {% for tag in tags %}
   <span class="weight-{{ tag.font_size }}">
-    <a rel="tag"
-       href="/blog/tag/{{ tag.name }}/" 
+    <a href="/blog/tag/{{ tag.name }}/" 
        title="Все записи с тегом «{{ tag.name }}»">
       {{ tag.name }}</a> {{ tag.count }}
   </span>
