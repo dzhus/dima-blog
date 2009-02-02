@@ -14,7 +14,7 @@ expressions:
 
 - `ReprEquation`
 
-Why Do I Use Infix Notation
+Why Do I Use Prefix Notation
 ===========================
 
 KISS! This is merely a helper module to construct CAPTCHAs :-)
