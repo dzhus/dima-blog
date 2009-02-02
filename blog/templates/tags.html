@@ -15,12 +15,12 @@
 
 {% block base %}
 <div class="box">
-    {% for tag in tags %}
-    <span class="weight-{{ tag.font_size }}">
-        <a rel="tag"
-           href="/blog/tag/{{ tag.name }}/" 
-           title="Все записи с тегом «{{ tag.name }}»">
-            {{ tag.name }}</a> {{ tag.count }}
+  {% for tag in tags %}
+  <span class="weight-{{ tag.font_size }}">
+    <a rel="tag"
+       href="/blog/tag/{{ tag.name }}/" 
+       title="Все записи с тегом «{{ tag.name }}»">
+      {{ tag.name }}</a> {{ tag.count }}
   </span>
   {% endfor %}
 </div>
