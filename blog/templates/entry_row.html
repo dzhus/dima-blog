@@ -12,12 +12,13 @@
 
   {% tags_for_object entry as tags %}
   {% if tags %}
-  <div class="entry_tags" id="entry-{{ entry.id }}-tags">Теги:
-    <span property="dc:subject">
+  <div class="entry_tags" id="entry-{{ entry.id }}-tags"
+       property="dc:subject" content="{{ entry.tags }}">
+    Теги:
     {% for entry_tag in tags %}
     <a href="/blog/tag/{{ entry_tag.name }}/" 
        rel="tag" 
-       title="Посмотреть все записи с тегом «{{ entry_tag.name }}»">{{ entry_tag.name }}</a>{% if not forloop.last %}, {% endif %}{% endfor %}</span>.
+       title="Посмотреть все записи с тегом «{{ entry_tag.name }}»">{{ entry_tag.name }}</a>{% if not forloop.last %}, {% endif %}{% endfor %}.
   </div>
   {% endif %}
 
