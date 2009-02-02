@@ -3,10 +3,8 @@
 {% load markup %}
 {% load pytils_dt %}
 {% load tagging_tags %}
-<div class="blog_entry" id="entry-{{ entry.id }}">
-  <h1 class="entry_title">
-    {% if entry.private %}◊ {% endif %}{{ entry.title }}
-  </h1>
+<div class="blog_entry" id="entry-{{ entry.id }}" about="{{ entry.get_absolute_url }}">
+  <h1 class="entry_title" property="dc:title">{% if entry.private %}◊ {% endif %}{{ entry.title }}</h1>
 
   <div class="entry_date" title="Запись сделана {{ entry.add_date|date:"d.m.Y в G:h:s" }}">
     {{ entry.add_date|ru_strftime:"%d %B %Y" }}
@@ -15,10 +13,11 @@
   {% tags_for_object entry as tags %}
   {% if tags %}
   <div class="entry_tags" id="entry-{{ entry.id }}-tags">Теги:
+    <span property="dc:subject">
     {% for entry_tag in tags %}
     <a href="/blog/tag/{{ entry_tag.name }}/" 
        rel="tag" 
-       title="Посмотреть все записи с тегом «{{ entry_tag.name }}»">{{ entry_tag.name }}</a>{% if not forloop.last %}, {% endif %}{% endfor %}.
+       title="Посмотреть все записи с тегом «{{ entry_tag.name }}»">{{ entry_tag.name }}</a>{% if not forloop.last %}, {% endif %}{% endfor %}</span>.
   </div>
   {% endif %}
 

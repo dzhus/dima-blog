@@ -24,6 +24,8 @@ DATE_FORMAT = 'd.m.Y'
 
 DATETIME_FORMAT = 'd.m.y @ G:i'
 
+DEFAULT_CONTENT_TYPE = 'application/xhtml+xml'
+
 SITE_ID = 1
 
 APPEND_SLASH = True
