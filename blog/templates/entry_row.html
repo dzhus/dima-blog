@@ -5,7 +5,7 @@
 {% load tagging_tags %}
 <div class="blog_entry" id="entry-{{ entry.id }}">
   <h1 class="entry_title">
-    {% if entry.private %}&lowast;&nbsp;{% endif %}{{ entry.title }}
+    {% if entry.private %}◊ {% endif %}{{ entry.title }}
   </h1>
 
   <div class="entry_date" title="Запись сделана {{ entry.add_date|date:"d.m.Y в G:h:s" }}">
