@@ -15,18 +15,18 @@
  * No more options are supported yet.
  */
 
-parent_id = "linkroll";
-count = 5;
+var parent_id = "linkroll";
+var xhns = "http://www.w3.org/1999/xhtml";
 
-// Node between posts
 make_post_delimiter = function()
 {
-    return document.createElement("br");
+    return document.createElementNS(xhns, "br");
 }
 
 make_post_node = function(post)
 {
-    node = document.createElement("a")
+    // See <https://bugzilla.mozilla.org/show_bug.cgi?id=304713>
+    var node = document.createElementNS(xhns, "a");
     node.setAttribute("href", post.u);
     if (post.n)
         node.setAttribute("title", post.n);
@@ -38,7 +38,7 @@ delcb = function(post_list)
 {
     var parent = document.getElementById(parent_id);
     
-    for (var i = 0; (i < count) && (p = post_list[i]); i++) {
+    for (var i = 0; p = post_list[i]; i++) {
         parent.appendChild(make_post_node(p));
         parent.appendChild(make_post_delimiter());
     }
