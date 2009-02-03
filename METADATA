@@ -1,0 +1,38 @@
+-*- org -*-
+
+* Microformats
+** rel-tag
+   rel-tag is used in `entry_row.html` template to mark up tag links.
+   It should not be used in tag cloud.
+
+   Profile: http://purl.org/uF/rel-tag/1.0/
+
+** hCard
+   hCard with geo are used on `/author/` page.
+
+   Profile: http://purl.org/uF/hCard/1.0/
+* RDFa
+* Other
+** Bookmark
+   Entry permalinks are marked with `rel="bookmark"`. Combined with
+   `about={{ entry.get_absolute_url }}` in enclosing `div` element
+   this leads to loops in extracted RDF, with every entry being a
+   bookmark of itself. Probably I'm misusing `bookmark`.
+
+   This keyword is among reserved values of `rel` in [[http://www.w3.org/TR/2008/REC-rdfa-syntax-20081014/][XHTML+RDFa]] spec
+   and is also listed in standard XHTML profile:
+   http://www.w3.org/1999/xhtml/vocab/
+
+** Standard XHTML links
+   Apart from standard `alternate`, `icon` and `stylesheet` :)
+   `<link>`s, several more semantically rich `rel` values are used on
+   several pages.
+
+   Profile: http://www.w3.org/1999/xhtml/vocab/
+*** Blog page view
+    `next`, `prev`, `last` and `first` point to corresponding blog
+    pages (with respect to tags)
+
+    `index` points to `/blog/entry/` (one big list of all entries)
+*** Blog entry view
+    `next` and `prev` point to next&previous entries
