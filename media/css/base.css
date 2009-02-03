@@ -1,9 +1,13 @@
 body 
 { 
     color: #2e3436;
-    width: 60%;
-    margin-left: 20%;
     background-color: #eeeeec;
+}
+
+#fit
+{
+    margin-left: 20%;
+    width: 60%;
 }
 
 #header 
