@@ -12,6 +12,10 @@
 
    Profile: http://purl.org/uF/hCard/1.0/
 * RDFa
+** DC
+   `dc:creator` (in Russian and English) is set for all pages,
+   `dc:title`, `dc:subject`, `dc:contributors` is set for pages under
+   `/blog/entry/*`
 * Other
 ** Bookmark
    Entry permalinks are marked with `rel="bookmark"`. Combined with
