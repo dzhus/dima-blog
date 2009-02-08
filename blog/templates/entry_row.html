@@ -4,7 +4,7 @@
 {% load pytils_dt %}
 {% load tagging_tags %}
 <div class="blog_entry" id="entry-{{ entry.id }}" about="{{ entry.get_absolute_url }}">
-  <h1 class="entry_title" property="dc:title">{% if entry.private %}◊ {% endif %}{{ entry.title }}</h1>
+  {% if entry.private %}◊ {% endif %}<h1 class="entry_title" property="dc:title">{{ entry.title }}</h1>
 
   <div class="entry_date" title="Запись сделана {{ entry.add_date|date:"d.m.Y в G:h:s" }}">
     {{ entry.add_date|ru_strftime:"%d %B %Y" }}
