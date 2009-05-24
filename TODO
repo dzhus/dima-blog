@@ -5,7 +5,8 @@
    CLOSED: [2009-01-10 Сбт 22:14]
    Descriptions of feed items should not contain relative links.
 
-** TODO Handle slashes properly in blogtag feeds
+** DONE Handle slashes properly in blogtag feeds
+   CLOSED: [2009-05-24 Вск 12:53]
    Accessing /feeds/blogtag/GNU/Linux/ fails
 * Tests
 ** TODO Use nose

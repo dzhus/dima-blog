@@ -6,25 +6,22 @@ from django.utils.feedgenerator import Atom1Feed
 from blog.models import Entry
 from tagging.models import Tag, TaggedItem
 
-def make_count(bits, index=0, default_count=50):
+def make_count(bits, default_count=50):
     """
-    Return items count from URL bits. `index` is the expected number
-    position.
+    Return items count from URL bits if last bit is positive integer.
     
-    >>> make_count(['55'])
-    55
-    >>> make_count(['Emacs', '20'])
+    >>> make_count(['Emacs'])
     50
-    >>> make_count(['бред', '15'], 1)
+    >>> make_count(['20'])
+    20
+    >>> make_count(['бред', '15'])
     15
     """
-    # We assume that item count is the last bit
-    if len(bits) == index + 1:
-        count = int(bits[index])
-        if (count < 1):
-            raise ObjectDoesNotExist
-    else:
-        count = default_count
+    count = default_count
+    if len(bits) > 0:
+        last_bit = bits[len(bits)-1]
+        if last_bit.isdigit():
+            count = int(last_bit)
     return count
 
 class GeneralFeed(Feed):
@@ -48,7 +45,7 @@ class BlogFeed(GeneralFeed):
         return obj[0].filter(private=0)[:obj[1]]
 
     def get_object(self, bits):
-        count = make_count(bits, 0)
+        count = make_count(bits)
         return (Entry.objects, count)
 
 class BlogTagFeed(BlogFeed):
@@ -73,8 +70,8 @@ class BlogTagFeed(BlogFeed):
         """
         if len(bits) < 1:
             raise ObjectDoesNotExist
-        count = make_count(bits, 1)
-        tag_name = bits[0].replace('_', ' ')
+        count = make_count(bits)
+        tag_name = '/'.join(bits[:-1]).replace('_', ' ')
         return (Tag.objects.get(name=tag_name), count)
 
 
