@@ -16,7 +16,7 @@ def pool_size_function(object_list):
 
     Consider each object to be contributing to the shared pool P of
     contents, with each contribution equal to the measure of
-    respective object. Contributions are ordered. This function yeilds
+    respective object. Contributions are ordered. This function yields
     an overall size of the pool after each contribution.
 
     The pool P equipped with the relation *contributed earlier than*
