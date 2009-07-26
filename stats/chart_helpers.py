@@ -54,15 +54,27 @@ def date_to_epoch(date):
     """
     return int(date.strftime('%s'))
 
-# TODO Use implementation from standard django template tags
-def group_by_year(object_list, date_field):
+def group_by(object_list, key_function):
     """
-    Return dictionary of objects grouped by years of creation.
+    Return dictionary of objects grouped by keys returned by
+    `key_function` for each element in `object_list`.
+
+    `object_list` does not need to be sorted.
+
+    >>> group_by([1, 2, 3, 4, 5], lambda x: x % 2)
+    {0: [2, 4], 1: [1, 3, 5]}
     """
     groups = dict()
     for obj in object_list:
-        key = obj.__dict__[date_field].year
+        key = key_function(obj)
         if key not in groups:
             groups[key] = list()
         groups[key].append(obj)
     return groups
+
+# TODO Use implementation from standard django template tags
+def group_by_year(object_list, date_field):
+    return group_by(object_list, lambda o: o.__dict__[date_field].year)
+
+def group_by_month(object_list, date_field):
+    return group_by(object_list, lambda o: o.__dict__[date_field].month)
