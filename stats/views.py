@@ -70,7 +70,7 @@ def queryset_stats(request, queryset, template_name, date_field='add_date'):
 
     yearly_objects = [year_groups[y] for y in years]
     yearly_count = map(len, yearly_objects)
-    yearly_measure = map(lambda year: sum(map(lambda object: len(object), year)), yearly_objects)
+    yearly_measure = map(lambda year: sum(map(len, year)), yearly_objects)
     yearly_density = map(lambda (measure, count): measure/count, zip(yearly_measure, yearly_count))
 
     [yc_labels, ym_labels, yd_labels] = map(lambda d: make_year_labels(years, d),
