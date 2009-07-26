@@ -64,11 +64,11 @@ INSTALLED_APPS = (
     'django.contrib.markup',
     'django.contrib.flatpages',
     'blog',
-    'pytils',
-    'tagging',
     'nerdcomments',
-    'googlecharts',
-    'stats')
+    'pytils',
+    'stats',
+    'tagging',
+    'django-googlecharts')
 
 COMMENTS_APP = 'nerdcomments'
 
