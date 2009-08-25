@@ -49,7 +49,7 @@ def true_for_all(iterable, predicate):
     >>> true_for_all([1, 3, 1771], lambda x: x % 2 == 1)
     True
     """
-    return reduce(lambda x, y: x and predicate(y), iterable, True)
+    return all(map(predicate, iterable))
 
 def all_are_instances(iterable, cl):
     """
