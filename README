@@ -23,7 +23,7 @@
     
   - django-tagging, SVN r149 <http://code.google.com/p/django-tagging/>
 
-  - googlecharts for Django, hg r4 <http://toys.jacobian.org/hg/googlecharts>
+  - googlecharts for Django, <http://github.com/jacobian/django-googlecharts>
     
   - pytils-0.2.3, <http://pypi.python.org/pypi/pytils/>
 
