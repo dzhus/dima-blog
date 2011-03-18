@@ -28,7 +28,7 @@ class GeneralFeed(Feed):
     link = '/blog/'
     feed_type = Atom1Feed
     author_name = 'Дмитрий Джус'
-    author_email = 'dima@sphinx.net.ru'
+    author_email = 'dima@dzhus.org'
     author_link = '/author/'
     description_template = 'feed_entry_description.html'
 

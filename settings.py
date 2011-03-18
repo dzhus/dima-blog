@@ -4,7 +4,7 @@ from secret import SECRET_KEY
 TEMPLATE_DEBUG = DEBUG
 
 ADMINS = (
-    ('Dmitry Dzhus', 'dima@sphinx.net.ru'),
+    ('Dmitry Dzhus', 'dima@dzhus.org'),
 )
 
 MANAGERS = ADMINS
