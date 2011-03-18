@@ -107,7 +107,7 @@ urlpatterns += patterns('django.contrib.syndication.views',
 
 ## Admin pages view
 urlpatterns += patterns('',
-                        (r'^admin/(.*)', include(admin.site.urls)))
+                        (r'^admin/', include(admin.site.urls)))
 
 urlpatterns += patterns('',
                        (r'^comments/', include('django.contrib.comments.urls')))
