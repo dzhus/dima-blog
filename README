@@ -19,13 +19,15 @@
 * Requirements
   This blog is being successfully used with the following software:
   
-  - Django 1.0 with patches from tickets #7005, #8630, #8968
+  - Django SVN 18-03-2011 with patches from tickets #7005 (orphans), (#8968)
     
   - django-tagging, SVN r149 <http://code.google.com/p/django-tagging/>
 
   - googlecharts for Django, <http://github.com/jacobian/django-googlecharts>
     
   - pytils-0.2.3, <http://pypi.python.org/pypi/pytils/>
+
+  - flup
 
   - python-markdown-2.0.3, <http://www.freewisdom.org/projects/python-markdown/>
 
