@@ -16,6 +16,7 @@
         {{ form.username }}
         {{ form.password }}
         <input type="submit" value="Вход" />
+        {% csrf_token %}
         <input type="hidden" name="next" value="{{ next }}" />
       </div>
     </form>
