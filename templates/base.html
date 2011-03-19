@@ -26,6 +26,8 @@
     <link rel="alternate" type="application/rss+xml" title="RSS-лента блога" 
           href="/feeds/blog/" />
     
+    {% block links %}
+    {% endblock %}
     <!-- Google Analytics -->
     <script type="text/javascript">
 
@@ -40,9 +42,6 @@
       })();
 
     </script>
-    
-    {% block links %}
-    {% endblock %}
   </head>
   
   <body>
