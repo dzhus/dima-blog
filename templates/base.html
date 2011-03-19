@@ -14,9 +14,6 @@
     
     <meta property="dc:creator" content="Дмитрий Джус" />
     <meta property="dc:creator" content="Dmitry Dzhus" xml:lang="en" />
-
-    <!-- Urchin tracker -->
-    <meta name="verify-v1" content="1catUmsXWtAgm37Ca8nVWx2DK4fjw59QRpcxqtbrTks=" />
     
     <link rel="icon" type="image/png" href="/media/icons/favicon.png" />
     <link rel="stylesheet" type="text/css" href="/media/css/base.css" />
@@ -30,18 +27,19 @@
           href="/feeds/blog/" />
     
     <!-- Google Analytics -->
-    <script src="http://www.google-analytics.com/urchin.js" type="text/javascript">
-    </script>
     <script type="text/javascript">
-      _uacct = "UA-2037319-1";
-      urchinTracker();
-    </script>
 
-    <!-- YaMetrics -->
-    <script type="text/javascript"><!--
-                                      var ya_cid=155635;
-                                      //--></script>
-    <script src="http://bs.yandex.ru/resource/watch.js" type="text/javascript"></script>
+      var _gaq = _gaq || [];
+      _gaq.push(['_setAccount', 'UA-2037319-2']);
+      _gaq.push(['_trackPageview']);
+
+      (function() {
+      var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+      ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+      })();
+
+    </script>
     
     {% block links %}
     {% endblock %}
