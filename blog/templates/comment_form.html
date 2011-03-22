@@ -44,6 +44,7 @@
             {{ form.captcha_token }}
             <input type="hidden" name="next" value="{{ entry.get_absolute_url }}" />
             <input type="submit" value="Добавить комментарий" />
+            {% csrf_token %}
         </p>
     </form>
 </div>
