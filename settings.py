@@ -44,6 +44,7 @@ TEMPLATE_CONTEXT_PROCESSORS = (
         'django.core.context_processors.auth',)
 
 MIDDLEWARE_CLASSES = (
+    'django.middleware.csrf.CsrfViewMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.locale.LocaleMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
