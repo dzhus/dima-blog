@@ -58,7 +58,7 @@ make_photo_node = function(photo)
     
     var img = document.createElementNS(xhns, "img");
     img.setAttribute("src", "http://farm" + photo.farm + ".static.flickr.com/" + 
-                     photo.server + "/" + photo.id + "_" + photo.secret + "_z.jpg");
+                     photo.server + "/" + photo.id + "_" + photo.secret + "_m.jpg");
     img.setAttribute("alt", photo.title);
     link.appendChild(img);
     return link;
