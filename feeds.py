@@ -67,6 +67,6 @@ class BlogTagFeed(GeneralFeed):
         """
         Return tuple of Tag object and requested item count.
         """
-        return (Tag.objects.get(name=tag), int(count))
+        return (Tag.objects.get(name=tag.replace('_', ' ')), int(count))
 
 
