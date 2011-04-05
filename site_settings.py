@@ -9,4 +9,9 @@ DEBUG = at_dev()
 
 TEMPLATE_DIRS = (SITE_PREFIX + '/templates')
 MEDIA_ROOT = SITE_PREFIX + '/media/'
-DATABASE_NAME = SITE_PREFIX + '/django.db'
+DATABASES = {
+    'default': {
+        'ENGINE': 'django.db.backends.sqlite3',
+        'NAME':  SITE_PREFIX + '/django.db'
+    }
+}

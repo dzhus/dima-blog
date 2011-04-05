@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 
-from django.contrib.syndication.feeds import Feed
+from django.contrib.syndication.views import Feed
 from django.utils.feedgenerator import Atom1Feed
 
 from blog.models import Entry
@@ -44,11 +44,10 @@ class BlogFeed(GeneralFeed):
     def items(self, obj):
         return obj[0].filter(private=0)[:obj[1]]
 
-    def get_object(self, bits):
-        count = make_count(bits)
-        return (Entry.objects, count)
+    def get_object(self, request, count="50"):
+        return (Entry.objects, int(count))
 
-class BlogTagFeed(BlogFeed):
+class BlogTagFeed(GeneralFeed):
     """
     Feed of blog items with specific tags.
 
@@ -64,14 +63,10 @@ class BlogTagFeed(BlogFeed):
     def title(self, obj):
         return u'Блог Димы Джуса: %s' % obj[0].name
 
-    def get_object(self, bits):
+    def get_object(self, request, tag, count="50"):
         """
         Return tuple of Tag object and requested item count.
         """
-        if len(bits) < 1:
-            raise ObjectDoesNotExist
-        count = make_count(bits)
-        tag_name = '/'.join(bits[:-1]).replace('_', ' ')
-        return (Tag.objects.get(name=tag_name), count)
+        return (Tag.objects.get(name=tag), int(count))
 
 

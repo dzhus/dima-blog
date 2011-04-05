@@ -101,9 +101,11 @@ urlpatterns += patterns('django',
                          'contrib.auth.views.logout', {'next_page': '/'}))
 
 ## Feeds
-urlpatterns += patterns('django.contrib.syndication.views',
-                        (r'^feeds/(?P<url>.+)/$', 'feed',
-                         {'feed_dict': {'blog': BlogFeed, 'blogtag': BlogTagFeed}}))
+urlpatterns += patterns('',
+                        (r'^feeds/blog/$', BlogFeed()),
+                        (r'^feeds/blog/(?P<count>\d+)/$', BlogFeed()),
+                        (r'^feeds/blogtag/(?P<tag>.+)/(?P<count>\d+)/$', BlogTagFeed()),
+                        (r'^feeds/blogtag/(?P<tag>.+)/$', BlogTagFeed()))
 
 ## Admin pages view
 urlpatterns += patterns('',
