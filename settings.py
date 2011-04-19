@@ -39,13 +39,15 @@ TEMPLATE_LOADERS = (
 #
 # DO NOT remove the trailing comma!
 TEMPLATE_CONTEXT_PROCESSORS = (
-    "django.contrib.auth.context_processors.auth",)
+    "django.contrib.auth.context_processors.auth",
+    'django.contrib.messages.context_processors.messages',)
 
 MIDDLEWARE_CLASSES = (
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.locale.LocaleMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
+    'django.contrib.messages.middleware.MessageMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.middleware.doc.XViewMiddleware',
     'django.middleware.gzip.GZipMiddleware',
@@ -62,6 +64,7 @@ INSTALLED_APPS = (
     'django.contrib.admin',
     'django.contrib.markup',
     'django.contrib.flatpages',
+    'django.contrib.messages',
     'blog',
     'nerdcomments',
     'pytils',
