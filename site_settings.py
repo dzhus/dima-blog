@@ -1,7 +1,7 @@
 from site_helpers import at_dev
 
 if at_dev():
-    SITE_PREFIX = '/home/sphinx/projects/dima-blog'
+    SITE_PREFIX = '/home/dzhus/projects/dima-blog'
 else:
     SITE_PREFIX = '/var/www/localhost/htdocs'
 
